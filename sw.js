@@ -1,5 +1,5 @@
 // 四时工坊 Service Worker —— 离线缓存
-const CACHE = 'zep4yrs-v1';
+const CACHE = 'zep4yrs-v3';
 const ASSETS = [
   '/',
   '/index.html',
@@ -11,6 +11,9 @@ const ASSETS = [
   '/contact.html',
   '/demos.html',
   '/404.html',
+  '/assets/css/siji.css',
+  '/assets/js/siji.js',
+  '/assets/css/siji-subs.css',
   '/assets/css/mimo.css',
   '/assets/js/mimo.js',
   '/assets/svg/logo-zep4yrs.svg',

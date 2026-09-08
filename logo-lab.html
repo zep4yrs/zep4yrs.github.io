@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>四时工坊 · Logo 比稿</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Helvetica Neue", -apple-system, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  background: #FAF6EC;
+  background-image:
+    linear-gradient(rgba(26,26,26,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,26,26,0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+  color: #1A1A1A; padding: 48px 32px 80px;
+}
+.wrap { max-width: 1240px; margin: 0 auto; }
+h1 { font-size: 34px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; }
+.sub { color: #8A8478; font-size: 15px; margin-bottom: 40px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 28px; }
+.card {
+  background: #fff; border-radius: 20px; padding: 30px;
+  box-shadow: 0 1px 2px rgba(26,26,26,0.04), 0 14px 36px rgba(26,26,26,0.07);
+  display: flex; flex-direction: column; align-items: center; gap: 18px;
+  transition: transform .3s cubic-bezier(.22,1,.36,1);
+}
+.card:hover { transform: translateY(-4px); }
+.big svg, .small svg { display: block; }
+.big svg { width: 190px; height: 190px; }
+.smalls { display: flex; align-items: flex-end; gap: 18px; }
+.smalls .s32 svg { width: 32px; height: 32px; }
+.smalls .s16 svg { width: 16px; height: 16px; }
+.smalls span { font: 11px/1 ui-monospace, Consolas, monospace; color: #B0AA9C; }
+h2 { font-size: 19px; font-weight: 800; }
+h2 .en { font: 400 11px ui-monospace, Consolas, monospace; color: #B0AA9C; letter-spacing: .16em; margin-left: 8px; }
+p.desc { font-size: 13.5px; color: #57534A; line-height: 1.7; text-align: center; max-width: 30em; }
+.tag { align-self: flex-start; font: 700 11px ui-monospace, Consolas, monospace; letter-spacing: .14em;
+  background: #F5C445; padding: 3px 8px; border-radius: 4px; }
+.tag.alt { background: #EDE8DA; color: #57534A; }
+.note { margin-top: 36px; color: #8A8478; font-size: 13px; text-align: center; }
+/* 徽章内动效 */
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes swing { from { transform: rotate(5deg); } to { transform: rotate(-5deg); } }
+.spin { transform-box: view-box; transform-origin: 50% 50%; animation: spin 14s linear infinite; }
+.lan { transform-box: fill-box; transform-origin: 50% 0%; animation: swing 3.4s ease-in-out infinite alternate; }
+@media (prefers-reduced-motion: reduce) { .spin, .lan { animation: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>四时工坊 · Logo 比稿</h1>
+<p class="sub">六个方向，均为矢量扁平稿 · 每张卡片下方是 32px / 16px 的 favicon 实际大小 · 选定后我再精修动效与细节</p>
+<div class="grid">
+
+<!-- A 四时窗 -->
+<div class="card">
+<span class="tag">A</span>
+<div class="big">
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+<rect width="120" height="120" rx="28" fill="#1A1A1A"/>
+<rect x="16" y="16" width="38" height="38" rx="11" fill="#7BA05B"/>
+<rect x="66" y="16" width="38" height="38" rx="11" fill="#F5C445"/>
+<rect x="16" y="66" width="38" height="38" rx="11" fill="#E85D3B"/>
+<rect x="66" y="66" width="38" height="38" rx="11" fill="#6E9ABE"/>
+<circle cx="60" cy="60" r="5.5" fill="#FAF6EC"/>
+</svg>
+</div>
+<h2>四时窗<span class="en">SEASONS GRID</span></h2>
+<p class="desc">2×2 四色窗 = 四季各占一扇，墨色方印为工坊，米色圆点为工心。App 图标气质，16px 依然清晰。</p>
+<div class="smalls"><span class="s32"><svg viewBox="0 0 120 120"><rect width="120" height="120" rx="28" fill="#1A1A1A"/><rect x="16" y="16" width="38" height="38" rx="11" fill="#7BA05B"/><rect x="66" y="16" width="38" height="38" rx="11" fill="#F5C445"/><rect x="16" y="66" width="38" height="38" rx="11" fill="#E85D3B"/><rect x="66" y="66" width="38" height="38" rx="11" fill="#6E9ABE"/><circle cx="60" cy="60" r="5.5" fill="#FAF6EC"/></svg></span><span class="s16"><svg viewBox="0 0 120 120"><rect width="120" height="120" rx="28" fill="#1A1A1A"/><rect x="16" y="16" width="38" height="38" rx="11" fill="#7BA05B"/><rect x="66" y="16" width="38" height="38" rx="11" fill="#F5C445"/><rect x="16" y="66" width="38" height="38" rx="11" fill="#E85D3B"/><rect x="66" y="66" width="38" height="38" rx="11" fill="#6E9ABE"/></svg></span><span>32px / 16px</span></div>
+</div>
+
+<!-- B 四字印 -->
+<div class="card">
+<span class="tag">B</span>
+<div class="big">
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+<rect width="120" height="120" rx="28" fill="#1A1A1A"/>
+<path d="M38,12 V66 Q38,84 52,84 H60" fill="none" stroke="#FAF6EC" stroke-width="11" stroke-linecap="round"/>
+<path d="M63,12 V84" fill="none" stroke="#FAF6EC" stroke-width="11" stroke-linecap="round"/>
+<circle cx="90" cy="84" r="8" fill="#F5C445"/>
+</svg>
+</div>
+<h2>四字印<span class="en">MONOGRAM</span></h2>
+<p class="desc">直接以品牌首字「四」造字：方框为工坊，框内两笔为四时流转，黄点为工心。中文用户一眼认字，最正宗的印章式 logo。</p>
+<div class="smalls"><span class="s32"><svg viewBox="0 0 120 120"><rect width="120" height="120" rx="28" fill="#1A1A1A"/><path d="M38,12 V66 Q38,84 52,84 H60" fill="none" stroke="#FAF6EC" stroke-width="11" stroke-linecap="round"/><path d="M63,12 V84" fill="none" stroke="#FAF6EC" stroke-width="11" stroke-linecap="round"/><circle cx="90" cy="84" r="8" fill="#F5C445"/></svg></span><span class="s16"><svg viewBox="0 0 120 120"><rect width="120" height="120" rx="28" fill="#1A1A1A"/><path d="M38,12 V66 Q38,84 52,84 H60" fill="none" stroke="#FAF6EC" stroke-width="11" stroke-linecap="round"/><path d="M63,12 V84" fill="none" stroke="#FAF6EC" stroke-width="11" stroke-linecap="round"/><circle cx="90" cy="84" r="8" fill="#F5C445"/></svg></span><span>32px / 16px</span></div>
+</div>
+
+<!-- C 枫桥拱 -->
+<div class="card">
+<span class="tag">C</span>
+<div class="big">
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+<rect width="120" height="120" rx="28" fill="#1A1A1A"/>
+<path d="M30,120 V78 Q30,62 46,62 H74 Q90,62 90,78 V120 H74 V84 Q74,76 66,76 H54 Q46,76 46,84 V120 Z" fill="#FAF6EC"/>
+<circle cx="84" cy="38" r="11" fill="#F5C445"/>
+<path d="M31,46 L33.2,40.6 L37,37.4 L34.6,42.4 L37.4,46.8 L32.6,45 Z" fill="#E85D3B"/>
+</svg>
+</div>
+<h2>枫桥拱<span class="en">ARCH</span></h2>
+<p class="desc">桥拱作负空间从底部升起，金色圆月悬于右上，一枚红枫点缀 —— 两三种颜色的极简构图，冷静克制。</p>
+<div class="smalls"><span class="s32"><svg viewBox="0 0 120 120"><rect width="120" height="120" rx="28" fill="#1A1A1A"/><path d="M30,120 V78 Q30,62 46,62 H74 Q90,62 90,78 V120 H74 V84 Q74,76 66,76 H54 Q46,76 46,84 V120 Z" fill="#FAF6EC"/><circle cx="84" cy="38" r="11" fill="#F5C445"/><path d="M31,46 L33.2,40.6 L37,37.4 L34.6,42.4 L37.4,46.8 L32.6,45 Z" fill="#E85D3B"/></svg></span><span class="s16"><svg viewBox="0 0 120 120"><rect width="120" height="120" rx="28" fill="#1A1A1A"/><path d="M30,120 V78 Q30,62 46,62 H74 Q90,62 90,78 V120 H74 V84 Q74,76 66,76 H54 Q46,76 46,84 V120 Z" fill="#FAF6EC"/><circle cx="84" cy="38" r="11" fill="#F5C445"/></svg></span><span>32px / 16px</span></div>
+</div>
+
+<!-- D 亖·四季条 -->
+<div class="card">
+<span class="tag">D</span>
+<div class="big">
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+<rect width="120" height="120" rx="28" fill="#FAF6EC" stroke="#1A1A1A" stroke-width="5"/>
+<rect x="26" y="24" width="68" height="13" rx="6.5" fill="#7BA05B"/>
+<rect x="26" y="47" width="68" height="13" rx="6.5" fill="#F5C445"/>
+<rect x="26" y="70" width="68" height="13" rx="6.5" fill="#E85D3B"/>
+<rect x="26" y="93" width="68" height="13" rx="6.5" fill="#6E9ABE"/>
+</svg>
+</div>
+<h2>亖 · 四季条<span class="en">FOUR BARS</span></h2>
+<p class="desc">「四」的古字就是「亖」—— 四道横条即四季，从春绿到冬蓝。最抽象最国际的一版，动效可做四条依次点亮。</p>
+<div class="smalls"><span class="s32"><svg viewBox="0 0 120 120"><rect width="120" height="120" rx="28" fill="#FAF6EC" stroke="#1A1A1A" stroke-width="5"/><rect x="26" y="24" width="68" height="13" rx="6.5" fill="#7BA05B"/><rect x="26" y="47" width="68" height="13" rx="6.5" fill="#F5C445"/><rect x="26" y="70" width="68" height="13" rx="6.5" fill="#E85D3B"/><rect x="26" y="93" width="68" height="13" rx="6.5" fill="#6E9ABE"/></svg></span><span class="s16"><svg viewBox="0 0 120 120"><rect width="120" height="120" rx="28" fill="#FAF6EC" stroke="#1A1A1A" stroke-width="5"/><rect x="26" y="24" width="68" height="13" rx="6.5" fill="#7BA05B"/><rect x="26" y="47" width="68" height="13" rx="6.5" fill="#F5C445"/><rect x="26" y="70" width="68" height="13" rx="6.5" fill="#E85D3B"/><rect x="26" y="93" width="68" height="13" rx="6.5" fill="#6E9ABE"/></svg></span><span>32px / 16px</span></div>
+</div>
+
+<!-- E 时轮 -->
+<div class="card">
+<span class="tag alt">E</span>
+<div class="big">
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+<rect width="120" height="120" rx="28" fill="#1A1A1A"/>
+<g class="spin">
+<path d="M60,60 L60,26 A34,34 0 0 1 84,36 Z" fill="#7BA05B"/>
+<path d="M60,60 L84,36 A34,34 0 0 1 94,60 Z" fill="#F5C445"/>
+<path d="M60,60 L94,60 A34,34 0 0 1 84,84 Z" fill="#E85D3B"/>
+<path d="M60,60 L84,84 A34,34 0 0 1 60,94 Z" fill="#6E9ABE"/>
+</g>
+<circle cx="60" cy="60" r="9" fill="#FAF6EC"/>
+</svg>
+</div>
+<h2>时轮 · 彩<span class="en">COLOR WHEEL</span></h2>
+<p class="desc">四季彩轮收进方印：四色扇叶常转，米色圆心不动。暖亮底 + 四季彩，之前灰阶版的彩色正装。</p>
+<div class="smalls"><span class="s32"><svg viewBox="0 0 120 120"><rect width="120" height="120" rx="28" fill="#1A1A1A"/><path d="M60,60 L60,26 A34,34 0 0 1 84,36 Z" fill="#7BA05B"/><path d="M60,60 L84,36 A34,34 0 0 1 94,60 Z" fill="#F5C445"/><path d="M60,60 L94,60 A34,34 0 0 1 84,84 Z" fill="#E85D3B"/><path d="M60,60 L84,84 A34,34 0 0 1 60,94 Z" fill="#6E9ABE"/><circle cx="60" cy="60" r="9" fill="#FAF6EC"/></svg></span><span class="s16"><svg viewBox="0 0 120 120"><rect width="120" height="120" rx="28" fill="#1A1A1A"/><path d="M60,60 L60,26 A34,34 0 0 1 84,36 Z" fill="#7BA05B"/><path d="M60,60 L84,36 A34,34 0 0 1 94,60 Z" fill="#F5C445"/><path d="M60,60 L94,60 A34,34 0 0 1 84,84 Z" fill="#E85D3B"/><path d="M60,60 L84,84 A34,34 0 0 1 60,94 Z" fill="#6E9ABE"/><circle cx="60" cy="60" r="9" fill="#FAF6EC"/></svg></span><span>32px / 16px</span></div>
+</div>
+
+<!-- F Z4 印 -->
+<div class="card">
+<span class="tag alt">F</span>
+<div class="big">
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+<rect width="120" height="120" rx="28" fill="#1A1A1A"/>
+<text x="60" y="76" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="52" font-weight="800" letter-spacing="-2" fill="#FAF6EC">Z4</text>
+<circle cx="96" cy="34" r="6" fill="#F5C445"/>
+</svg>
+</div>
+<h2>Z4 印<span class="en">LETTERMARK</span></h2>
+<p class="desc">沿用你现有 ID「zep4yrs」的 Z4 缩写做字母印，黄点为工坊星火。最国际化的字母路线。</p>
+<div class="smalls"><span class="s32"><svg viewBox="0 0 120 120"><rect width="120" height="120" rx="28" fill="#1A1A1A"/><text x="60" y="76" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="52" font-weight="800" letter-spacing="-2" fill="#FAF6EC">Z4</text><circle cx="96" cy="34" r="6" fill="#F5C445"/></svg></span><span class="s16"><svg viewBox="0 0 120 120"><rect width="120" height="120" rx="28" fill="#1A1A1A"/><text x="60" y="76" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="52" font-weight="800" letter-spacing="-2" fill="#FAF6EC"/></svg></span><span>32px / 16px</span></div>
+</div>
+
+</div>
+<p class="note">选定方向后告诉我编号（如「B，但黄点换成月亮」），我在该方向上精修到底：配色 / 比例 / 动效 / 圆角全部可调。</p>
+</div>
+</body>
+</html>

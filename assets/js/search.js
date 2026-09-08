@@ -30,39 +30,29 @@
   var closeBtn = overlay.querySelector('.search-close');
   var search = null;
 
-  // 加载 Pagefind
-  function loadSearch() {
-    if (search) return Promise.resolve(search);
-    return window.pagefind ? window.pagefind.then(function (s) {
-      search = s;
-      return s;
-    }) : Promise.resolve(null);
+  // 加载 Pagefind JS API（动态 import，避免 window.pagefind promise 链循环）
+  async function loadSearch() {
+    if (search) return search;
+    try {
+      search = await import('/pagefind/pagefind.js');
+    } catch (e) {
+      search = null;
+    }
+    return search;
   }
 
-  // 异步加载 pagefind-ui
-  if (!window.pagefind) {
-    var pf = document.createElement('script');
-    pf.src = 'pagefind/pagefind-ui.js';
-    pf.onload = function () {
-      if (window.PagefindUI) {
-        // 用 PagefindUI 的底层搜索 API
-      }
-    };
-    document.head.appendChild(pf);
-  }
-
-  // 简易搜索：用 pagefind 的 search 接口
+  // 搜索：用 pagefind 的 search 接口
   async function doSearch(query) {
     if (!query.trim()) {
       resultsEl.innerHTML = '<div class="search-empty">输入关键词开始搜索</div>';
       return;
     }
-    if (!window.pagefind) {
+    var pf = await loadSearch();
+    if (!pf) {
       resultsEl.innerHTML = '<div class="search-empty">搜索索引加载中…</div>';
       return;
     }
     try {
-      var pf = await window.pagefind;
       var results = await pf.search(query);
       if (results.results.length === 0) {
         resultsEl.innerHTML = '<div class="search-empty">无匹配结果，换个关键词试试</div>';
