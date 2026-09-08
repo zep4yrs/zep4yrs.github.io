@@ -2,6 +2,18 @@
 
 ## 2026-09-08
 
+### 同步上游仓库动态（struct / lannook）
+- **StructVis**：收录 2026-09 画布质感升级（柱体圆角、玻璃感微渐变、底板微光）与首页广告卡 16:10 优化、广告关闭降级为会话级；hero 描述启用新 slogan「看见数据结构与数据库的每一步跳动」；changelog 补 v1.0.x 条目；projects/demos 卡片文案与版本（v0.0.1 · 新 → v1.0.0 · 正式版）同步；OG 图重生成
+- **LanNook**：版本 v26.2.2 → **v26.4.0**（08-22 发布），全站同步（首页跑马灯/卡片/详情页 VERSION）；changelog 补 v26.4.0（Silk vNext 基础、分平台 chrome 与顶部导航、anime.js 编排、35 项启发式审计修复）与 v26.3.0（RustSec 清零）条目
+- **bulletin**：新增 3 条公告（StructVis 画布升级 09.08、LanNook v26.4.0 08.22、v26.3.0 08.14）
+- 重建 pagefind 索引（21 页 / 2386 词）
+
+### DeepSeek 桌宠项目下线
+- 项目方向调整，DeepSeek 桌宠从全站下线：管线甘特行、首页产品矩阵（Stellar 顺位补为 N°08）、生态商业列表、projects 矩阵（Stellar 顺位补为 N°08）、about 方向描述与统计、stellar 页相关推荐（改指 LanNook）全部移除
+- 计数同步：九个→八个项目，商业 4→3，桌面 4→3，PROJECTS 9→8 active
+- 删除 `deepseek-pet.html`、`assets/og/og-deepseek-pet.png`、`assets/svg/logo-deepseek-pet.svg`；project.css 移除 theme-deepseek-pet 变量
+- feed.xml / bulletin 历史公告保留（历史事实不改写）
+
 ### 清理
 - 删除无入链的旧试验页 `3d-rings.html`（同心环全屏 demo，已被首页 3D hero 取代）与 `logos.html`（旧 logo 展示页，自包含样式）
 

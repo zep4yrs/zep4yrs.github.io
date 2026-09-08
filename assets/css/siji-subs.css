@@ -305,9 +305,7 @@ body { overflow-x: clip; }
 }
 .proj-hero .ph-cta a.primary:hover { background: var(--ink); border-color: var(--ink); }
 .proj-hero .ph-cta a:not(.primary):hover { background: var(--proj, var(--ink)); color: #FAF6EC; }
-/* 亮青主题色（DeepSeek）上用墨字保证对比度 */
-body.theme-deepseek-pet .proj-hero .ph-cta a.primary { color: var(--ink); }
-body.theme-deepseek-pet .proj-hero .ph-cta a:not(.primary):hover { color: var(--ink); }
+/* 亮青主题色（DeepSeek）已随项目下线移除 */
 
 .why-grid, .scenario-grid { border: none; gap: 22px; }
 .why-card, .scenario-card { padding: 30px; }

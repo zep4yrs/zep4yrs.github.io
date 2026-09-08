@@ -16,7 +16,7 @@
 | `about.html` | 关于工坊 + 历程时间线 |
 | `contact.html` | 联系渠道 |
 | `demos.html` | 在线体验入口汇总 |
-| `<项目名>.html` ×9 | 项目详情页（bluetidy / lannook / ctf-qiankun / autopen / alertzero / cryptovis / structvis / deepseek-pet / stellar） |
+| `<项目名>.html` ×8 | 项目详情页（bluetidy / lannook / ctf-qiankun / autopen / alertzero / cryptovis / structvis / stellar） |
 | `404.html` | 404「图纸找不到这张图」 |
 | `logo-lab.html` | 内部工具：logo 比稿页（不进导航） |
 
