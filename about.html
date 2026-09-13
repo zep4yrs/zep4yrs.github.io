@@ -8,81 +8,6 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,500&amp;family=Noto+Sans+SC:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
-<link href="assets/css/fonts.css" rel="stylesheet"/>
-<link href="assets/css/mimo.css" rel="stylesheet"/>
-<link href="assets/css/search.css" rel="stylesheet"/>
-<link href="assets/css/siji-subs.css?v=3" rel="stylesheet"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-<style>
-  /* about 页专属：历程时间线 */
-  .timeline { border-top: 1px solid var(--line); }
-  .tl-item {
-    display: grid; grid-template-columns: 120px 1fr auto;
-    gap: 32px; align-items: baseline;
-    padding: 28px 8px; border-bottom: 1px solid var(--line);
-    text-decoration: none; color: inherit;
-    transition: background .15s, padding .15s;
-  }
-  .tl-item:hover { background: var(--card); padding-left: 20px; }
-  .tl-item .tl-year {
-    font-family: var(--font-serif); font-style: italic; font-weight: 500;
-    font-size: 28px; color: var(--ink); line-height: 1;
-  }
-  .tl-item .tl-main h3 {
-    font-family: var(--font-sans); font-weight: 600;
-    font-size: 18px; margin-bottom: 6px; letter-spacing: -0.01em;
-  }
-  .tl-item .tl-main h3 .en {
-    font-family: var(--font-serif); font-style: italic; font-weight: 400;
-    color: var(--ink-3); font-size: 0.75em; margin-left: 8px;
-  }
-  .tl-item .tl-main p { font-size: 13px; color: var(--ink-2); line-height: 1.6; }
-  .tl-item .tl-arrow { color: var(--ink); font-family: var(--font-serif); transition: transform .15s; }
-  .tl-item:hover .tl-arrow { transform: translateX(4px); }
-
-  /* 维护者卡片 */
-  .maintainer-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
-    border: 1px solid var(--line); border-bottom: none;
-  }
-  .maintainer-card {
-    padding: 40px; border-bottom: 1px solid var(--line);
-    border-right: 1px solid var(--line); background: var(--card);
-    transition: background .15s;
-  }
-  .maintainer-card:last-child { border-right: none; }
-  .maintainer-card:hover { background: var(--bg); }
-  .maintainer-card .mc-role {
-    font-family: var(--font-mono); font-size: 11px; color: var(--ink-3);
-    letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 16px;
-  }
-  .maintainer-card h3 {
-    font-family: var(--font-sans); font-weight: 700;
-    font-size: 24px; margin-bottom: 4px; letter-spacing: -0.01em;
-  }
-  .maintainer-card h3 .en {
-    font-family: var(--font-serif); font-style: italic; font-weight: 400;
-    color: var(--ink-3); font-size: 0.6em; margin-left: 8px;
-  }
-  .maintainer-card .mc-desc {
-    font-size: 14px; color: var(--ink-2); line-height: 1.7; margin: 16px 0 24px;
-  }
-  .maintainer-card .mc-meta {
-    border-top: 1px solid var(--line); padding-top: 16px;
-    display: flex; flex-direction: column; gap: 8px;
-    font-family: var(--font-mono); font-size: 12px;
-  }
-  .maintainer-card .mc-meta .row { display: flex; justify-content: space-between; }
-  .maintainer-card .mc-meta .k { color: var(--ink-3); font-size: 10px; letter-spacing: 0.1em; }
-  .maintainer-card .mc-meta .v { color: var(--ink); }
-
-  @media (max-width: 900px) {
-    .tl-item { grid-template-columns: 1fr; gap: 8px; }
-    .maintainer-grid { grid-template-columns: 1fr; }
-    .maintainer-card { border-right: none; }
-  }
-</style>
 <link href="https://work.feng-qiao.top/about.html" rel="canonical"/>
 <meta content="website" property="og:type"/>
 <meta content="关于 · 四时工坊" property="og:title"/>
@@ -103,22 +28,21 @@
 <meta content="https://work.feng-qiao.top/assets/og/og-about.png" property="og:image"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
+<link rel="stylesheet" href="assets/css/fonts.css">
+<link rel="stylesheet" href="assets/css/proj-base.css">
+<link rel="stylesheet" href="assets/css/siji-info.css">
+<link rel="stylesheet" href="assets/css/search.css">
 </head>
 <body>
-<!-- 通知条 -->
-<div class="notice">
-  StructVis 画布质感升级 · 数据结构自学工具
-  <span class="dot"></span>
-<a href="bulletin.html">查看公告 →</a>
+<div class="topbar">
+<a class="brand" href="index.html"><span class="dot"></span>四时工坊</a>
+<nav class="top-links">
+<a href="index.html">首页</a><a href="about.html">关于</a><a href="projects.html">项目</a><a href="capabilities.html">能力</a><a href="pipeline.html">管线</a><a href="bulletin.html">公告</a><a href="contact.html">联系</a><a href="demos.html">在线体验</a>
+<a class="gh" href="https://github.com/zep4yrs" target="_blank" rel="noopener">GitHub ↗</a>
+</nav>
+<button class="menu-btn" aria-label="菜单"><span></span><span></span><span></span></button>
 </div>
-<!-- 导航 -->
-<header class="nav">
-<div class="nav-inner">
-<a class="brand" href="index.html">
-<span class="brand-mark">z4</span>
-<span>四时工坊</span>
-</a>
-<nav class="nav-links">
+<div class="menu-overlay">
 <a href="index.html">首页</a>
 <a href="about.html">关于</a>
 <a href="projects.html">项目</a>
@@ -126,384 +50,95 @@
 <a href="pipeline.html">管线</a>
 <a href="bulletin.html">公告</a>
 <a href="contact.html">联系</a>
-<span class="nav-dropdown">
-<button class="nav-dropdown-btn">在线体验 <span class="arrow-down">▼</span></button>
-<span class="nav-dropdown-menu">
-<a href="https://work.feng-qiao.top/crypto/">CryptoVis<span class="dd-desc">密码学可视化</span></a>
-<a href="https://work.feng-qiao.top/struct/">StructVis<span class="dd-desc">数据结构可视化</span></a>
-<a href="https://work.feng-qiao.top/ctf-qiankun/">CTF 乾坤袋<span class="dd-desc">CTF 工具箱</span></a>
-</span>
-</span>
-<a class="nav-cta" href="https://github.com/zep4yrs" rel="noopener" target="_blank">GitHub ↗</a>
-</nav>
-
-  <button class="hamburger" aria-label="菜单"><span></span><span></span><span></span></button>
+<a href="demos.html">在线体验</a>
+<a class="gh" href="https://github.com/zep4yrs" target="_blank" rel="noopener">GitHub ↗</a>
 </div>
-</header>
-<div class="mobile-menu">
-  <a href="index.html">首页</a>
-  <a href="index.html#matrix">项目矩阵</a>
-  <a href="index.html#ecosystem">生态</a>
-  <a href="about.html">关于</a>
-  <a href="projects.html">项目</a>
-  <a href="capabilities.html">能力</a>
-  <a href="pipeline.html">管线</a>
-  <a href="bulletin.html">公告</a>
-  <a href="contact.html">联系</a>
-  <div class="mm-dropdown">
-    <button class="mm-dropdown-btn">在线体验 ▼</button>
-    <div class="mm-dropdown-menu">
-      <a href="https://work.feng-qiao.top/crypto/">CryptoVis</a>
-      <a href="https://work.feng-qiao.top/struct/">StructVis</a>
-      <a href="https://work.feng-qiao.top/ctf-qiankun/">CTF 乾坤袋</a>
-    </div>
-  </div>
-  <a href="https://github.com/zep4yrs" class="mm-cta" target="_blank">GitHub ↗</a>
-</div>
-
 <main>
-<!-- Hero -->
-<section class="hero" style="padding: 72px 0 56px;">
-<div class="hero-watermark">ABOUT</div>
+<section class="page-hero">
 <div class="wrap">
-<div class="hero-inner">
-<div class="hero-left">
-<div class="kicker">ABOUT · 关于</div>
-<h1>关于工坊<span class="en">about the workshop</span></h1>
-<p class="sub">四时工坊是枫桥独立维护的软件工作室。不追风口、不赶工期，按自己的节奏把每个想法做成能用的东西。</p>
-</div>
-<div class="hero-right">
-<div id="globe3d" class="globe-3d">
-  <div class="globe-label label-2024">2024</div>
-  <div class="globe-label label-2025">2025</div>
-  <div class="globe-label label-2026">2026</div>
-  <div class="globe-label label-origin">Origin</div>
-  <div class="globe-label label-footer">历程线</div>
-</div>
-</div>
-</div>
+<div class="kicker reveal">ABOUT · 关于</div>
+<h1 class="reveal">关于工坊<span class="en">about the workshop</span></h1>
+<p class="lede reveal">四时工坊是枫桥独立维护的软件工作室。<b>不追风口、不赶工期</b>，按自己的节奏把每个想法做成能用的东西。</p>
 </div>
 </section>
-<!-- 工作室宣言 -->
-<section class="section" id="manifesto">
+
+<section class="sect">
 <div class="wrap">
-<div class="section-head">
 <div class="kicker">MANIFESTO · 宣言</div>
 <h2>工坊的活法<span class="en">how we work</span></h2>
-</div>
-<div class="about-grid">
-<div class="about-left">
-<h3>不追风口<span class="en">no trends</span></h3>
-<p>四时工坊的名字取自"四季"，不追风口、不赶工期，按自己的节奏把每个想法做成能用的东西。这里没有产品经理，没有 deadline，只有一个独立开发者对自己写下的每一行代码负责。</p>
-<p>工作室覆盖四个方向：桌面开发（BlueTidy、LanNook）、安全工程（CTF 乾坤袋、Polaris、零号告警）、教学可视化（CryptoVis、StructVis、Stellar）、游戏化学习（零号告警）。开源和商业并行，工具和教学放一起，这是工坊的定位。</p>
-<div class="sig">
-<div><span class="k">MAINTAINER</span><span class="v">枫桥 / zep4yrs</span></div>
-<div><span class="k">SINCE</span><span class="v">2024</span></div>
-<div><span class="k">PROJECTS</span><span class="v">8 active</span></div>
-</div>
-</div>
-<div class="about-right">
-<ul class="voice-list">
-<li class="voice-item">
-<p class="quote">"不追风口、不赶工期，按自己的节奏做能用的东西这是工坊的活法。"</p>
-<div class="author">— 枫桥 · 工坊主理人</div>
-</li>
-<li class="voice-item">
-<p class="quote">"开源不是姿态，是工作方式。每个项目都从自己真实需要里长出来。"</p>
-<div class="author">— 工坊维护原则</div>
-</li>
-<li class="voice-item">
-<p class="quote">"教学工具要保持一致教材，不能自说自话。学生跟着课本走，工具就该跟着课本走。"</p>
-<div class="author">— StructVis 设计笔记</div>
-</li>
-<li class="voice-item">
-<p class="quote">"商业项目也要有教学价值。零号告警是游戏，但玩家玩完能说清一次安全事件的分析流程。"</p>
-<div class="author">— 零号告警 设计目标</div>
-</li>
-</ul>
-</div>
+<p class="desc">工作室覆盖四个方向：桌面开发（BlueTidy、LanNook）、安全工程（CTF 乾坤袋、Polaris、零号告警）、教学可视化（CryptoVis、StructVis、Stellar）、游戏化学习（零号告警）。开源和商业并行，工具和教学放一起，这是工坊的定位。</p>
+<div class="grid3" style="margin-top:34px">
+<div class="card reveal"><p style="font-size:15px;color:var(--ink);line-height:1.85"><b>「不追风口、不赶工期，按自己的节奏做能用的东西。」</b><br><span style="color:var(--ink-3);font-size:12px">—— 枫桥 · 工坊主理人</span></p></div>
+<div class="card reveal"><p style="font-size:15px;color:var(--ink);line-height:1.85"><b>「开源不是姿态，是工作方式。」</b><br>每个项目都从自己真实需要里长出来。<br><span style="color:var(--ink-3);font-size:12px">—— 工坊维护原则</span></p></div>
+<div class="card reveal"><p style="font-size:15px;color:var(--ink);line-height:1.85"><b>「教学工具要保持一致教材，不能自说自话。」</b><br>学生跟着课本走，工具就该跟着课本走。<br><span style="color:var(--ink-3);font-size:12px">—— StructVis 设计笔记</span></p></div>
 </div>
 </div>
 </section>
-<!-- 历程时间线 -->
-<section class="section" id="history">
+
+<section class="sect">
 <div class="wrap">
-<div class="section-head">
 <div class="kicker">HISTORY · 历程</div>
 <h2>工坊历程<span class="en">timeline</span></h2>
 <p class="desc">从第一个开源项目到八个项目并作，工坊用两年时间慢慢长成了现在的样子。</p>
-</div>
-<div class="timeline">
-<a class="tl-item" href="bulletin.html">
-<span class="tl-year">2026</span>
-<div class="tl-main">
-<h3>多元化<span class="en">diversification</span></h3>
-<p>StructVis、CryptoVis 上线，教学可视化方向成型。零号告警进入编码阶段。工坊覆盖桌面、安全、教学、游戏四个方向。</p>
-</div>
-<span class="tl-arrow">→</span>
+<div class="timeline" style="margin-top:30px">
+<a class="tl-item reveal" href="projects.html">
+<span class="year">2026</span>
+<div><h3>多元化<span class="en">diversification</span></h3><p>StructVis、CryptoVis 上线，教学可视化方向成型。零号告警进入编码阶段。工坊覆盖桌面、安全、教学、游戏四个方向。</p></div>
+<span class="arrow">→</span>
 </a>
-<a class="tl-item" href="bulletin.html">
-<span class="tl-year">2025</span>
-<div class="tl-main">
-<h3>项目积累<span class="en">accumulation</span></h3>
-<p>LanNook、BlueTidy、CTF 乾坤袋陆续发布。从桌面工具到浏览器工具箱，领域越做越宽。开源协议从 MIT 到 GPL，按项目需要选。</p>
-</div>
-<span class="tl-arrow">→</span>
+<a class="tl-item reveal" href="projects.html">
+<span class="year">2025</span>
+<div><h3>项目积累<span class="en">accumulation</span></h3><p>LanNook、BlueTidy、CTF 乾坤袋陆续发布。从桌面工具到浏览器工具箱，领域越做越宽。开源协议从 MIT 到 GPL，按项目需要选。</p></div>
+<span class="arrow">→</span>
 </a>
-<a class="tl-item" href="bulletin.html">
-<span class="tl-year">2024</span>
-<div class="tl-main">
-<h3>zep4yrs 起源<span class="en">origin</span></h3>
-<p>开始写第一个开源项目，后来慢慢变成了一堆项目。四时工坊的名字在那时候定下来四季不歇，慢慢做。</p>
-</div>
-<span class="tl-arrow">→</span>
+<a class="tl-item reveal" href="index.html">
+<span class="year">2024</span>
+<div><h3>zep4yrs 起源<span class="en">origin</span></h3><p>开始写第一个开源项目，后来慢慢变成了一堆项目。四时工坊的名字在那时候定下来——四季不歇，慢慢做。</p></div>
+<span class="arrow">→</span>
 </a>
 </div>
 </div>
 </section>
-<!-- 维护者 -->
-<section class="section" id="team">
+
+<section class="sect">
 <div class="wrap">
-<div class="section-head">
 <div class="kicker">TEAM · 维护者</div>
 <h2>工坊的人<span class="en">who runs it</span></h2>
+<div class="grid2" style="margin-top:30px">
+<div class="card reveal">
+<div class="kicker" style="font-size:10.5px;margin-bottom:16px">MAINTAINER · 主理人</div>
+<h3 style="font-size:26px">枫桥<span class="en">feng-qiao</span></h3>
+<p>独立开发者，zep4yrs 仓库的所有者。负责工坊全部项目的设计、开发、维护。偏好桌面端、系统级工具、教学可视化，相信好的工具应该自己用着顺手再分享出去。</p>
+<p class="spec" style="padding:14px 18px;margin-top:18px;font-size:13px">
+<span style="display:flex;justify-content:space-between;padding:6px 0"><span style="font-family:var(--font-mono);font-size:10.5px;color:var(--ink-3)">GITHUB</span><span>github.com/zep4yrs</span></span>
+<span style="display:flex;justify-content:space-between;padding:6px 0;border-top:1px dashed var(--line)"><span style="font-family:var(--font-mono);font-size:10.5px;color:var(--ink-3)">SITE</span><span>work.feng-qiao.top</span></span>
+<span style="display:flex;justify-content:space-between;padding:6px 0;border-top:1px dashed var(--line)"><span style="font-family:var(--font-mono);font-size:10.5px;color:var(--ink-3)">FOCUS</span><span>桌面 / 安全 / 教学</span></span>
+</p>
 </div>
-<div class="maintainer-grid">
-<div class="maintainer-card">
-<div class="mc-role">MAINTAINER · 主理人</div>
-<h3>枫桥<span class="en">feng-qiao</span></h3>
-<p class="mc-desc">独立开发者，zep4yrs 仓库的所有者。负责工坊全部项目的设计、开发、维护。偏好桌面端、系统级工具、教学可视化，相信好的工具应该自己用着顺手再分享出去。</p>
-<div class="mc-meta">
-<div class="row"><span class="k">GITHUB</span><span class="v">github.com/zep4yrs</span></div>
-<div class="row"><span class="k">SITE</span><span class="v">work.feng-qiao.top</span></div>
-<div class="row"><span class="k">FOCUS</span><span class="v">桌面 / 安全 / 教学</span></div>
-</div>
-</div>
-<div class="maintainer-card">
-<div class="mc-role">CONTRIBUTORS · 贡献者</div>
-<h3>开放协作<span class="en">open collaboration</span></h3>
-<p class="mc-desc">工坊的项目大多开源，欢迎在 GitHub 上提 Issue、PR 或讨论。无论是 bug 报告、功能建议、文档完善，还是只是聊聊用法，都是对工坊的支持。</p>
-<div class="mc-meta">
-<div class="row"><span class="k">OPEN SOURCE</span><span class="v">3 / 7 项目</span></div>
-<div class="row"><span class="k">LICENSE</span><span class="v">MIT / GPL-3.0</span></div>
-<div class="row"><span class="k">CONTRIBUTE</span><span class="v">via GitHub Issues</span></div>
-</div>
+<div class="card reveal">
+<div class="kicker" style="font-size:10.5px;margin-bottom:16px">CONTRIBUTORS · 贡献者</div>
+<h3 style="font-size:26px">开放协作<span class="en">open collaboration</span></h3>
+<p>工坊的项目大多开源，欢迎在 GitHub 上提 Issue、PR 或讨论。无论是 bug 报告、功能建议、文档完善，还是只是聊聊用法，都是对工坊的支持。</p>
+<p class="spec" style="padding:14px 18px;margin-top:18px;font-size:13px">
+<span style="display:flex;justify-content:space-between;padding:6px 0"><span style="font-family:var(--font-mono);font-size:10.5px;color:var(--ink-3)">OPEN SOURCE</span><span>3 / 7 项目</span></span>
+<span style="display:flex;justify-content:space-between;padding:6px 0;border-top:1px dashed var(--line)"><span style="font-family:var(--font-mono);font-size:10.5px;color:var(--ink-3)">LICENSE</span><span>MIT / GPL-3.0</span></span>
+<span style="display:flex;justify-content:space-between;padding:6px 0;border-top:1px dashed var(--line)"><span style="font-family:var(--font-mono);font-size:10.5px;color:var(--ink-3)">CONTRIBUTE</span><span>via GitHub Issues</span></span>
+</p>
 </div>
 </div>
 </div>
 </section>
+
 </main>
-<!-- 页脚 -->
 <footer>
-<div class="wrap">
-<div class="footer-inner">
-<span>© 2026 四时工坊 · zep4yrs</span>
-<span>ABOUT · 关于</span>
-<span>BLUE TIDY · LANNOOK · CTF乾坤袋 · AUTOPEN · 零号告警 · CRYPTOVIS · STRUCTVIS · STELLAR</span>
-</div>
+<div class="wrap footer-inner">
+<span>© 2026 四时工坊 · 枫桥</span>
+<span>以四季的节奏，做能用的东西</span>
+<span>work.feng-qiao.top</span>
 </div>
 </footer>
-<!-- 自定义鼠标 -->
-<div class="cursor-ring" id="cursorRing"></div>
-<div class="cursor-dot" id="cursorDot"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="assets/js/mimo.js"></script>
-<script>
-/* ===== 历程线 · 3D 螺旋路径（Three.js + GSAP） ===== */
-(function(){
-  'use strict';
-  var container = document.getElementById('globe3d');
-  if (!container || typeof THREE === 'undefined' || typeof gsap === 'undefined') return;
-
-  var scene = new THREE.Scene();
-  var aspect = container.clientWidth / container.clientHeight;
-  var camera = new THREE.PerspectiveCamera(38, aspect, 0.1, 100);
-  camera.position.set(6, 3.5, 22);
-  camera.lookAt(0, 0, 0);
-
-  var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setClearColor(0x000000, 0);
-  container.appendChild(renderer.domElement);
-
-  var controls = new THREE.OrbitControls(camera, renderer.domElement);
-  controls.enableDamping = true;
-  controls.dampingFactor = 0.08;
-  controls.autoRotate = false;
-  controls.minDistance = 2;
-  controls.maxDistance = 25;
-  controls.target.set(0, 0, 0);
-
-  function resize() {
-    var w = container.clientWidth;
-    var h = container.clientHeight;
-    if (w === 0 || h === 0) return;
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-    renderer.setSize(w, h);
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  /* 螺旋路径点 */
-  var spiralPoints = [];
-  var turns = 4;
-  var totalPts = 200;
-  for (var i = 0; i <= totalPts; i++) {
-    var t = i / totalPts;
-    var angle = t * Math.PI * 2 * turns;
-    var radius = 3.2 - t * 1.6;
-    var y = -2.0 + t * 4.0;
-    spiralPoints.push(new THREE.Vector3(
-      Math.cos(angle) * radius,
-      y,
-      Math.sin(angle) * 0.8
-    ));
-  }
-
-  /* 螺旋线 */
-  var spiralGeo = new THREE.BufferGeometry().setFromPoints(spiralPoints);
-  var spiralMat = new THREE.LineBasicMaterial({ color: 0x888888, transparent: true, opacity: 0.35 });
-  var spiralLine = new THREE.Line(spiralGeo, spiralMat);
-  scene.add(spiralLine);
-
-  /* 三个里程碑节点 */
-  var milestones = [
-    { t: 0.1, label: '2024', color: 0x555555, size: 0.12 },
-    { t: 0.45, label: '2025', color: 0x888888, size: 0.15 },
-    { t: 0.85, label: '2026', color: 0xCCCCCC, size: 0.18 }
-  ];
-
-  var nodeGroup = new THREE.Group();
-  var nodeMeshes = [];
-  milestones.forEach(function(m) {
-    var idx = Math.floor(m.t * totalPts);
-    var pos = spiralPoints[idx] || spiralPoints[spiralPoints.length - 1];
-    var geo = new THREE.SphereGeometry(m.size, 12, 12);
-    var mat = new THREE.MeshBasicMaterial({ color: m.color });
-    var mesh = new THREE.Mesh(geo, mat);
-    mesh.position.copy(pos);
-    nodeGroup.add(mesh);
-    nodeMeshes.push(mesh);
-
-    /* 光环 */
-    var ringGeo = new THREE.RingGeometry(m.size * 1.5, m.size * 1.8, 24);
-    var ringMat = new THREE.MeshBasicMaterial({ color: m.color, side: THREE.DoubleSide, transparent: true, opacity: 0.3 });
-    var ring = new THREE.Mesh(ringGeo, ringMat);
-    ring.position.copy(pos);
-    ring.lookAt(0, 0, 0);
-    nodeGroup.add(ring);
-    gsap.to(ring.scale, { x: 2, y: 2, z: 2, duration: 2, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: m.t * 3 });
-    gsap.to(ring.material, { opacity: 0, duration: 2, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: m.t * 3 });
-  });
-  scene.add(nodeGroup);
-
-  /* 连接线：从原点到各节点 */
-  var origin = new THREE.Vector3(0, -2, 0);
-  nodeMeshes.forEach(function(mesh) {
-    var lineGeo = new THREE.BufferGeometry().setFromPoints([origin, mesh.position]);
-    var lineMat = new THREE.LineDashedMaterial({ color: 0x555555, dashSize: 0.05, gapSize: 0.1, transparent: true, opacity: 0.2 });
-    var line = new THREE.Line(lineGeo, lineMat);
-    line.computeLineDistances();
-    scene.add(line);
-  });
-
-  /* 起点原点 */
-  var originGeo = new THREE.SphereGeometry(0.08, 8, 8);
-  var originMat = new THREE.MeshBasicMaterial({ color: 0x555555 });
-  var originMesh = new THREE.Mesh(originGeo, originMat);
-  originMesh.position.copy(origin);
-  scene.add(originMesh);
-
-  /* 装饰粒子沿路径 */
-  var dotGroup = new THREE.Group();
-  var dotGeo = new THREE.SphereGeometry(0.03, 4, 4);
-  var dotMat = new THREE.MeshBasicMaterial({ color: 0x888888 });
-  var dotCount = 80;
-  var dotMeshes = [];
-  for (var i = 0; i < dotCount; i++) {
-    var dot = new THREE.Mesh(dotGeo, dotMat);
-    var idx = Math.floor((i / dotCount) * totalPts);
-    var p = spiralPoints[idx] || spiralPoints[0];
-    dot.position.copy(p);
-    dotGroup.add(dot);
-    dotMeshes.push(dot);
-  }
-  scene.add(dotGroup);
-
-  /* GSAP 旋转 */
-  gsap.to(spiralLine.rotation, { y: Math.PI * 2, duration: 35, repeat: -1, ease: 'none' });
-  gsap.to(nodeGroup.rotation, { y: Math.PI * 2, duration: 35, repeat: -1, ease: 'none' });
-  gsap.to(dotGroup.rotation, { y: Math.PI * 2, duration: 35, repeat: -1, ease: 'none' });
-
-  /* 粒子沿路径流动 */
-  (function flowParticles() {
-    var offset = 0;
-    setInterval(function() {
-      offset = (offset + 1) % dotCount;
-      for (var i = 0; i < dotCount; i++) {
-        var idx = (i + offset) % dotCount;
-        var pi = Math.floor((idx / dotCount) * totalPts);
-        var p = spiralPoints[pi] || spiralPoints[0];
-        dotMeshes[i].position.copy(p);
-      }
-    }, 120);
-  })();
-
-  /* 标签 */
-  var label2024 = container.querySelector('.label-2024');
-  var label2025 = container.querySelector('.label-2025');
-  var label2026 = container.querySelector('.label-2026');
-  var labelOrigin = container.querySelector('.label-origin');
-  var labelFooter = container.querySelector('.label-footer');
-
-  var labelPositions = [
-    { el: label2024, pos: new THREE.Vector3(0, -1.0, 0) },
-    { el: label2025, pos: new THREE.Vector3(0, 0.8, 0) },
-    { el: label2026, pos: new THREE.Vector3(0, 2.5, 0) },
-    { el: labelOrigin, pos: new THREE.Vector3(0, -2.8, 0) },
-    { el: labelFooter, pos: new THREE.Vector3(0, -3.8, 0) }
-  ];
-
-  function updateLabels() {
-    var rect = container.getBoundingClientRect();
-    for (var i = 0; i < labelPositions.length; i++) {
-      var lp = labelPositions[i];
-      if (!lp.el) continue;
-      var vec = lp.pos.clone();
-      vec.project(camera);
-      var x = (vec.x * 0.5 + 0.5) * rect.width;
-      var y = (-vec.y * 0.5 + 0.5) * rect.height;
-      lp.el.style.left = x + 'px';
-      lp.el.style.top = y + 'px';
-    }
-  }
-
-  function animate() {
-    requestAnimationFrame(animate);
-    controls.update();
-    updateLabels();
-    renderer.render(scene, camera);
-  }
-  animate();
-})();
-</script>
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('sw.js').catch(function(){});
-  });
-}
-</script>
-<script>
-    window.pagefind = new Promise(function(resolve) {
-          var s = document.createElement('script');
-          s.src = 'pagefind/pagefind-ui.js';
-          s.onload = function() { resolve(window.pagefind); };
-          s.onerror = function() { resolve(null); };
-          document.head.appendChild(s);
-        });
-    </script>
+<script src="assets/js/proj-base.js"></script>
 <script src="assets/js/search.js"></script>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})}</script>
 </body>
 </html>

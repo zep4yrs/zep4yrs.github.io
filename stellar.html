@@ -1,299 +1,236 @@
-﻿<!DOCTYPE html>
-
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stellar · 摘星 · 四时工坊</title>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,500&amp;family=Noto+Sans+SC:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
-<link href="assets/css/fonts.css" rel="stylesheet"/>
-<link href="assets/css/mimo.css" rel="stylesheet"/>
-<link href="assets/css/search.css" rel="stylesheet"/>
-<link href="assets/css/project.css" rel="stylesheet"/>
-<link href="assets/css/siji-subs.css?v=3" rel="stylesheet"/>
-<link href="https://work.feng-qiao.top/stellar.html" rel="canonical"/>
-<meta content="software" property="og:type"/>
-<meta content="Stellar · 摘星 · 桌面 AI 内容策展 · 四时工坊" property="og:title"/>
-<meta content="桌面 AI 内容策展助手。随手贴一个链接或一段文字，5 秒告诉你值不值得看，然后把精华摘下来存好。Tauri 2 + React + TypeScript。" property="og:description"/>
-<meta content="https://work.feng-qiao.top/stellar.html" property="og:url"/>
-<meta content="四时工坊" property="og:site_name"/>
-<meta content="zh_CN" property="og:locale"/>
-<meta content="summary" name="twitter:card"/>
-<meta content="Stellar · 摘星 · 桌面 AI 内容策展 · 四时工坊" name="twitter:title"/>
-<meta content="桌面 AI 内容策展助手。随手贴一个链接或一段文字，5 秒告诉你值不值得看，然后把精华摘下来存好。Tauri 2 + React + TypeScript。" name="twitter:description"/>
-<link href="manifest.json" rel="manifest"/>
-<meta content="#1A1A1A" name="theme-color"/>
-<link href="assets/svg/logo-zep4yrs.svg" rel="icon" type="image/svg+xml"/>
-<link href="feed.xml" rel="alternate" title="四时工坊公告" type="application/rss+xml"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/fonts.css">
+<link rel="stylesheet" href="assets/css/proj-base.css">
+<link rel="canonical" href="https://work.feng-qiao.top/stellar.html">
+<meta property="og:type" content="software">
+<meta property="og:title" content="Stellar · 摘星 · 四时工坊">
+<meta property="og:description" content="桌面 AI 内容策展助手：贴一个链接或一段文字，5 秒告诉你值不值得看，把精华摘下来存好。本地存储 · Tauri 2 + React。">
+<meta property="og:url" content="https://work.feng-qiao.top/stellar.html">
+<meta property="og:site_name" content="四时工坊">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Stellar · 摘星 · 四时工坊">
+<meta name="twitter:description" content="桌面 AI 内容策展助手：贴一个链接或一段文字，5 秒告诉你值不值得看，把精华摘下来存好。本地存储 · Tauri 2 + React。">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1A1A1A">
+<link rel="icon" type="image/svg+xml" href="assets/svg/logo-zep4yrs.svg">
+<link rel="alternate" type="application/rss+xml" title="四时工坊公告" href="feed.xml">
 <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Organization","name":"四时工坊","alternateName":"Four Seasons Workshop","url":"https://work.feng-qiao.top","logo":"https://work.feng-qiao.top/assets/svg/logo-zep4yrs.svg","founder":"枫桥","foundingDate":"2024","sameAs":["https://github.com/zep4yrs"]}
-  </script>
-<meta content="https://work.feng-qiao.top/assets/og/og-stellar.png" property="og:image"/>
-<meta content="1200" property="og:image:width"/>
-<meta content="630" property="og:image:height"/>
-</head>
-<body class="theme-stellar">
-<div class="notice">
-  Stellar · 商业 · 开发中
-  <span class="dot"></span>
-<a href="bulletin.html">最新动态 →</a>
-</div>
-<header class="nav">
-<div class="nav-inner">
-<a class="brand" href="index.html">
-<span class="brand-mark">z4</span><span>四时工坊</span>
-</a>
-<nav class="nav-links">
-<a href="index.html">首页</a>
-<a href="about.html">关于</a>
-<a href="projects.html">项目</a>
-<a href="capabilities.html">能力</a>
-<a href="pipeline.html">管线</a>
-<a href="bulletin.html">公告</a>
-<a href="contact.html">联系</a>
-<span class="nav-dropdown">
-<button class="nav-dropdown-btn">在线体验 <span class="arrow-down">▼</span></button>
-<span class="nav-dropdown-menu">
-<a href="https://work.feng-qiao.top/crypto/">CryptoVis<span class="dd-desc">密码学可视化</span></a>
-<a href="https://work.feng-qiao.top/struct/">StructVis<span class="dd-desc">数据结构可视化</span></a>
-<a href="https://work.feng-qiao.top/ctf-qiankun/">CTF 乾坤袋<span class="dd-desc">CTF 工具箱</span></a>
-</span>
-</span>
-<a class="nav-cta" href="https://github.com/zep4yrs" rel="noopener" target="_blank">GitHub ↗</a>
-</nav>
+{"@context":"https://schema.org","@type":"Organization","name":"四时工坊","alternateName":"Four Seasons Workshop","url":"https://work.feng-qiao.top","logo":"https://work.feng-qiao.top/assets/svg/logo-zep4yrs.svg","founder":"枫桥","foundingDate":"2024","sameAs":["https://github.com/zep4yrs"]}
+</script>
+<meta property="og:image" content="https://work.feng-qiao.top/assets/og/og-stellar.png">
+<style>
+/* ===== Stellar · 摘星卡片盒 ===== */
+:root { --ac: #D97706; --ac-soft: rgba(217,119,6,0.10); --night: #26221C; }
 
-  <button class="hamburger" aria-label="菜单"><span></span><span></span><span></span></button>
+.hero { padding: 150px 0 70px; }
+.kicker { display: flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-2); letter-spacing: .22em; }
+.kicker::before { content: ""; width: 30px; height: 2px; background: var(--ink); }
+h1 { font-size: clamp(46px, 6.4vw, 84px); font-weight: 900; letter-spacing: -0.035em; line-height: 1.03; margin: 20px 0 14px; }
+h1 .star { color: var(--ac); }
+.lede { font-size: 16.5px; line-height: 1.85; color: var(--ink-2); max-width: 46ch; }
+.lede b { color: var(--ink); }
+.lede .n5 { font-family: var(--font-mono); font-weight: 700; color: var(--ac); }
+.cta { display: flex; gap: 12px; flex-wrap: wrap; margin: 28px 0 10px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 26px; border-radius: 999px; border: 1.5px solid var(--ink); font-family: var(--font-mono); font-size: 13.5px; text-decoration: none; color: var(--ink); transition: all .15s; }
+.btn:hover { transform: translateY(-1px); }
+.btn.solid { background: var(--ac); border-color: var(--ac); color: #fff; }
+.btn.solid:hover { background: var(--ink); border-color: var(--ink); }
+.coming { font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-3); letter-spacing: .14em; }
+
+/* 5 秒判定演示台 */
+.judge { background: var(--night); color: #EDE6D8; border-radius: 26px; padding: clamp(26px,4vw,44px); box-shadow: 0 30px 70px rgba(38,34,28,0.45); }
+.judge-head { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; letter-spacing: .18em; color: #A89C86; margin-bottom: 20px; }
+.judge-input {
+  width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 12px; color: #EDE6D8; font-size: 14px; line-height: 1.6;
+  padding: 16px 18px; min-height: 84px; outline: none; resize: vertical;
+  font-family: var(--font-sans);
+}
+.judge-input:focus { border-color: var(--ac); }
+.judge-btn {
+  margin-top: 14px; background: var(--ac); color: #fff; border: none; border-radius: 999px;
+  font-family: var(--font-mono); font-size: 13px; padding: 11px 28px; cursor: pointer; transition: all .15s;
+}
+.judge-btn:hover { background: #F0A83C; }
+.verdict { display: none; margin-top: 20px; border-top: 1px dashed rgba(255,255,255,0.15); padding-top: 20px; }
+.verdict.show { display: block; }
+.verdict-line { display: flex; align-items: baseline; gap: 14px; }
+.verdict-score { font-family: var(--font-mono); font-size: 54px; font-weight: 700; color: var(--ac); line-height: 1; }
+.verdict-score small { font-size: 20px; color: #A89C86; }
+.verdict-text { font-size: 15px; font-weight: 700; }
+.verdict-text small { display: block; font-weight: 400; font-size: 12px; color: #A89C86; margin-top: 4px; }
+.dims { margin-top: 18px; display: grid; gap: 10px; }
+.dim-row { display: grid; grid-template-columns: 88px 1fr 40px; gap: 12px; align-items: center; font-size: 12px; color: #B8AC96; }
+.dim-track { height: 8px; border-radius: 999px; background: rgba(255,255,255,0.09); overflow: hidden; }
+.dim-fill { height: 100%; border-radius: 999px; background: var(--ac); width: 0; transition: width 1s cubic-bezier(.22,1,.36,1); }
+.judge-note { font-size: 10.5px; color: #6E655A; margin-top: 16px; }
+
+/* 卡片墙 */
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.acard { background: var(--card); border-radius: 18px; box-shadow: var(--shadow); padding: 26px; position: relative; transition: transform .25s; }
+.acard:hover { transform: translateY(-4px) rotate(-0.6deg); }
+.acard .starline { color: var(--ac); font-size: 14px; letter-spacing: 3px; }
+.acard h4 { font-size: 16px; font-weight: 800; margin: 12px 0 8px; line-height: 1.5; }
+.acard p { font-size: 12.5px; line-height: 1.75; color: var(--ink-2); }
+.acard .src { margin-top: 14px; font-family: var(--font-mono); font-size: 10px; color: var(--ink-3); }
+
+.wrap-section { padding: clamp(64px, 9vw, 110px) 0; border-top: 1px solid var(--hair); }
+.kicker { margin-bottom: 40px; }
+.feat { display: grid; grid-template-columns: 200px 1fr; gap: 28px; padding: 34px 0; border-bottom: 1px dashed var(--line); }
+.feat .fn { font-family: Georgia, serif; font-style: italic; font-size: 40px; color: var(--ac); line-height: 1; }
+.feat h3 { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 10px; }
+.feat h3 .en { font-family: var(--font-mono); font-weight: 400; font-size: 11px; color: var(--ink-3); letter-spacing: .18em; margin-left: 10px; text-transform: uppercase; }
+.feat p { font-size: 14.5px; line-height: 1.9; color: var(--ink-2); max-width: 66ch; margin-bottom: 8px; }
+.feat p b { color: var(--ink); }
+
+.why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.why { border-top: 3px solid var(--ac); background: var(--card); border-radius: 0 0 18px 18px; box-shadow: var(--shadow); padding: 24px 22px; }
+.why .wn { font-family: var(--font-mono); font-size: 11px; color: var(--ac); letter-spacing: .16em; }
+.why h4 { font-size: 17px; font-weight: 800; margin: 10px 0 8px; }
+.why p { font-size: 13px; line-height: 1.75; color: var(--ink-2); }
+
+.spec { background: var(--card); border-radius: 22px; box-shadow: var(--shadow); padding: 10px 30px; }
+.spec-row { display: grid; grid-template-columns: 130px 1fr; gap: 18px; padding: 14px 0; border-bottom: 1px dashed var(--line); font-size: 14px; }
+.spec-row:last-child { border-bottom: none; }
+.spec-row .k { font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); letter-spacing: .14em; padding-top: 3px; }
+
+@media (max-width: 900px) {
+  .hero { padding: 120px 0 56px; }
+  .cards { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr 1fr; }
+  .feat { grid-template-columns: 1fr; gap: 10px; }
+}
+@media (max-width: 560px) { .why-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="topbar">
+<a class="brand" href="index.html"><span class="dot"></span>四时工坊</a>
+<nav class="top-links">
+<a href="index.html">首页</a><a href="projects.html">项目</a><a href="pipeline.html">管线</a><a href="bulletin.html">公告</a>
+<a class="gh" href="https://github.com/zep4yrs" target="_blank" rel="noopener">GitHub ↗</a>
+</nav>
+<button class="menu-btn" aria-label="菜单"><span></span><span></span><span></span></button>
 </div>
-</header>
-<div class="mobile-menu">
-  <a href="index.html">首页</a>
-  <a href="index.html#matrix">项目矩阵</a>
-  <a href="index.html#ecosystem">生态</a>
-  <a href="about.html">关于</a>
-  <a href="projects.html">项目</a>
-  <a href="capabilities.html">能力</a>
-  <a href="pipeline.html">管线</a>
-  <a href="bulletin.html">公告</a>
-  <a href="contact.html">联系</a>
-  <div class="mm-dropdown">
-    <button class="mm-dropdown-btn">在线体验 ▼</button>
-    <div class="mm-dropdown-menu">
-      <a href="https://work.feng-qiao.top/crypto/">CryptoVis</a>
-      <a href="https://work.feng-qiao.top/struct/">StructVis</a>
-      <a href="https://work.feng-qiao.top/ctf-qiankun/">CTF 乾坤袋</a>
-    </div>
-  </div>
-  <a href="https://github.com/zep4yrs" class="mm-cta" target="_blank">GitHub ↗</a>
+<div class="menu-overlay">
+<a href="index.html">首页</a><a href="projects.html">项目矩阵</a><a href="pipeline.html">管线</a><a href="bulletin.html">公告</a>
+<a class="gh" href="https://github.com/zep4yrs" target="_blank" rel="noopener">关注开发 ↗</a>
 </div>
 
 <main>
-<section class="proj-hero">
+<section class="hero">
 <div class="wrap">
-<div class="ph-top">
-<img alt="Stellar" class="ph-logo" src="assets/svg/logo-stellar.svg"/>
-<div class="ph-num">N°09 · STELLAR</div>
+<div class="reveal">
+<div class="kicker">N°08 · STELLAR · 摘星</div>
+<h1>5 秒，<br>决定读不读。<span class="star">✦</span></h1>
+<p class="lede">桌面 AI 内容策展助手：随手贴一个链接或一段文字，<b><span class="n5">5</span> 秒</b>告诉你值不值得看，把精华摘下来存好。Tauri 2 + React + TypeScript。</p>
+<div class="cta">
+<a class="btn solid" href="contact.html">开发中 · 关注动态</a>
+<a class="btn" href="https://github.com/zep4yrs" target="_blank" rel="noopener">GitHub</a>
 </div>
-<h1>Stellar / 摘星<span class="en">curation</span></h1>
-<p class="ph-desc">桌面 AI 内容策展助手。随手贴一个链接或一段文字，5 秒告诉你值不值得看，然后把精华摘下来存好。Tauri 2 + React + TypeScript。</p>
-<div class="ph-cta">
-<a class="primary" href="https://github.com/zep4yrs" rel="noopener" target="_blank">GitHub 源码 →</a>
-<a href="#">下载 →</a>
+<div class="coming">V0.1-DEV · WINDOWS / MACOS / LINUX · 数据全本地</div>
 </div>
-<div class="install-cmd"><code>开发中，敬请期待</code><span class="copy-label">COMMERCIAL</span></div>
+
+<div class="judge reveal" style="margin-top:56px">
+<div class="judge-head"><span>VERDICT · 5 秒判定</span><span>DEMO · 交互可玩</span></div>
+<div class="judge-input" contenteditable="true" id="judgeText">一篇 8000 字的长文，标题很标题党，开头三段都在铺垫，核心观点只有一个，案例引用了 2019 年的数据……</div>
+<button class="judge-btn" id="judgeBtn">✦ 判断值不值得看</button>
+<div class="verdict" id="verdict">
+<div class="verdict-line">
+<div class="verdict-score"><span id="scoreNum">0</span><small>/100</small></div>
+<div class="verdict-text">值得略读，不必精读<small>核心观点集中在 §2；案例偏旧，跳到 §4 看结论即可</small></div>
 </div>
-</section>
-<section class="section scroll-reveal">
-<div class="wrap stream-in">
-<div class="section-head">
-<div class="kicker">SPEC · 规格</div>
-<h2>规格表<span class="en">specification</span></h2>
-</div>
-<div class="spec-table">
-<div class="spec-row"><div class="sk">VERSION</div><div class="sv">v0.1-dev</div></div>
-<div class="spec-row"><div class="sk">STACK</div><div class="sv">Tauri 2 · React · TypeScript</div></div>
-<div class="spec-row"><div class="sk">PLATFORM</div><div class="sv">Windows / macOS / Linux</div></div>
-<div class="spec-row"><div class="sk">LICENSE</div><div class="sv commercial">商业</div></div>
-<div class="spec-row"><div class="sk">STATUS</div><div class="sv">开发中</div></div>
-<div class="spec-row"><div class="sk">FORM</div><div class="sv">桌面应用</div></div>
-</div>
-</div>
-</section>
-<section class="section scroll-reveal">
-<div class="wrap stream-in">
-<div class="section-head">
-<div class="kicker">FEATURES · 特性</div>
-<h2>核心特性<span class="en">key features</span></h2>
-</div>
-<div class="feat-list">
-<div class="feat-item"><div class="fn">N°01</div><div><h3>智能策展<span class="en">smart curation</span></h3><p>贴一个链接或者一段文字进去，5 秒内给出 5 个维度的评分，加上一个明确的判断，值不值得花时间看。不跟你含糊，说好就是好，说不好就是不好。</p><p>每天打开手机电脑，各种文章推送铺天盖地。用它先筛一遍，好内容不会被埋没，噪音也不会被纠缠。省下来的时间，才是自己的。</p></div></div>
-<div class="feat-item"><div class="fn">N°02</div><div><h3>内容提取<span class="en">content extract</span></h3><p>支持网页链接、PDF 文件和纯文本，贴进去自动提取核心论点和关键信息。几千字的文章提炼成几百字的精华摘要，不用从头到尾读完才知道在讲什么。</p><p>碰到那种又长又绕的文章，或者技术文档里藏着关键信息的那种，用它提炼一下，几句话就知道核心在说什么，省时间。</p></div></div>
-<div class="feat-item"><div class="fn">N°03</div><div><h3>个人归档<span class="en">personal archive</span></h3><p>所有策展过的内容都存在本地，按主题、时间、来源智能组织好，还支持全文检索。几个月前看过的一篇文章，只记得一个关键词，搜一下就能找到，不用翻几百个浏览器书签。</p><p>数据全在本地，不用担心哪天服务关了东西就没了。隐私也有保障，你的阅读记录和收藏内容不会上传到任何服务器。</p></div></div>
-<div class="feat-item"><div class="fn">N°04</div><div><h3>每日精选<span class="en">daily pick</span></h3><p>根据你的阅读习惯和策展记录，每天早上推送 3 条最值得看的内容。用得越久，推得越准。</p><p>早上打开电脑先看一眼今日精选，今天值得读的东西已经在那了。不用在信息流里瞎翻，也不用担心错过什么重要的。</p></div></div>
+<div class="dims">
+<div class="dim-row"><span>信息密度</span><div class="dim-track"><div class="dim-fill" style="width:46%"></div></div><span>46</span></div>
+<div class="dim-row"><span>论证质量</span><div class="dim-track"><div class="dim-fill" style="width:71%"></div></div><span>71</span></div>
+<div class="dim-row"><span>时效性</span><div class="dim-track"><div class="dim-fill" style="width:28%"></div></div><span>28</span></div>
+<div class="dim-row"><span>可操作性</span><div class="dim-track"><div class="dim-fill" style="width:55%"></div></div><span>55</span></div>
+<div class="dim-row"><span>独特观点</span><div class="dim-track"><div class="dim-fill" style="width:62%"></div></div><span>62</span></div>
 </div>
 </div>
-</section>
-<section class="section scroll-reveal">
-<div class="wrap stream-in">
-<div class="section-head">
-<div class="kicker">SCENARIOS · 适用场景</div>
-<h2>适用场景<span class="en">use cases</span></h2>
-</div>
-<div class="scenario-grid">
-<div class="scenario-card">
-<div class="sc-icon">SC·01</div>
-<h4>信息过载</h4>
-<p>每天打开手机电脑，各种文章、推送、公众号铺天盖地，不知道哪些值得看。用摘星扫一下，好内容留下，噪音直接过滤掉。</p>
-</div>
-<div class="scenario-card">
-<div class="sc-icon">SC·02</div>
-<h4>研究学习</h4>
-<p>写论文或者做研究的时候，要读大量文献。每篇都仔细读不现实，用它快速评估文献价值，决定哪些精读哪些略读。</p>
-</div>
-<div class="scenario-card">
-<div class="sc-icon">SC·03</div>
-<h4>内容收藏整理</h4>
-<p>看到好的文章想收藏，但不知道怎么分类。摘星自动帮你归档，按主题和时间组织好，想找的时候搜一下就行，不用翻几百个书签。</p>
-</div>
-<div class="scenario-card">
-<div class="sc-icon">SC·04</div>
-<h4>竞品分析</h4>
-<p>做产品调研的时候，一堆竞品文章要读。用摘星扫一遍，每篇的核心观点和差异点提炼出来，快速定位哪些文章值得深入分析。</p>
-</div>
-</div>
-</div>
-</section>
-<section class="section scroll-reveal">
-<div class="wrap stream-in">
-<div class="section-head">
-<div class="kicker">WHY · 为什么选择</div>
-<h2>为什么选择 Stellar / 摘星<span class="en">why choose</span></h2>
-</div>
-<div class="why-grid">
-<div class="why-card">
-<div class="wc-num">01</div>
-<h4>快速判断</h4>
-<p>5 秒告诉你一篇文章值不值得看，不用自己花时间读半天才发现是水文。时间花在刀刃上。</p>
-</div>
-<div class="why-card">
-<div class="wc-num">02</div>
-<h4>本地存储</h4>
-<p>所有数据都存在本地，不经过云端，隐私安全有保障。也不用担心哪天服务停了收藏的东西全没了。</p>
-</div>
-<div class="why-card">
-<div class="wc-num">03</div>
-<h4>智能推荐</h4>
-<p>基于你的阅读习惯和策展记录来推荐，不是那种泛泛的推荐算法。用得越久，它越懂你喜欢什么。</p>
-</div>
-<div class="why-card">
-<div class="wc-num">04</div>
-<h4>跨平台同步</h4>
-<p>本地数据可以通过 iCloud、OneDrive 等云盘同步，电脑和手机都能访问。数据始终在自己手里，不经过第三方服务器，安全和隐私都自己掌控。</p>
-</div>
-</div>
-</div>
-</section>
-<section class="section scroll-reveal">
-<div class="wrap stream-in">
-<div class="section-head">
-<div class="kicker">CHANGELOG · 更新日志</div>
-<h2>版本历史<span class="en">changelog</span></h2>
-</div>
-<div class="changelog">
-<div class="cl-item"><span class="cl-ver">v0.1-dev</span><span class="cl-date">2026-07</span><span class="cl-desc">概念原型，Tauri 2 骨架搭建</span></div>
-<div class="cl-item"><span class="cl-ver">v0.0</span><span class="cl-date">2026-06</span><span class="cl-desc">立项</span></div>
-</div>
-</div>
-</section>
-<section class="section scroll-reveal">
-<div class="wrap stream-in">
-<div class="section-head">
-<div class="kicker">ROADMAP · 路线图</div>
-<h2>下一步<span class="en">what's next</span></h2>
-</div>
-<div class="roadmap-list">
-<div class="rm-item"><span class="rm-num">N°01</span><span class="rm-title">内测版</span><span class="rm-status">计划</span></div>
-<div class="rm-item"><span class="rm-num">N°02</span><span class="rm-title">公开 beta</span><span class="rm-status">计划</span></div>
-<div class="rm-item"><span class="rm-num">N°03</span><span class="rm-title">正式版</span><span class="rm-status">进行中</span></div>
-<div class="rm-item"><span class="rm-num">N°04</span><span class="rm-title">跨平台支持</span><span class="rm-status done">已完成</span></div>
-</div>
-</div>
-</section>
-<section class="section scroll-reveal">
-<div class="wrap stream-in">
-<div class="section-head">
-<div class="kicker">RELATED · 相关</div>
-<h2>同类项目<span class="en">related</span></h2>
-</div>
-<div class="related-grid">
-<a class="related-card" href="cryptovis.html"><img alt="CryptoVis" src="assets/svg/logo-cryptovis.svg"/><h4>CryptoVis</h4><p>教学可视化方向</p></a>
-<a class="related-card" href="structvis.html"><img alt="StructVis" src="assets/svg/logo-structvis.svg"/><h4>StructVis</h4><p>教学可视化方向</p></a>
-<a class="related-card" href="lannook.html"><img alt="LanNook" src="assets/svg/logo-lannook.svg"/><h4>LanNook</h4><p>桌面工具方向</p></a>
-</div>
-</div>
-</section>
-<section class="section scroll-reveal">
-<div class="wrap stream-in">
-<div class="section-head">
-<div class="kicker">COMMENTS · 评论</div>
-<h2>讨论<span class="en">discussion</span></h2>
-</div>
-<div class="share-bar">
-<span class="share-label">SHARE · 分享</span>
-<a class="share-btn" href="https://connect.qq.com/widget/shareqq/index.html?url=https://work.feng-qiao.top/stellar.html&amp;text=Stellar%20%C2%B7%20%E6%91%98%E6%98%9F" rel="noopener" target="_blank" title="分享到 QQ">
-<svg fill="currentColor" height="14" viewbox="0 0 24 24" width="14"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
-<span class="share-label-text">QQ</span>
-</a>
-<a class="share-btn" href="https://service.weibo.com/share/share.php?url=https://work.feng-qiao.top/stellar.html&amp;title=Stellar%20%C2%B7%20%E6%91%98%E6%98%9F" rel="noopener" target="_blank" title="分享到微博">
-<svg fill="currentColor" height="14" viewbox="0 0 24 24" width="14"><path d="M10.098 20.323c-3.977.391-7.414-1.406-7.672-4.02-.259-2.609 2.759-5.047 6.74-5.441 3.979-.394 7.413 1.404 7.671 4.018.259 2.6-2.759 5.049-6.739 5.443zM3.027 8.64c-1.109.412-1.866.559-1.866.559s.157-.515.683-1.134c.527-.617 1.174-.999 1.174-.999s-.108.48-.108 1.045c0 .304.058.529.117.529zm-.058-.529c-.002-.228-.046-.336-.046-.336s-.06.167-.06.417c0 .153.022.266.048.336.012.034.026.056.038.068.016.016.028.02.028.02s-.008-.113-.008-.284v-.221zm.877-1.596c-1.054.395-1.773.677-1.773.677s.148-.698.848-1.352c.7-.654 1.48-.923 1.48-.923s-.368.707-.368 1.519c0 .137.027.239.055.304.016.036.034.06.055.077.012.01.024.016.033.019l.008.003s-.114-.094-.254-.246c-.14-.153-.228-.328-.228-.328-.069.096-.201.228-.393.35-.192.12-.428.22-.463.221.001.001 0 .001 0 .001zm-2.33 6.312c0-2.442 1.426-4.375 3.568-4.875l.233-.057C5.593 6.099 5.55 4.8 4.919 4.281c-1.134-.917-3.193-.224-3.193-.224s.511-.732 1.46-.997c.949-.266 1.919.005 2.505.508.89.762.968 2.145.289 3.377 1.622-.216 3.154.238 4.144 1.154.861.798 1.257 1.865 1.257 2.944 0 2.582-3.163 4.612-7.067 4.612-3.905 0-7.069-2.031-7.069-4.612z"></path></svg>
-<span class="share-label-text">微博</span>
-</a>
-<a class="share-btn" href="https://www.douban.com/share/service?url=https://work.feng-qiao.top/stellar.html" rel="noopener" target="_blank" title="分享到豆瓣">
-<svg fill="currentColor" height="14" viewbox="0 0 24 24" width="14"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg>
-<span class="share-label-text">豆瓣</span>
-</a>
-<button class="share-btn share-copy-link" data-url="https://work.feng-qiao.top/stellar.html" title="复制链接">
-<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-<span class="share-label-text">复制链接</span>
-</button>
-</div>
-<div class="giscus">
-<script async="" crossorigin="anonymous" data-category="Announcements" data-category-id="DIC_kwDOSaXw7M4CkKYP" data-emit-metadata="0" data-input-position="top" data-lang="zh-CN" data-mapping="pathname" data-reactions-enabled="1" data-repo="zep4yrs/zep4yrs.github.io" data-repo-id="R_kgDOSaXw7A" data-strict="0" data-theme="preferred_color_scheme" src="https://giscus.app/client.js">
-</script>
+<div class="judge-note">↑ 交互演示 · 实际产品由 AI 实时评估</div>
 </div>
 </div>
 </section>
 
-</main>
-<footer>
-<div class="wrap">
-<div class="footer-inner">
-<span>© 2026 四时工坊 · zep4yrs</span>
-<span>Stellar / 摘星</span>
-<span>商业 · 开发中</span>
+<section class="wrap wrap-section">
+<div class="kicker">ARCHIVE · 策展卡片</div>
+<div class="cards">
+<div class="acard reveal"><div class="starline">★★★☆☆</div><h4>为什么局部变量表会影响 GC 根枚举？</h4><p>核心论点：栈上变量是 GC roots 的一部分。案例用了 HotSpot 的 OopMap 讲安全点概念。</p><div class="src">SRC · 技术博客 · 62 分</div></div>
+<div class="acard reveal"><div class="starline">★★★★★</div><h4>数据库索引为什么用 B+ 树而不是跳表？</h4><p>磁盘预读模型下 B+ 树的扇出优势讲透了，还对比了 LSM 树的取舍。</p><div class="src">SRC · 数据库 · 88 分</div></div>
+<div class="acard reveal"><div class="starline">★★☆☆☆</div><h4>2026 年最值得学的十种编程语言</h4><p>清单式水文，观点全在标题里。唯一有用的是引用的 TIOBE 数据源链接。</p><div class="src">SRC · 资讯 · 24 分</div></div>
 </div>
+</section>
+
+<section class="wrap wrap-section">
+<div class="kicker">FEATURES · 核心特性</div>
+<div class="feat reveal"><div class="fn">01</div><div><h3>智能策展<span class="en">smart curation</span></h3><p>贴链接或文字进去，5 秒内给出 <b>5 个维度的评分</b>加一个明确判断：值不值得花时间看。不跟你含糊——说好就是好，说不好就是不好。信息流铺天盖地的时代，先筛一遍，好内容不被埋没，噪音不被纠缠。<b>省下来的时间才是自己的。</b></p></div></div>
+<div class="feat reveal"><div class="fn">02</div><div><h3>内容提取<span class="en">content extract</span></h3><p>网页链接、PDF、纯文本都支持，贴进去自动提取<b>核心论点和关键信息</b>：几千字提炼成几百字精华摘要，不用读完才知道在讲什么。又长又绕的技术文档，几句话就知道核心。</p></div></div>
+<div class="feat reveal"><div class="fn">03</div><div><h3>个人归档<span class="en">personal archive</span></h3><p>策展过的内容全部<b>存在本地</b>，按主题、时间、来源智能组织，支持全文检索。几个月前看过的文章只记得关键词，搜一下就找到。数据不出本地，服务关了东西还在。</p></div></div>
+<div class="feat reveal"><div class="fn">04</div><div><h3>每日精选<span class="en">daily pick</span></h3><p>根据阅读习惯和策展记录，每天早上推送 <b>3 条最值得看的内容</b>。用得越久推得越准——早上打开电脑，今天值得读的已经在了。</p></div></div>
+</section>
+
+<section class="wrap wrap-section">
+<div class="kicker">WHY · 为什么选摘星</div>
+<div class="why-grid">
+<div class="why reveal"><div class="wn">01</div><h4>快速判断</h4><p>5 秒告诉你值不值得看，不用读半天才发现是水文。时间花在刀刃上。</p></div>
+<div class="why reveal"><div class="wn">02</div><h4>本地存储</h4><p>数据全在本地不过云端，隐私有保障，服务停了收藏还在。</p></div>
+<div class="why reveal"><div class="wn">03</div><h4>智能推荐</h4><p>基于阅读习惯和策展记录，不是泛泛的推荐算法。越用越懂你。</p></div>
+<div class="why reveal"><div class="wn">04</div><h4>跨平台同步</h4><p>本地数据可跨设备同步，Windows / macOS / Linux 都在。</p></div>
+</div>
+</section>
+
+<section class="wrap wrap-section">
+<div class="kicker">SPEC · 规格表</div>
+<div class="spec reveal">
+<div class="spec-row"><div class="k">VERSION</div><div>v0.1-dev</div></div>
+<div class="spec-row"><div class="k">STACK</div><div>Tauri 2 · React · TypeScript</div></div>
+<div class="spec-row"><div class="k">PLATFORM</div><div>Windows / macOS / Linux</div></div>
+<div class="spec-row"><div class="k">LICENSE</div><div>商业</div></div>
+<div class="spec-row"><div class="k">STATUS</div><div>开发中</div></div>
+<div class="spec-row"><div class="k">FORM</div><div>桌面应用</div></div>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="wrap footer-inner">
+<span>© 2026 四时工坊 · 枫桥</span>
+<span>STELLAR · 摘星</span>
+<span>work.feng-qiao.top</span>
 </div>
 </footer>
-<div class="cursor-ring" id="cursorRing"></div>
-<div class="cursor-dot" id="cursorDot"></div>
-<script src="assets/js/mimo.js"></script>
+<script src="assets/js/proj-base.js"></script>
 <script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('sw.js').catch(function(){});
+(function () {
+  var btn = document.getElementById('judgeBtn');
+  var verdict = document.getElementById('verdict');
+  var num = document.getElementById('scoreNum');
+  if (!btn) return;
+  btn.addEventListener('click', function () {
+    verdict.classList.add('show');
+    var target = 63;
+    var cur = 0;
+    var timer = setInterval(function () {
+      cur += 3;
+      if (cur >= target) { cur = target; clearInterval(timer); }
+      num.textContent = cur;
+    }, 28);
+    document.querySelectorAll('.dim-fill').forEach(function (f) {
+      var w = f.style.width; f.style.width = '0';
+      setTimeout(function () { f.style.width = w; }, 60);
+    });
   });
-}
+})();
 </script>
-<script>
-    window.pagefind = new Promise(function(resolve) {
-          var s = document.createElement('script');
-          s.src = 'pagefind/pagefind-ui.js';
-          s.onload = function() { resolve(window.pagefind); };
-          s.onerror = function() { resolve(null); };
-          document.head.appendChild(s);
-        });
-    </script>
-<script src="assets/js/search.js"></script>
 </body>
 </html>

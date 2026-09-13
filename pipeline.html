@@ -8,33 +8,6 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,500&amp;family=Noto+Sans+SC:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
-<link href="assets/css/fonts.css" rel="stylesheet"/>
-<link href="assets/css/mimo.css" rel="stylesheet"/>
-<link href="assets/css/search.css" rel="stylesheet"/>
-<link href="assets/css/siji-subs.css?v=3" rel="stylesheet"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-<style>
-  .gantt { border: 1px solid var(--line); background: var(--card); }
-  .gantt-head { display: grid; grid-template-columns: 160px repeat(12, 1fr); border-bottom: 1px solid var(--line); }
-  .gantt-head .gh-cell { padding: 12px 8px; font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); text-align: center; border-right: 1px solid var(--line-2); }
-  .gantt-head .gh-name { text-align: left; font-weight: 700; color: var(--ink); }
-  .gantt-row { display: grid; grid-template-columns: 160px repeat(12, 1fr); border-bottom: 1px solid var(--line-2); align-items: center; min-height: 44px; }
-  .gantt-row:last-child { border-bottom: none; }
-  .gantt-row .gr-name { padding: 8px 12px; font-size: 13px; font-weight: 500; border-right: 1px solid var(--line); display: flex; align-items: center; gap: 8px; }
-  .gantt-row .gr-name img { width: 18px; height: 18px; }
-  .gantt-row .gr-bar { height: 16px; margin: 0 2px; }
-  .gantt-row .gr-bar.done { background: var(--ink); }
-  .gantt-row .gr-bar.progress { background: repeating-linear-gradient(45deg, var(--ink), var(--ink) 3px, transparent 3px, transparent 6px); border: 1px solid var(--ink); }
-  .gantt-row .gr-bar.planned { border: 1px dashed var(--ink-3); background: transparent; }
-  .gantt-legend { display: flex; gap: 24px; margin-top: 24px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-2); flex-wrap: wrap; }
-  .gantt-legend .gl-item { display: flex; align-items: center; gap: 8px; }
-  .gantt-legend .gl-sw { width: 24px; height: 12px; border: 1px solid var(--ink); }
-  .gantt-legend .gl-sw.done { background: var(--ink); }
-  .gantt-legend .gl-sw.progress { background: repeating-linear-gradient(45deg, var(--ink), var(--ink) 2px, transparent 2px, transparent 4px); }
-  .gantt-legend .gl-sw.planned { border-style: dashed; }
-  @media (max-width: 768px) { .gantt-head, .gantt-row { grid-template-columns: 120px repeat(12, 14px); } .gantt-row .gr-name { font-size: 11px; } .gantt-head .gh-cell { font-size: 9px; padding: 8px 2px; } }
-</style>
 <link href="https://work.feng-qiao.top/pipeline.html" rel="canonical"/>
 <meta content="website" property="og:type"/>
 <meta content="管线 · 四时工坊" property="og:title"/>
@@ -55,20 +28,21 @@
 <meta content="https://work.feng-qiao.top/assets/og/og-pipeline.png" property="og:image"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
+<link rel="stylesheet" href="assets/css/fonts.css">
+<link rel="stylesheet" href="assets/css/proj-base.css">
+<link rel="stylesheet" href="assets/css/siji-info.css">
+<link rel="stylesheet" href="assets/css/search.css">
 </head>
 <body>
-<div class="notice">
-  2026 管线 · 8 个项目持续滚动
-  <span class="dot"></span>
-<a href="bulletin.html">最新动态 →</a>
+<div class="topbar">
+<a class="brand" href="index.html"><span class="dot"></span>四时工坊</a>
+<nav class="top-links">
+<a href="index.html">首页</a><a href="about.html">关于</a><a href="projects.html">项目</a><a href="capabilities.html">能力</a><a href="pipeline.html">管线</a><a href="bulletin.html">公告</a><a href="contact.html">联系</a><a href="demos.html">在线体验</a>
+<a class="gh" href="https://github.com/zep4yrs" target="_blank" rel="noopener">GitHub ↗</a>
+</nav>
+<button class="menu-btn" aria-label="菜单"><span></span><span></span><span></span></button>
 </div>
-<header class="nav">
-<div class="nav-inner">
-<a class="brand" href="index.html">
-<span class="brand-mark">z4</span>
-<span>四时工坊</span>
-</a>
-<nav class="nav-links">
+<div class="menu-overlay">
 <a href="index.html">首页</a>
 <a href="about.html">关于</a>
 <a href="projects.html">项目</a>
@@ -76,383 +50,86 @@
 <a href="pipeline.html">管线</a>
 <a href="bulletin.html">公告</a>
 <a href="contact.html">联系</a>
-<span class="nav-dropdown">
-<button class="nav-dropdown-btn">在线体验 <span class="arrow-down">▼</span></button>
-<span class="nav-dropdown-menu">
-<a href="https://work.feng-qiao.top/crypto/">CryptoVis<span class="dd-desc">密码学可视化</span></a>
-<a href="https://work.feng-qiao.top/struct/">StructVis<span class="dd-desc">数据结构可视化</span></a>
-<a href="https://work.feng-qiao.top/ctf-qiankun/">CTF 乾坤袋<span class="dd-desc">CTF 工具箱</span></a>
-</span>
-</span>
-<a class="nav-cta" href="https://github.com/zep4yrs" rel="noopener" target="_blank">GitHub ↗</a>
-</nav>
-
-  <button class="hamburger" aria-label="菜单"><span></span><span></span><span></span></button>
+<a href="demos.html">在线体验</a>
+<a class="gh" href="https://github.com/zep4yrs" target="_blank" rel="noopener">GitHub ↗</a>
 </div>
-</header>
-<div class="mobile-menu">
-  <a href="index.html">首页</a>
-  <a href="index.html#matrix">项目矩阵</a>
-  <a href="index.html#ecosystem">生态</a>
-  <a href="about.html">关于</a>
-  <a href="projects.html">项目</a>
-  <a href="capabilities.html">能力</a>
-  <a href="pipeline.html">管线</a>
-  <a href="bulletin.html">公告</a>
-  <a href="contact.html">联系</a>
-  <div class="mm-dropdown">
-    <button class="mm-dropdown-btn">在线体验 ▼</button>
-    <div class="mm-dropdown-menu">
-      <a href="https://work.feng-qiao.top/crypto/">CryptoVis</a>
-      <a href="https://work.feng-qiao.top/struct/">StructVis</a>
-      <a href="https://work.feng-qiao.top/ctf-qiankun/">CTF 乾坤袋</a>
-    </div>
-  </div>
-  <a href="https://github.com/zep4yrs" class="mm-cta" target="_blank">GitHub ↗</a>
-</div>
-
 <main>
-<section class="hero" style="padding:80px 0 56px">
-<div class="hero-watermark">PIPELINE</div>
+<section class="page-hero">
 <div class="wrap">
-<div class="hero-inner">
-<div class="hero-left">
-<div class="kicker">PIPELINE · 管线</div>
-<h1>项目管线<span class="en">project pipeline</span></h1>
-<p class="sub">八个项目的进度时间线。实色=做完了，斜纹=进行中，虚线=计划中。按季度保持一致，2024 起源，2026 多元化。</p>
+<div class="kicker reveal">PIPELINE · 管线</div>
+<h1 class="reveal">项目管线<span class="en">project pipeline</span></h1>
+<p class="lede reveal">八个项目的进度时间线。<b>实色 = 做完了，斜纹 = 进行中，虚线 = 计划中</b>。按季度保持一致，2024 起源，2026 多元化。</p>
 </div>
-<div class="hero-right">
-<div id="globe3d" class="globe-3d">
-  <div class="globe-label label-wave1">2024</div>
-  <div class="globe-label label-wave2">2025</div>
-  <div class="globe-label label-wave3">2026</div>
-  <div class="globe-label label-footer">波形管线</div>
+</section>
+
+<section class="sect" style="border-top:none;padding-top:20px">
+<div class="wrap">
+<div class="kicker">TIMELINE · 甘特总览</div>
+<h2>开发节奏<span class="en">gantt</span></h2>
+<div class="gantt" style="margin-top:30px">
+<div class="ghead">
+<div class="g" style="text-align:left;padding-left:14px;font-weight:700;color:var(--ink)">项目 / 时间</div>
+<div class="g">24Q4</div><div class="g">25Q1</div><div class="g">25Q2</div><div class="g">25Q3</div><div class="g">25Q4</div><div class="g">26Q1</div><div class="g">26Q2</div><div class="g">26Q3</div><div class="g">26Q4</div><div class="g">27Q1</div><div class="g">27Q2</div><div class="g">27Q3</div>
+</div>
+
+<div class="grow">
+<div class="gname"><img alt="" src="assets/svg/logo-bluetidy.svg">BlueTidy</div>
+<div class="gbar done" style="grid-column:2/4"></div>
+<div class="gbar done" style="grid-column:4/6"></div>
+<div class="gbar prog" style="grid-column:7/9"></div>
+</div>
+<div class="grow">
+<div class="gname"><img alt="" src="assets/svg/logo-lannook.svg">LanNook</div>
+<div class="gbar done" style="grid-column:3/5"></div>
+<div class="gbar prog" style="grid-column:8/10"></div>
+</div>
+<div class="grow">
+<div class="gname"><img alt="" src="assets/svg/logo-ctf-qiankun.svg">CTF乾坤袋</div>
+<div class="gbar done" style="grid-column:4/7"></div>
+</div>
+<div class="grow">
+<div class="gname"><img alt="" src="assets/svg/logo-autopen.svg">AutoPen</div>
+<div class="gbar prog" style="grid-column:6/9"></div>
+<div class="gbar plan" style="grid-column:10/11"></div>
+</div>
+<div class="grow">
+<div class="gname"><img alt="" src="assets/svg/logo-alertzero.svg">零号告警</div>
+<div class="gbar prog" style="grid-column:8/10"></div>
+<div class="gbar plan" style="grid-column:11/13"></div>
+</div>
+<div class="grow">
+<div class="gname"><img alt="" src="assets/svg/logo-cryptovis.svg">CryptoVis</div>
+<div class="gbar done" style="grid-column:7/9"></div>
+</div>
+<div class="grow">
+<div class="gname"><img alt="" src="assets/svg/logo-structvis.svg">StructVis</div>
+<div class="gbar done" style="grid-column:9/10"></div>
+<div class="gbar prog" style="grid-column:10/11"></div>
+</div>
+<div class="grow">
+<div class="gname"><img alt="" src="assets/svg/logo-stellar.svg">Stellar · 摘星</div>
+<div class="gbar prog" style="grid-column:9/10"></div>
+<div class="gbar plan" style="grid-column:10/12"></div>
 </div>
 </div>
+<div class="legend">
+<span class="li"><span class="sw" style="background:var(--ink)"></span>已完成 done</span>
+<span class="li"><span class="sw" style="background:repeating-linear-gradient(45deg,var(--ink),var(--ink) 3px,transparent 3px,transparent 6px);border:1px solid var(--ink)"></span>进行中 in progress</span>
+<span class="li"><span class="sw" style="border:1.5px dashed var(--ink-3)"></span>计划中 planned</span>
 </div>
 </div>
 </section>
-<section class="section">
-<div class="wrap">
-<div class="gantt">
-<div class="gantt-head">
-<div class="gh-cell gh-name">项目 / 时间</div>
-<div class="gh-cell">24Q4</div><div class="gh-cell">25Q1</div><div class="gh-cell">25Q2</div>
-<div class="gh-cell">25Q3</div><div class="gh-cell">25Q4</div><div class="gh-cell">26Q1</div>
-<div class="gh-cell">26Q2</div><div class="gh-cell">26Q3</div><div class="gh-cell">26Q4</div>
-<div class="gh-cell">27Q1</div><div class="gh-cell">27Q2</div><div class="gh-cell">27Q3</div>
-</div>
-<!-- BlueTidy: 24Q4-25Q3 done, 26Q1-Q2 progress -->
-<div class="gantt-row">
-<div class="gr-name"><img alt="" src="assets/svg/logo-bluetidy.svg"/>BlueTidy</div>
-<div class="gr-bar done" style="grid-column:2/4"></div>
-<div class="gr-bar done" style="grid-column:4/6"></div>
-<div class="gr-bar progress" style="grid-column:7/9"></div>
-</div>
-<!-- LanNook: 25Q1-Q3 done, 26Q2 progress -->
-<div class="gantt-row">
-<div class="gr-name"><img alt="" src="assets/svg/logo-lannook.svg"/>LanNook</div>
-<div class="gr-bar done" style="grid-column:3/5"></div>
-<div class="gr-bar progress" style="grid-column:8/10"></div>
-</div>
-<!-- CTF乾坤袋: 25Q2-Q4 done -->
-<div class="gantt-row">
-<div class="gr-name"><img alt="" src="assets/svg/logo-ctf-qiankun.svg"/>CTF乾坤袋</div>
-<div class="gr-bar done" style="grid-column:4/7"></div>
-</div>
-<!-- AutoPen: 25Q4-26Q2 progress, 26Q4 planned -->
-<div class="gantt-row">
-<div class="gr-name"><img alt="" src="assets/svg/logo-autopen.svg"/>AutoPen</div>
-<div class="gr-bar progress" style="grid-column:6/9"></div>
-<div class="gr-bar planned" style="grid-column:10/11"></div>
-</div>
-<!-- 零号告警: 26Q2-Q3 progress, 27Q1-Q2 planned -->
-<div class="gantt-row">
-<div class="gr-name"><img alt="" src="assets/svg/logo-alertzero.svg"/>零号告警</div>
-<div class="gr-bar progress" style="grid-column:8/10"></div>
-<div class="gr-bar planned" style="grid-column:11/13"></div>
-</div>
-<!-- CryptoVis: 26Q1-Q2 done -->
-<div class="gantt-row">
-<div class="gr-name"><img alt="" src="assets/svg/logo-cryptovis.svg"/>CryptoVis</div>
-<div class="gr-bar done" style="grid-column:7/9"></div>
-</div>
-<!-- StructVis: 26Q3 done -->
-<div class="gantt-row">
-<div class="gr-name"><img alt="" src="assets/svg/logo-structvis.svg"/>StructVis</div>
-<div class="gr-bar done" style="grid-column:9/10"></div>
-<div class="gr-bar progress" style="grid-column:10/11"></div>
-</div>
-<!-- Stellar / 摘星: 26Q3 开发中, 27Q1-Q2 计划 -->
-<div class="gantt-row">
-<div class="gr-name"><img alt="" src="assets/svg/logo-stellar.svg"/>Stellar · 摘星</div>
-<div class="gr-bar progress" style="grid-column:9/10"></div>
-<div class="gr-bar planned" style="grid-column:11/13"></div>
-</div>
-</div>
-<div class="gantt-legend">
-<div class="gl-item"><span class="gl-sw done"></span>已完成 done</div>
-<div class="gl-item"><span class="gl-sw progress"></span>进行中 in progress</div>
-<div class="gl-item"><span class="gl-sw planned"></span>计划中 planned</div>
-</div>
-</div>
-</section>
+
 </main>
 <footer>
-<div class="wrap">
-<div class="footer-inner">
-<span>© 2026 四时工坊 · zep4yrs</span>
-<span>PIPELINE · 管线</span>
-<span>2024 Q4 → 2027 Q3</span>
-</div>
+<div class="wrap footer-inner">
+<span>© 2026 四时工坊 · 枫桥</span>
+<span>以四季的节奏，做能用的东西</span>
+<span>work.feng-qiao.top</span>
 </div>
 </footer>
-<div class="cursor-ring" id="cursorRing"></div>
-<div class="cursor-dot" id="cursorDot"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="assets/js/mimo.js"></script>
-<script>
-/* ===== 管道流光 · 3D 管道粒子流（Three.js + GSAP） ===== */
-(function(){
-  'use strict';
-  var container = document.getElementById('globe3d');
-  if (!container || typeof THREE === 'undefined' || typeof gsap === 'undefined') return;
-
-  var scene = new THREE.Scene();
-  var aspect = container.clientWidth / container.clientHeight;
-  var camera = new THREE.PerspectiveCamera(40, aspect, 0.1, 100);
-  camera.position.set(6, 3.5, 10);
-  camera.lookAt(0, 0, 0);
-
-  var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setClearColor(0x000000, 0);
-  container.appendChild(renderer.domElement);
-
-  var controls = new THREE.OrbitControls(camera, renderer.domElement);
-  controls.enableDamping = true;
-  controls.dampingFactor = 0.08;
-  controls.autoRotate = false;
-  controls.minDistance = 2;
-  controls.maxDistance = 25;
-  controls.target.set(0, 0, 0);
-
-  function resize() {
-    var w = container.clientWidth;
-    var h = container.clientHeight;
-    if (w === 0 || h === 0) return;
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-    renderer.setSize(w, h);
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  /* 管道路径 - 3D 贝塞尔曲线 */
-  var pathPoints = [];
-  var numPathPts = 150;
-  for (var i = 0; i <= numPathPts; i++) {
-    var t = i / numPathPts;
-    /* 螺旋上升 + 波浪 */
-    var x = Math.sin(t * Math.PI * 3) * (2.0 - t * 0.5);
-    var y = -2.0 + t * 4.0;
-    var z = Math.cos(t * Math.PI * 3) * (2.0 - t * 0.5);
-    pathPoints.push(new THREE.Vector3(x, y, z));
-  }
-
-  /* 管道主线 */
-  var pipeGeo = new THREE.BufferGeometry().setFromPoints(pathPoints);
-  var pipeMat = new THREE.LineBasicMaterial({ color: 0x666666, transparent: true, opacity: 0.2 });
-  var pipeLine = new THREE.Line(pipeGeo, pipeMat);
-  scene.add(pipeLine);
-
-  /* 管道内壁 - 半透明管 */
-  var tubePts = [];
-  for (var i = 0; i <= numPathPts; i += 2) {
-    var t = i / numPathPts;
-    var x = Math.sin(t * Math.PI * 3) * (2.0 - t * 0.5);
-    var y = -2.0 + t * 4.0;
-    var z = Math.cos(t * Math.PI * 3) * (2.0 - t * 0.5);
-    tubePts.push(new THREE.Vector3(x, y, z));
-  }
-  var tubeCurve = new THREE.CatmullRomCurve3(tubePts);
-  var tubeGeo2 = new THREE.TubeGeometry(tubeCurve, 60, 0.15, 6, false);
-  var tubeMat2 = new THREE.MeshBasicMaterial({
-    color: 0x555555,
-    transparent: true,
-    opacity: 0.04,
-    side: THREE.DoubleSide,
-    wireframe: true
-  });
-  var tubeMesh = new THREE.Mesh(tubeGeo2, tubeMat2);
-  scene.add(tubeMesh);
-
-  /* 管道外圈环 */
-  var ringGroup = new THREE.Group();
-  for (var r = 0; r < 8; r++) {
-    var t = (r + 1) / 9;
-    var idx = Math.floor(t * numPathPts);
-    var center = pathPoints[idx] || pathPoints[0];
-    var ringPts = [];
-    var ringRadius = 0.6;
-    for (var j = 0; j <= 16; j++) {
-      var a = (j / 16) * Math.PI * 2;
-      ringPts.push(new THREE.Vector3(
-        center.x + Math.cos(a) * ringRadius,
-        center.y + Math.sin(a) * ringRadius * 0.3,
-        center.z + Math.sin(a) * ringRadius * 0.5
-      ));
-    }
-    var ringGeo = new THREE.BufferGeometry().setFromPoints(ringPts);
-    var ringMat = new THREE.LineBasicMaterial({ color: 0x777777, transparent: true, opacity: 0.1 + r * 0.02 });
-    var ring = new THREE.Line(ringGeo, ringMat);
-    ringGroup.add(ring);
-  }
-  scene.add(ringGroup);
-
-  /* 流动粒子 */
-  var flowCount = 100;
-  var flowGroup = new THREE.Group();
-  var flowMeshes = [];
-  var flowGeo = new THREE.SphereGeometry(0.05, 6, 6);
-  for (var i = 0; i < flowCount; i++) {
-    var mat = new THREE.MeshBasicMaterial({ color: 0x888888, transparent: true, opacity: 0.5 + Math.random() * 0.3 });
-    var mesh = new THREE.Mesh(flowGeo, mat);
-    var t = i / flowCount;
-    var idx = Math.floor(t * numPathPts);
-    var p = pathPoints[idx] || pathPoints[0];
-    mesh.position.copy(p);
-    flowGroup.add(mesh);
-    flowMeshes.push(mesh);
-  }
-
-  /* 大粒子（关键节点） */
-  var bigCount = 6;
-  var bigMeshes = [];
-  for (var i = 0; i < bigCount; i++) {
-    var t = (i + 1) / (bigCount + 1);
-    var idx = Math.floor(t * numPathPts);
-    var p = pathPoints[idx] || pathPoints[0];
-    var geo = new THREE.SphereGeometry(0.1, 8, 8);
-    var mat = new THREE.MeshBasicMaterial({ color: 0xAAAAAA });
-    var mesh = new THREE.Mesh(geo, mat);
-    mesh.position.copy(p);
-    flowGroup.add(mesh);
-    bigMeshes.push(mesh);
-
-    /* 光晕 */
-    var glowGeo = new THREE.SphereGeometry(0.2, 8, 8);
-    var glowMat = new THREE.MeshBasicMaterial({ color: 0x888888, transparent: true, opacity: 0.15 });
-    var glow = new THREE.Mesh(glowGeo, glowMat);
-    glow.position.copy(p);
-    flowGroup.add(glow);
-    gsap.to(glow.scale, {
-      x: 1.8, y: 1.8, z: 1.8,
-      duration: 1.5 + i * 0.2,
-      repeat: -1, yoyo: true, ease: 'sine.inOut'
-    });
-  }
-  scene.add(flowGroup);
-
-  /* 粒子流动 */
-  (function() {
-    var offset = 0;
-    setInterval(function() {
-      offset = (offset + 1) % flowCount;
-      for (var i = 0; i < flowCount; i++) {
-        var idx = (i + offset) % flowCount;
-        var t = idx / flowCount;
-        var pi = Math.floor(t * numPathPts);
-        var p = pathPoints[pi] || pathPoints[0];
-        flowMeshes[i].position.copy(p);
-      }
-    }, 80);
-  })();
-
-  /* 大粒子也流动 */
-  (function() {
-    var offsets = [0, 0.15, 0.3, 0.45, 0.6, 0.75];
-    setInterval(function() {
-      for (var i = 0; i < bigCount; i++) {
-        offsets[i] = (offsets[i] + 0.005) % 1;
-        var idx = Math.floor(offsets[i] * numPathPts);
-        var p = pathPoints[idx] || pathPoints[0];
-        bigMeshes[i].position.copy(p);
-      }
-    }, 50);
-  })();
-
-  /* 背景粒子 */
-  var bgCount = 80;
-  var bgGeo = new THREE.BufferGeometry();
-  var bgPos = new Float32Array(bgCount * 3);
-  for (var i = 0; i < bgCount * 3; i++) {
-    bgPos[i] = (Math.random() - 0.5) * 10;
-  }
-  bgGeo.setAttribute('position', new THREE.BufferAttribute(bgPos, 3));
-  var bgMat = new THREE.PointsMaterial({ color: 0x444444, size: 0.02, transparent: true, opacity: 0.2 });
-  var bgMesh = new THREE.Points(bgGeo, bgMat);
-  scene.add(bgMesh);
-
-  /* GSAP 缓慢旋转 */
-  gsap.to(pipeLine.rotation, { y: Math.PI * 2, duration: 45, repeat: -1, ease: 'none' });
-  gsap.to(flowGroup.rotation, { y: Math.PI * 2, duration: 45, repeat: -1, ease: 'none' });
-  gsap.to(ringGroup.rotation, { y: Math.PI * 2, duration: 45, repeat: -1, ease: 'none' });
-  gsap.to(tubeMesh.rotation, { y: Math.PI * 2, duration: 45, repeat: -1, ease: 'none' });
-  gsap.to(bgMesh.rotation, { y: -Math.PI * 2, duration: 60, repeat: -1, ease: 'none' });
-
-  /* 标签 */
-  var labelW1 = container.querySelector('.label-wave1');
-  var labelW2 = container.querySelector('.label-wave2');
-  var labelW3 = container.querySelector('.label-wave3');
-  var labelFooter = container.querySelector('.label-footer');
-
-  var labelPositions = [
-    { el: labelW1, pos: new THREE.Vector3(-2.0, -1.5, 0) },
-    { el: labelW2, pos: new THREE.Vector3(0, 0, 0) },
-    { el: labelW3, pos: new THREE.Vector3(2.0, 1.5, 0) },
-    { el: labelFooter, pos: new THREE.Vector3(0, -3.2, 0) }
-  ];
-
-  function updateLabels() {
-    var rect = container.getBoundingClientRect();
-    for (var i = 0; i < labelPositions.length; i++) {
-      var lp = labelPositions[i];
-      if (!lp.el) continue;
-      var vec = lp.pos.clone();
-      vec.project(camera);
-      var x = (vec.x * 0.5 + 0.5) * rect.width;
-      var y = (-vec.y * 0.5 + 0.5) * rect.height;
-      lp.el.style.left = x + 'px';
-      lp.el.style.top = y + 'px';
-    }
-  }
-
-  function animate() {
-    requestAnimationFrame(animate);
-    controls.update();
-    updateLabels();
-    renderer.render(scene, camera);
-  }
-  animate();
-})();
-</script>
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('sw.js').catch(function(){});
-  });
-}
-</script>
-<script>
-    window.pagefind = new Promise(function(resolve) {
-          var s = document.createElement('script');
-          s.src = 'pagefind/pagefind-ui.js';
-          s.onload = function() { resolve(window.pagefind); };
-          s.onerror = function() { resolve(null); };
-          document.head.appendChild(s);
-        });
-    </script>
+<script src="assets/js/proj-base.js"></script>
 <script src="assets/js/search.js"></script>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})}</script>
 </body>
 </html>

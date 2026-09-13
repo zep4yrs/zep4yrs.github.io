@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -6,332 +6,242 @@
 <title>CTF 乾坤袋 · 四时工坊</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,500&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/fonts.css">
-<link rel="stylesheet" href="assets/css/project.css">
-  <link rel="stylesheet" href="assets/css/mimo.css">
-  <link rel="stylesheet" href="assets/css/search.css">
-  <link rel="stylesheet" href="assets/css/siji-subs.css?v=3">
-  <link rel="canonical" href="https://work.feng-qiao.top/ctf-qiankun.html">
-  <meta property="og:type" content="software">
-  <meta property="og:title" content="CTF 乾坤袋 · CTF工具箱 · 四时工坊">
-  <meta property="og:description" content="CTF 工具箱，打开网页就能用。MIT 开源。">
-  <meta property="og:url" content="https://work.feng-qiao.top/ctf-qiankun.html">
-  <meta property="og:site_name" content="四时工坊">
-  <meta property="og:locale" content="zh_CN">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="CTF 乾坤袋 · CTF工具箱 · 四时工坊">
-  <meta name="twitter:description" content="CTF 工具箱，打开网页就能用。MIT 开源。">
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#1A1A1A">
-  <link rel="icon" type="image/svg+xml" href="assets/svg/logo-zep4yrs.svg">
-  <link rel="alternate" type="application/rss+xml" title="四时工坊公告" href="feed.xml">
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Organization","name":"四时工坊","alternateName":"Four Seasons Workshop","url":"https://work.feng-qiao.top","logo":"https://work.feng-qiao.top/assets/svg/logo-zep4yrs.svg","founder":"枫桥","foundingDate":"2024","sameAs":["https://github.com/zep4yrs"]}
-  </script>
-  <meta property="og:image" content="https://work.feng-qiao.top/assets/og/og-ctf-qiankun.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+<link rel="stylesheet" href="assets/css/proj-base.css">
+<link rel="canonical" href="https://work.feng-qiao.top/ctf-qiankun.html">
+<meta property="og:type" content="software">
+<meta property="og:title" content="CTF 乾坤袋 · CTF 工具箱 · 四时工坊">
+<meta property="og:description" content="浏览器端 CTF 工具箱：编码解码、哈希密码学、隐写分析、取证 OSINT，450+ 工具纯前端本地处理。MIT 开源。">
+<meta property="og:url" content="https://work.feng-qiao.top/ctf-qiankun.html">
+<meta property="og:site_name" content="四时工坊">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CTF 乾坤袋 · CTF 工具箱 · 四时工坊">
+<meta name="twitter:description" content="浏览器端 CTF 工具箱：编码解码、哈希密码学、隐写分析、取证 OSINT，450+ 工具纯前端本地处理。MIT 开源。">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1A1A1A">
+<link rel="icon" type="image/svg+xml" href="assets/svg/logo-zep4yrs.svg">
+<link rel="alternate" type="application/rss+xml" title="四时工坊公告" href="feed.xml">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"四时工坊","alternateName":"Four Seasons Workshop","url":"https://work.feng-qiao.top","logo":"https://work.feng-qiao.top/assets/svg/logo-zep4yrs.svg","founder":"枫桥","foundingDate":"2024","sameAs":["https://github.com/zep4yrs"]}
+</script>
+<meta property="og:image" content="https://work.feng-qiao.top/assets/og/og-ctf-qiankun.png">
+<style>
+/* ===== CTF 乾坤袋 · 黑客终端 ===== */
+:root { --ac: #7C3AED; --ac-soft: rgba(124,58,237,0.10); --term: #0D1117; --phos: #4AFA88; }
+
+.hero { padding: 150px 0 70px; }
+.hero-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: clamp(32px,5vw,64px); align-items: center; }
+.kicker { display: flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-2); letter-spacing: .22em; }
+.kicker::before { content: ""; width: 30px; height: 2px; background: var(--ink); }
+h1 { font-size: clamp(44px, 6vw, 78px); font-weight: 900; letter-spacing: -0.03em; line-height: 1.04; margin: 20px 0 14px; }
+h1 .cnt { display: block; font-family: var(--font-mono); font-size: 14px; letter-spacing: .2em; color: var(--ac); margin-top: 16px; }
+.lede { font-size: 16.5px; line-height: 1.85; color: var(--ink-2); max-width: 42ch; }
+.lede b { color: var(--ink); }
+.cta { display: flex; gap: 12px; flex-wrap: wrap; margin: 28px 0 16px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 26px; border-radius: 999px; border: 1.5px solid var(--ink); font-family: var(--font-mono); font-size: 13.5px; text-decoration: none; color: var(--ink); transition: all .15s; }
+.btn:hover { transform: translateY(-1px); }
+.btn.primary { background: var(--ac); border-color: var(--ac); color: #fff; }
+.btn.primary:hover { background: var(--ink); border-color: var(--ink); }
+.meta-line { font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); letter-spacing: .06em; }
+
+/* 终端 */
+.term {
+  background: var(--term); border-radius: 16px; overflow: hidden;
+  box-shadow: 0 30px 70px rgba(13,17,23,0.45), 0 0 0 1px rgba(13,17,23,0.9);
+  font-family: var(--font-mono); font-size: 13px; line-height: 1.75;
+}
+.term-bar { display: flex; align-items: center; gap: 7px; padding: 12px 16px; background: #161B22; }
+.term-bar i { width: 12px; height: 12px; border-radius: 50%; display: block; }
+.term-bar i:nth-child(1) { background: #FF5F56; } .term-bar i:nth-child(2) { background: #FFBD2E; } .term-bar i:nth-child(3) { background: #27C93F; }
+.term-bar span { margin-left: 10px; color: #8B949E; font-size: 11px; }
+.term-body { padding: 20px 22px 24px; color: #C9D1D9; min-height: 320px; }
+.term-body .ln { white-space: pre-wrap; word-break: break-all; }
+.term-body .pr { color: var(--phos); }
+.term-body .dim { color: #6E7681; }
+.term-body .cy { color: #79C0FF; }
+.term-body .yl { color: #F2CC60; }
+.caret { display: inline-block; width: 8px; height: 16px; background: var(--phos); vertical-align: -3px; animation: blink 1s steps(2) infinite; }
+@keyframes blink { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+
+/* 工具键盘网格 */
+.kbd-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.key {
+  background: var(--card); border-radius: 14px; box-shadow: var(--shadow);
+  padding: 18px 16px 14px; text-align: left; text-decoration: none; color: var(--ink);
+  display: block; transition: transform .2s, box-shadow .2s;
+}
+.key:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.key .ki { font-size: 20px; }
+.key .kn { font-weight: 800; font-size: 14.5px; margin-top: 8px; }
+.key .kd { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-3); margin-top: 3px; }
+.key .kt { display: inline-block; margin-top: 8px; font-family: var(--font-mono); font-size: 9.5px; background: var(--ac-soft); color: var(--ac); border-radius: 5px; padding: 1px 7px; }
+
+.wrap-section { padding: clamp(64px, 9vw, 110px) 0; border-top: 1px solid var(--hair); }
+.kicker { margin-bottom: 40px; }
+.feat { display: grid; grid-template-columns: 200px 1fr; gap: 28px; padding: 34px 0; border-bottom: 1px dashed var(--line); }
+.feat .fn { font-family: Georgia, serif; font-style: italic; font-size: 40px; color: var(--ac); line-height: 1; }
+.feat h3 { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 10px; }
+.feat h3 .en { font-family: var(--font-mono); font-weight: 400; font-size: 11px; color: var(--ink-3); letter-spacing: .18em; margin-left: 10px; text-transform: uppercase; }
+.feat p { font-size: 14.5px; line-height: 1.9; color: var(--ink-2); max-width: 66ch; margin-bottom: 8px; }
+.feat p b { color: var(--ink); }
+
+.sc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.sc { background: var(--card); border-radius: 18px; box-shadow: var(--shadow); padding: 24px; border-top: 3px solid var(--ac); }
+.sc h4 { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
+.sc p { font-size: 12.5px; line-height: 1.75; color: var(--ink-2); }
+
+.spec { background: var(--card); border-radius: 22px; box-shadow: var(--shadow); padding: 10px 30px; }
+.spec-row { display: grid; grid-template-columns: 130px 1fr; gap: 18px; padding: 14px 0; border-bottom: 1px dashed var(--line); font-size: 14px; }
+.spec-row:last-child { border-bottom: none; }
+.spec-row .k { font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); letter-spacing: .14em; padding-top: 3px; }
+
+.cta-band { background: var(--term); color: #C9D1D9; border-radius: 26px; padding: clamp(36px,5vw,60px); display: flex; justify-content: space-between; align-items: center; gap: 26px; flex-wrap: wrap; }
+.cta-band h2 { font-size: clamp(24px,3vw,34px); font-weight: 900; color: #fff; letter-spacing: -0.02em; font-family: var(--font-mono); }
+.cta-band h2 .pr { color: var(--phos); }
+.cta-band p { opacity: .7; margin-top: 8px; font-size: 14px; font-family: var(--font-mono); }
+.cta-band .btn { border-color: var(--phos); color: var(--phos); background: transparent; }
+.cta-band .btn.solid { background: var(--phos); color: var(--term); }
+
+@media (max-width: 900px) {
+  .hero { padding: 120px 0 56px; }
+  .hero-grid { grid-template-columns: 1fr; }
+  .feat { grid-template-columns: 1fr; gap: 10px; }
+  .sc-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 620px) { .sc-grid { grid-template-columns: 1fr; } .kbd-grid { grid-template-columns: 1fr 1fr; } }
+</style>
 </head>
-<body class="theme-ctf">
-
-<div class="notice">
-  CTF 乾坤袋 · MIT · 开源
-  <span class="dot"></span>
-  <a href="bulletin.html">最新动态 →</a>
+<body>
+<div class="topbar">
+<a class="brand" href="index.html"><span class="dot"></span>四时工坊</a>
+<nav class="top-links">
+<a href="index.html">首页</a><a href="projects.html">项目</a><a href="pipeline.html">管线</a><a href="bulletin.html">公告</a>
+<a class="gh" href="https://github.com/zep4yrs/ctf-qiankun" target="_blank" rel="noopener">GitHub ↗</a>
+</nav>
+<button class="menu-btn" aria-label="菜单"><span></span><span></span><span></span></button>
 </div>
-
-<header class="nav">
-  <div class="nav-inner">
-    <a href="index.html" class="brand">
-      <span class="brand-mark">z4</span><span>四时工坊</span>
-    </a>
-    <nav class="nav-links">
-      <a href="index.html">首页</a>
-      <a href="about.html">关于</a>
-      <a href="projects.html">项目</a>
-      <a href="capabilities.html">能力</a>
-      <a href="pipeline.html">管线</a>
-      <a href="bulletin.html">公告</a>
-      <a href="contact.html">联系</a>
-      <span class="nav-dropdown">
-        <button class="nav-dropdown-btn">在线体验 <span class="arrow-down">▼</span></button>
-        <span class="nav-dropdown-menu">
-          <a href="https://work.feng-qiao.top/crypto/">CryptoVis<span class="dd-desc">密码学可视化</span></a>
-          <a href="https://work.feng-qiao.top/struct/">StructVis<span class="dd-desc">数据结构可视化</span></a>
-          <a href="https://work.feng-qiao.top/ctf-qiankun/">CTF 乾坤袋<span class="dd-desc">CTF 工具箱</span></a>
-        </span>
-      </span>
-      <a href="https://github.com/zep4yrs" target="_blank" rel="noopener" class="nav-cta">GitHub ↗</a>
-    </nav>
-  
-  <button class="hamburger" aria-label="菜单"><span></span><span></span><span></span></button>
+<div class="menu-overlay">
+<a href="index.html">首页</a><a href="projects.html">项目矩阵</a><a href="pipeline.html">管线</a><a href="bulletin.html">公告</a>
+<a class="gh" href="https://github.com/zep4yrs/ctf-qiankun" target="_blank" rel="noopener">在线体验 ↗</a>
 </div>
-</header>
-<div class="mobile-menu">
-  <a href="index.html">首页</a>
-  <a href="index.html#matrix">项目矩阵</a>
-  <a href="index.html#ecosystem">生态</a>
-  <a href="about.html">关于</a>
-  <a href="projects.html">项目</a>
-  <a href="capabilities.html">能力</a>
-  <a href="pipeline.html">管线</a>
-  <a href="bulletin.html">公告</a>
-  <a href="contact.html">联系</a>
-  <div class="mm-dropdown">
-    <button class="mm-dropdown-btn">在线体验 ▼</button>
-    <div class="mm-dropdown-menu">
-      <a href="https://work.feng-qiao.top/crypto/">CryptoVis</a>
-      <a href="https://work.feng-qiao.top/struct/">StructVis</a>
-      <a href="https://work.feng-qiao.top/ctf-qiankun/">CTF 乾坤袋</a>
-    </div>
-  </div>
-  <a href="https://github.com/zep4yrs" class="mm-cta" target="_blank">GitHub ↗</a>
-</div>
-
 
 <main>
-<section class="proj-hero">
-  <div class="wrap">
-    <div class="ph-top">
-      <img src="assets/svg/logo-ctf-qiankun.svg" class="ph-logo" alt="CTF 乾坤袋">
-      <div class="ph-num">N°03 · CTF QIANKUN</div>
-    </div>
-    <h1>CTF 乾坤袋<span class="en">ctf kit</span></h1>
-    <p class="ph-desc">一个浏览器端 CTF 工具箱，打开网页就能用。编码解码、哈希密码学、隐写分析、取证 OSINT，比赛和学习常用的工具都集成了。纯前端，数据在浏览器本地处理，不上传服务器。MIT 开源。</p>
-    <div class="ph-cta">
-      <a href="https://github.com/zep4yrs/ctf-qiankun" class="primary" target="_blank" rel="noopener">GitHub 源码 →</a>
-      <a href="https://github.com/zep4yrs/ctf-qiankun" target="_blank" rel="noopener">在线体验 →</a>
-    </div>
-  </div>
+<section class="hero">
+<div class="wrap hero-grid">
+<div class="reveal">
+<div class="kicker">N°03 · CTF QIANKUN · 工具箱</div>
+<h1>比赛开打，<br>乾坤袋打开。<span class="cnt">450+ TOOLS · 持续迭代</span></h1>
+<p class="lede">一个浏览器端的 CTF 工具箱：编码解码、哈希密码学、隐写分析、取证 OSINT。<b>纯前端，数据全程在浏览器本地处理</b>，不上传任何服务器。MIT 开源。</p>
+<div class="cta">
+<a class="btn primary" href="https://work.feng-qiao.top/ctf-qiankun/" target="_blank" rel="noopener">在线体验 →</a>
+<a class="btn" href="https://github.com/zep4yrs/ctf-qiankun" target="_blank" rel="noopener">GitHub 源码</a>
+</div>
+<div class="meta-line">MIT · TypeScript + Vue + NestJS · 浏览器纯前端</div>
+</div>
+<div class="term reveal" aria-hidden="true">
+<div class="term-bar"><i></i><i></i><i></i><span>qiankun — zsh</span></div>
+<div class="term-body">
+<div class="ln"><span class="pr">ctf</span> <span class="cy">decode</span> --chain base64,hex,rot13 "RGh4J3M=..."</div>
+<div class="ln dim"># 检测到套娃编码，自动链式解码</div>
+<div class="ln">→ base64 ──→ <span class="yl">Q0VYfCdzIC4uLg==</span></div>
+<div class="ln">→ hex ──────→ <span class="yl">44 68 78 27 73</span></div>
+<div class="ln">→ rot13 ────→ <span class="pr">flag{q1ankun_d4ai}</span></div>
+<div class="ln"> </div>
+<div class="ln"><span class="pr">ctf</span> <span class="cy">hash</span> --identify "e10adc394..."</div>
+<div class="ln dim">→ 匹配到 MD5 · 32 位小写 · 置信度 98%</div>
+<div class="ln"> </div>
+<div class="ln"><span class="pr">ctf</span> <span class="cy">stego</span> --lsb png "misc_01.png"</div>
+<div class="ln">→ LSB 通道发现隐藏数据 · 3.2 KB</div>
+<div class="ln">→ 提取 → <span class="yl">hidden.txt</span> <span class="caret"></span></div>
+</div>
+</div>
+</div>
 </section>
 
-<section class="section scroll-reveal">
-  <div class="wrap stream-in">
-    <div class="section-head">
-      <div class="kicker">SPEC · 规格</div>
-      <h2>规格表<span class="en">specification</span></h2>
-    </div>
-    <div class="spec-table">
-      <div class="spec-row"><div class="sk">VERSION</div><div class="sv">持续迭代 · 450+ 工具</div></div>
-      <div class="spec-row"><div class="sk">STACK</div><div class="sv">TypeScript · Vue · NestJS</div></div>
-      <div class="spec-row"><div class="sk">PLATFORM</div><div class="sv">浏览器 · 纯前端</div></div>
-      <div class="spec-row"><div class="sk">LICENSE</div><div class="sv">MIT · 开源</div></div>
-      <div class="spec-row"><div class="sk">STATUS</div><div class="sv">活跃维护中</div></div>
-      <div class="spec-row"><div class="sk">FORM</div><div class="sv">在线工具（不是浏览器扩展）</div></div>
-    </div>
-  </div>
+<section class="wrap wrap-section">
+<div class="kicker">TOOLBELT · 常用面板</div>
+<div class="kbd-grid">
+<a class="key" href="https://work.feng-qiao.top/ctf-qiankun/" target="_blank" rel="noopener"><div class="ki">🔐</div><div class="kn">编码解码</div><div class="kd">Base64 / Hex / URL / Unicode</div><span class="kt">批量处理</span></a>
+<a class="key" href="https://work.feng-qiao.top/ctf-qiankun/" target="_blank" rel="noopener"><div class="ki">🧮</div><div class="kn">哈希计算</div><div class="kd">MD5 / SHA 系列一步出</div><span class="kt">自动识别</span></a>
+<a class="key" href="https://work.feng-qiao.top/ctf-qiankun/" target="_blank" rel="noopener"><div class="ki">🗝️</div><div class="kn">密码学辅助</div><div class="kd">RSA / AES · ECB CBC GCM</div><span class="kt">模式配好</span></a>
+<a class="key" href="https://work.feng-qiao.top/ctf-qiankun/" target="_blank" rel="noopener"><div class="ki">🖼️</div><div class="kn">隐写检测</div><div class="kd">LSB / 文件尾附加数据</div><span class="kt">上传即跑</span></a>
+<a class="key" href="https://work.feng-qiao.top/ctf-qiankun/" target="_blank" rel="noopener"><div class="ki">📎</div><div class="kn">文件取证</div><div class="kd">EXIF 查看 / 类型识别</div><span class="kt">二进制可分析</span></a>
+<a class="key" href="https://work.feng-qiao.top/ctf-qiankun/" target="_blank" rel="noopener"><div class="ki">🧵</div><div class="kn">工作流</div><div class="kd">多步骤操作链串起来跑</div><span class="kt">智能串联</span></a>
+<a class="key" href="https://work.feng-qiao.top/ctf-qiankun/" target="_blank" rel="noopener"><div class="ki">⭐</div><div class="kn">收藏 + 最近</div><div class="kd">常用工具直接点</div><span class="kt">越用越顺手</span></a>
+<a class="key" href="https://work.feng-qiao.top/ctf-qiankun/" target="_blank" rel="noopener"><div class="ki">📖</div><div class="kn">内置说明</div><div class="kd">每个工具自带用法</div><span class="kt">不用翻文档</span></a>
+</div>
 </section>
 
-<section class="section scroll-reveal">
-  <div class="wrap stream-in">
-    <div class="section-head">
-      <div class="kicker">FEATURES · 特性</div>
-      <h2>核心特性<span class="en">key features</span></h2>
-    </div>
-    <div class="feat-list">
-      <div class="feat-item"><div class="fn">N°01</div><div><h3>编码与转换<span class="en">encode &amp; decode</span></h3>
-        <p>Base64、Hex、URL、Unicode、HTML Entity 等编码互转，支持批量处理，贴十几条一次搞定。工具能智能识别当前编码类型，省去自己猜格式的麻烦。</p>
-        <p>比赛题经常玩套娃编码，Base64 解开是 Hex，Hex 再解才是明文。以前得开三四个在线工具来回切，现在一个页面搞定，数据全程在浏览器里跑，不经过任何服务器。</p>
-      </div></div>
-      <div class="feat-item"><div class="fn">N°02</div><div><h3>密码学辅助<span class="en">crypto tools</span></h3>
-        <p>古典密码、哈希计算、密码学辅助工具，RSA/AES 等常见操作都安排上了。MD5、SHA 系列哈希，ECB、CBC、GCM 模式切换，填充方式配好，遇到密码学题目直接开干。</p>
-        <p>以前算个哈希得开终端敲 OpenSSL，参数记不住还得翻 man 手册。现在选项全列在面板上，选好值点一下就跑完，不用背命令也不怕敲错。</p>
-      </div></div>
-      <div class="feat-item"><div class="fn">N°03</div><div><h3>隐写与取证<span class="en">stego &amp; forensics</span></h3>
-        <p>图片、音频、二进制文件分析，EXIF 查看、文件类型识别、隐写检测，比赛里遇到隐写题不用到处找专用工具。上传文件就能跑，结果直接显示。</p>
-        <p>LSB 隐写、文件尾附加数据、EXIF 信息隐藏，这些常见套路工具都能检测。不用自己装一堆命令行工具，也不用记那些复杂参数，浏览器里点几下就行。</p>
-      </div></div>
-      <div class="feat-item"><div class="fn">N°04</div><div><h3>智能工作流<span class="en">smart workflow</span></h3>
-        <p>多步骤操作链，把编码解码、哈希计算、格式转换串起来跑。工具搜索、分类浏览、收藏和最近使用，频繁用的工具可以收藏起来，下次直接点。</p>
-        <p>每个工具都内置了使用说明，不熟悉的操作看一眼就知道怎么用。不用翻文档、不用搜教程，页面里直接就有。工具数量还在涨，常用的基本都覆盖了。</p>
-      </div></div>
-    </div>
-  </div>
+<section class="wrap wrap-section">
+<div class="kicker">FEATURES · 核心特性</div>
+<div class="feat reveal"><div class="fn">01</div><div><h3>编码与转换<span class="en">encode &amp; decode</span></h3><p>Base64、Hex、URL、Unicode、HTML Entity 等编码互转，支持批量处理。<b>智能识别当前编码类型</b>，省去自己猜格式。比赛题常玩套娃编码——Base64 解开是 Hex、Hex 再解才是明文，一个页面链式搞定，数据全程本地跑。</p></div></div>
+<div class="feat reveal"><div class="fn">02</div><div><h3>密码学辅助<span class="en">crypto tools</span></h3><p>古典密码、哈希计算、RSA/AES 常见操作都安排上。MD5、SHA 系列哈希，ECB、CBC、GCM 模式切换，填充方式配好。<b>选项全列在面板上</b>，选好值点一下就跑完，不用背 OpenSSL 参数。</p></div></div>
+<div class="feat reveal"><div class="fn">03</div><div><h3>隐写与取证<span class="en">stego &amp; forensics</span></h3><p>图片、音频、二进制文件分析，EXIF 查看、文件类型识别、隐写检测。LSB 隐写、文件尾附加数据、EXIF 信息隐藏这些常见套路都能检测——<b>上传文件就能跑</b>，不用装一堆命令行工具。</p></div></div>
+<div class="feat reveal"><div class="fn">04</div><div><h3>智能工作流<span class="en">smart workflow</span></h3><p>多步骤操作链把编码解码、哈希计算、格式转换<b>串起来跑</b>。工具搜索、分类浏览、收藏和最近使用，每个工具内置使用说明——页面里直接就有。</p></div></div>
 </section>
 
-<section class="section scroll-reveal">
-  <div class="wrap stream-in">
-    <div class="section-head">
-      <div class="kicker">SCENARIOS · 适用场景</div>
-      <h2>什么时候用<span class="en">use cases</span></h2>
-    </div>
-    <div class="scenario-grid">
-      <div class="scenario-card">
-        <div class="sc-icon">SC·01</div>
-        <h4>CTF 比赛</h4>
-        <p>比赛时打开工具箱，编码解码、密码学、隐写分析都在一个页面里，不用多个工具来回切换。省下来的时间全花在解题上。</p>
-      </div>
-      <div class="scenario-card">
-        <div class="sc-icon">SC·02</div>
-        <h4>安全学习</h4>
-        <p>刚入门的时候，遇到各种编码转换和密码学操作不用到处找在线工具。一个页面全搞定，边学边用，比翻书快。</p>
-      </div>
-      <div class="scenario-card">
-        <div class="sc-icon">SC·03</div>
-        <h4>日常开发</h4>
-        <p>写代码时遇到编码转换、哈希计算、文件分析，开个网页就搞定。不用切出去开命令行或者找在线工具，省事。</p>
-      </div>
-      <div class="scenario-card">
-        <div class="sc-icon">SC·04</div>
-        <h4>离线环境</h4>
-        <p>纯前端，数据在浏览器本地处理，没网也能用。比赛现场网络不稳定也不影响，打开页面所有工具都在。</p>
-      </div>
-    </div>
-  </div>
+<section class="wrap wrap-section">
+<div class="kicker">SCENARIOS · 什么时候用</div>
+<div class="sc-grid">
+<div class="sc reveal"><h4>CTF 比赛</h4><p>编码解码、密码学、隐写分析都在一个页面，不用多工具来回切。省下的时间全花在解题上。</p></div>
+<div class="sc reveal"><h4>安全学习</h4><p>刚入门遇到编码转换和密码学操作不用到处找在线工具，边学边用，比翻书快。</p></div>
+<div class="sc reveal"><h4>日常开发</h4><p>编码转换、哈希计算、文件分析，开个网页就搞定，不用切出去开命令行。</p></div>
+<div class="sc reveal"><h4>离线环境</h4><p>纯前端本地处理，比赛现场网络不稳也不影响——打开页面所有工具都在。</p></div>
+</div>
 </section>
 
-<section class="section scroll-reveal">
-  <div class="wrap stream-in">
-    <div class="section-head">
-      <div class="kicker">WHY CHOOSE · 为什么选择</div>
-      <h2>选 CTF 乾坤袋的理由<span class="en">why choose</span></h2>
-    </div>
-    <div class="why-grid">
-      <div class="why-card">
-        <div class="wc-num">01</div>
-        <h4>随时可用</h4>
-        <p>打开浏览器就能用，不用安装任何东西。比赛的时候打开页面，所有工具都在，不用等加载、不用切窗口。</p>
-      </div>
-      <div class="why-card">
-        <div class="wc-num">02</div>
-        <h4>工具丰富</h4>
-        <p>450+ 工具覆盖编码、密码学、隐写、取证、OSINT 等多个方向。日常比赛和练习基本够用，不用再额外装一堆单独的工具。</p>
-      </div>
-      <div class="why-card">
-        <div class="wc-num">03</div>
-        <h4>开源免费</h4>
-        <p>MIT 协议，代码全公开，不存在收费或者功能锁这种说法。源码在 GitHub 上，觉得缺什么功能自己改也行，提 PR 也行。</p>
-      </div>
-      <div class="why-card">
-        <div class="wc-num">04</div>
-        <h4>本地处理</h4>
-        <p>所有工具在浏览器本地运行，不经过任何服务器，数据安全。文件传上去就在本地处理，不会离开你的电脑。</p>
-      </div>
-    </div>
-  </div>
+<section class="wrap wrap-section">
+<div class="kicker">SPEC · 规格表</div>
+<div class="spec reveal">
+<div class="spec-row"><div class="k">VERSION</div><div>持续迭代 · 450+ 工具</div></div>
+<div class="spec-row"><div class="k">STACK</div><div>TypeScript · Vue · NestJS</div></div>
+<div class="spec-row"><div class="k">PLATFORM</div><div>浏览器 · 纯前端</div></div>
+<div class="spec-row"><div class="k">LICENSE</div><div>MIT · 开源</div></div>
+<div class="spec-row"><div class="k">STATUS</div><div>活跃维护中</div></div>
+<div class="spec-row"><div class="k">FORM</div><div>在线工具（不是浏览器扩展）</div></div>
+</div>
 </section>
 
-<section class="section scroll-reveal">
-  <div class="wrap stream-in">
-    <div class="section-head">
-      <div class="kicker">CHANGELOG · 更新日志</div>
-      <h2>版本历史<span class="en">changelog</span></h2>
-    </div>
-    <div class="changelog">
-            <div class="cl-item"><span class="cl-ver">持续迭代</span><span class="cl-date">2026</span><span class="cl-desc">工具数量扩展至 450+，新增隐写分析模块</span></div>
-      <div class="cl-item"><span class="cl-ver">v2.0</span><span class="cl-date">2025-10</span><span class="cl-desc">框架重构，工具分类优化</span></div>
-      <div class="cl-item"><span class="cl-ver">v1.0</span><span class="cl-date">2025-04</span><span class="cl-desc">正式版，基础工具集</span></div>
-      <div class="cl-item"><span class="cl-ver">v0.5</span><span class="cl-date">2024-12</span><span class="cl-desc">概念原型，编码工具</span></div>
-    </div>
-  </div>
+<section style="padding-bottom:90px">
+<div class="wrap">
+<div class="cta-band reveal">
+<div>
+<h2><span class="pr">$</span> ctf open --all</h2>
+<p>450+ tools · MIT · 数据不出浏览器</p>
+</div>
+<div style="display:flex;gap:12px;flex-wrap:wrap">
+<a class="btn solid" href="https://work.feng-qiao.top/ctf-qiankun/" target="_blank" rel="noopener">立即打开 →</a>
+<a class="btn" href="https://github.com/zep4yrs/ctf-qiankun" target="_blank" rel="noopener">GitHub 源码</a>
+</div>
+</div>
+</div>
 </section>
-
-<section class="section scroll-reveal">
-  <div class="wrap stream-in">
-    <div class="section-head">
-      <div class="kicker">ROADMAP · 路线图</div>
-      <h2>下一步<span class="en">what's next</span></h2>
-    </div>
-    <div class="roadmap-list">
-            <div class="rm-item"><span class="rm-num">N°01</span><span class="rm-title">更多工具模块</span><span class="rm-status ">进行中</span></div>
-      <div class="rm-item"><span class="rm-num">N°02</span><span class="rm-title">自定义工具链</span><span class="rm-status ">计划</span></div>
-      <div class="rm-item"><span class="rm-num">N°03</span><span class="rm-title">离线 PWA 支持</span><span class="rm-status ">计划</span></div>
-      <div class="rm-item"><span class="rm-num">N°04</span><span class="rm-title">基础工具集发布</span><span class="rm-status done">已完成</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="section scroll-reveal">
-  <div class="wrap stream-in">
-    <div class="section-head">
-      <div class="kicker">RELATED · 相关</div>
-      <h2>同类项目<span class="en">related</span></h2>
-    </div>
-    <div class="related-grid">
-            <a class="related-card" href="cryptovis.html"><img src="assets/svg/logo-cryptovis.svg" alt="CryptoVis"><h4>CryptoVis</h4><p>密码学可视化</p></a>
-      <a class="related-card" href="autopen.html"><img src="assets/svg/logo-autopen.svg" alt="AutoPen"><h4>AutoPen</h4><p>安全自动化</p></a>
-      <a class="related-card" href="alertzero.html"><img src="assets/svg/logo-alertzero.svg" alt="零号告警"><h4>零号告警</h4><p>安全学习方向</p></a>
-    </div>
-  </div>
-</section>
-
-<section class="section scroll-reveal">
-  <div class="wrap stream-in">
-    <div class="section-head">
-      <div class="kicker">COMMENTS · 评论</div>
-      <h2>讨论<span class="en">discussion</span></h2>
-    </div>
-    <div class="share-bar">
-      <span class="share-label">SHARE · 分享</span>
-      <a class="share-btn" href="https://connect.qq.com/widget/shareqq/index.html?url=https://work.feng-qiao.top/ctf-qiankun.html&title=CTF%20%E4%B9%BE%E5%9D%A4%E8%A2%8B" target="_blank" rel="noopener" title="分享到 QQ">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8l-9 9z"/></svg>
-        <span class="share-label-text">QQ</span>
-      </a>
-      <a class="share-btn" href="https://service.weibo.com/share/share.php?url=https://work.feng-qiao.top/ctf-qiankun.html&title=CTF%20%E4%B9%BE%E5%9D%A4%E8%A2%8B" target="_blank" rel="noopener" title="分享到微博">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M10.098 20.323c-3.977.391-7.414-1.406-7.672-4.02-.259-2.609 2.759-5.047 6.74-5.441 3.979-.394 7.413 1.404 7.671 4.018.259 2.6-2.759 5.049-6.739 5.443zM3.027 8.64c-1.109.412-1.866.559-1.866.559s.157-.515.683-1.134c.527-.617 1.174-.999 1.174-.999s-.108.48-.108 1.045c0 .304.058.529.117.529zm-.058-.529c-.002-.228-.046-.336-.046-.336s-.06.167-.06.417c0 .153.022.266.048.336.012.034.026.056.038.068.016.016.028.02.028.02s-.008-.113-.008-.284v-.221zm.877-1.596c-1.054.395-1.773.677-1.773.677s.148-.698.848-1.352c.7-.654 1.48-.923 1.48-.923s-.368.707-.368 1.519c0 .137.027.239.055.304.016.036.034.06.055.077.012.01.024.016.033.019l.008.003s-.114-.094-.254-.246c-.14-.153-.228-.328-.228-.328-.069.096-.201.228-.393.35-.192.12-.428.22-.463.221.001.001 0 .001 0 .001zm-2.33 6.312c0-2.442 1.426-4.375 3.568-4.875l.233-.057C5.593 6.099 5.55 4.8 4.919 4.281c-1.134-.917-3.193-.224-3.193-.224s.511-.732 1.46-.997c.949-.266 1.919.005 2.505.508.89.762.968 2.145.289 3.377 1.622-.216 3.154.238 4.144 1.154.861.798 1.257 1.865 1.257 2.944 0 2.582-3.163 4.612-7.067 4.612-3.905 0-7.069-2.031-7.069-4.612z"/></svg>
-        <span class="share-label-text">微博</span>
-      </a>
-      <a class="share-btn" href="https://www.douban.com/share/service?url=https://work.feng-qiao.top/ctf-qiankun.html" target="_blank" rel="noopener" title="分享到豆瓣">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8l-9 9z"/></svg>
-        <span class="share-label-text">豆瓣</span>
-      </a>
-      <button class="share-btn share-copy-link" data-url="https://work.feng-qiao.top/ctf-qiankun.html" title="复制链接">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-        <span class="share-label-text">复制链接</span>
-      </button>
-    </div>
-    <div class="giscus">
-      <script src="https://giscus.app/client.js"
-        data-repo="zep4yrs/zep4yrs.github.io"
-        data-repo-id="R_kgDOSaXw7A"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOSaXw7M4CkKYP"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="preferred_color_scheme"
-        data-lang="zh-CN"
-        crossorigin="anonymous"
-        async>
-      </script>
-    </div>
-  </div>
-</section>
-
 </main>
 
 <footer>
-  <div class="wrap">
-    <div class="footer-inner">
-      <span>© 2026 四时工坊 · zep4yrs</span>
-      <span>CTF 乾坤袋</span>
-      <span>MIT · 开源</span>
-    </div>
-  </div>
+<div class="wrap footer-inner">
+<span>© 2026 四时工坊 · 枫桥</span>
+<span>CTF 乾坤袋 · 浏览器端工具箱</span>
+<span>work.feng-qiao.top</span>
+</div>
 </footer>
-
-<div class="cursor-ring" id="cursorRing"></div>
-<div class="cursor-dot" id="cursorDot"></div>
-<script src="assets/js/mimo.js"></script>
+<script src="assets/js/proj-base.js"></script>
 <script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('sw.js').catch(function(){});
+/* 终端逐字打印 */
+(function () {
+  var lines = document.querySelectorAll('.term-body .ln');
+  if (!lines.length) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  lines.forEach(function (ln) {
+    ln.style.opacity = '0';
+    ln.style.transition = 'opacity .3s ease ' + (200 + [...lines].indexOf(ln) * 260) + 'ms';
   });
-}
+  setTimeout(function () {
+    lines.forEach(function (ln) { ln.style.opacity = '1'; });
+  }, 300);
+})();
 </script>
-<script>
-    window.pagefind = new Promise(function(resolve) {
-          var s = document.createElement('script');
-          s.src = 'pagefind/pagefind-ui.js';
-          s.onload = function() { resolve(window.pagefind); };
-          s.onerror = function() { resolve(null); };
-          document.head.appendChild(s);
-        });
-    </script>
-<script src="assets/js/search.js"></script>
 </body>
 </html>

@@ -8,28 +8,6 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,500&amp;family=Noto+Sans+SC:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
-<link href="assets/css/fonts.css" rel="stylesheet"/>
-<link href="assets/css/mimo.css" rel="stylesheet"/>
-<link href="assets/css/search.css" rel="stylesheet"/>
-<link href="assets/css/siji-subs.css?v=3" rel="stylesheet"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-<style>
-  /* 筛选器 */
-  .filter-bar {
-    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px;
-    padding-bottom: 24px; border-bottom: 1px solid var(--line);
-  }
-  .filter-chip {
-    border: 1px solid var(--line); padding: 6px 14px;
-    font-family: var(--font-mono); font-size: 12px; color: var(--ink-2);
-    cursor: pointer; transition: all .15s; background: var(--card);
-  }
-  .filter-chip:hover { border-color: var(--ink); color: var(--ink); }
-  .filter-chip.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-  .filter-chip .count { color: var(--ink-3); margin-left: 6px; font-size: 10px; }
-  .filter-chip.active .count { color: var(--ink-4); }
-</style>
 <link href="https://work.feng-qiao.top/projects.html" rel="canonical"/>
 <meta content="website" property="og:type"/>
 <meta content="项目 · 四时工坊" property="og:title"/>
@@ -50,20 +28,21 @@
 <meta content="https://work.feng-qiao.top/assets/og/og-projects.png" property="og:image"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
+<link rel="stylesheet" href="assets/css/fonts.css">
+<link rel="stylesheet" href="assets/css/proj-base.css">
+<link rel="stylesheet" href="assets/css/siji-info.css">
+<link rel="stylesheet" href="assets/css/search.css">
 </head>
 <body>
-<div class="notice">
-  8 个项目持续维护中 · 3 开源 / 2 商业 / 2 教学
-  <span class="dot"></span>
-<a href="bulletin.html">最新动态 →</a>
+<div class="topbar">
+<a class="brand" href="index.html"><span class="dot"></span>四时工坊</a>
+<nav class="top-links">
+<a href="index.html">首页</a><a href="about.html">关于</a><a href="projects.html">项目</a><a href="capabilities.html">能力</a><a href="pipeline.html">管线</a><a href="bulletin.html">公告</a><a href="contact.html">联系</a><a href="demos.html">在线体验</a>
+<a class="gh" href="https://github.com/zep4yrs" target="_blank" rel="noopener">GitHub ↗</a>
+</nav>
+<button class="menu-btn" aria-label="菜单"><span></span><span></span><span></span></button>
 </div>
-<header class="nav">
-<div class="nav-inner">
-<a class="brand" href="index.html">
-<span class="brand-mark">z4</span>
-<span>四时工坊</span>
-</a>
-<nav class="nav-links">
+<div class="menu-overlay">
 <a href="index.html">首页</a>
 <a href="about.html">关于</a>
 <a href="projects.html">项目</a>
@@ -71,364 +50,129 @@
 <a href="pipeline.html">管线</a>
 <a href="bulletin.html">公告</a>
 <a href="contact.html">联系</a>
-<span class="nav-dropdown">
-<button class="nav-dropdown-btn">在线体验 <span class="arrow-down">▼</span></button>
-<span class="nav-dropdown-menu">
-<a href="https://work.feng-qiao.top/crypto/">CryptoVis<span class="dd-desc">密码学可视化</span></a>
-<a href="https://work.feng-qiao.top/struct/">StructVis<span class="dd-desc">数据结构可视化</span></a>
-<a href="https://work.feng-qiao.top/ctf-qiankun/">CTF 乾坤袋<span class="dd-desc">CTF 工具箱</span></a>
-</span>
-</span>
-<a class="nav-cta" href="https://github.com/zep4yrs" rel="noopener" target="_blank">GitHub ↗</a>
-</nav>
-
-  <button class="hamburger" aria-label="菜单"><span></span><span></span><span></span></button>
+<a href="demos.html">在线体验</a>
+<a class="gh" href="https://github.com/zep4yrs" target="_blank" rel="noopener">GitHub ↗</a>
 </div>
-</header>
-<div class="mobile-menu">
-  <a href="index.html">首页</a>
-  <a href="index.html#matrix">项目矩阵</a>
-  <a href="index.html#ecosystem">生态</a>
-  <a href="about.html">关于</a>
-  <a href="projects.html">项目</a>
-  <a href="capabilities.html">能力</a>
-  <a href="pipeline.html">管线</a>
-  <a href="bulletin.html">公告</a>
-  <a href="contact.html">联系</a>
-  <div class="mm-dropdown">
-    <button class="mm-dropdown-btn">在线体验 ▼</button>
-    <div class="mm-dropdown-menu">
-      <a href="https://work.feng-qiao.top/crypto/">CryptoVis</a>
-      <a href="https://work.feng-qiao.top/struct/">StructVis</a>
-      <a href="https://work.feng-qiao.top/ctf-qiankun/">CTF 乾坤袋</a>
-    </div>
-  </div>
-  <a href="https://github.com/zep4yrs" class="mm-cta" target="_blank">GitHub ↗</a>
-</div>
-
 <main>
-<section class="hero" style="padding: 72px 0 56px;">
-<div class="hero-watermark">PROJECTS</div>
+<section class="page-hero">
 <div class="wrap">
-<div class="hero-inner">
-<div class="hero-left">
-<div class="kicker">PROJECTS · 项目清单</div>
-<h1>八个项目<span class="en">eight projects</span></h1>
-<p class="sub">桌面开发、安全工程、教学可视化、游戏化学习四个方向，八个项目，开源和商业并行。</p>
-</div>
-<div class="hero-right">
-<div id="globe3d" class="globe-3d">
-  <div class="globe-label label-proj1">开源</div>
-  <div class="globe-label label-proj2">工具</div>
-  <div class="globe-label label-proj3">安全</div>
-  <div class="globe-label label-proj4">教学</div>
-  <div class="globe-label label-footer">项目矩阵</div>
-</div>
-</div>
-</div>
+<div class="kicker reveal">PROJECTS · 项目清单</div>
+<h1 class="reveal">八个项目<span class="en">eight projects</span></h1>
+<p class="lede reveal">桌面开发、安全工程、教学可视化、游戏化学习四个方向，八个项目，开源和商业并行。</p>
 </div>
 </section>
-<section class="section" id="matrix">
+
+<section class="sect" style="border-top:none;padding-top:20px">
 <div class="wrap">
-<div class="section-head">
 <div class="kicker">MATRIX · 项目矩阵</div>
 <h2>全部项目<span class="en">all projects</span></h2>
+<div class="chips" style="margin-top:26px">
+<button class="chip active" data-filter="all">全部<span class="cnt">8</span></button>
+<button class="chip" data-filter="open">开源<span class="cnt">3</span></button>
+<button class="chip" data-filter="commercial">商业<span class="cnt">3</span></button>
+<button class="chip" data-filter="edu">教学<span class="cnt">2</span></button>
+<button class="chip" data-filter="desktop">桌面<span class="cnt">3</span></button>
+<button class="chip" data-filter="web">Web<span class="cnt">3</span></button>
+<button class="chip" data-filter="game">游戏<span class="cnt">1</span></button>
 </div>
-<!-- 筛选器 -->
-<div class="filter-bar">
-<span class="filter-chip active" data-filter="all">全部 <span class="count">8</span></span>
-<span class="filter-chip" data-filter="open">开源 <span class="count">3</span></span>
-<span class="filter-chip" data-filter="commercial">商业 <span class="count">3</span></span>
-<span class="filter-chip" data-filter="edu">教学 <span class="count">2</span></span>
-<span class="filter-chip" data-filter="desktop">桌面 <span class="count">3</span></span>
-<span class="filter-chip" data-filter="web">Web <span class="count">3</span></span>
-<span class="filter-chip" data-filter="game">游戏 <span class="count">1</span></span>
-</div>
-<!-- 项目矩阵网格 -->
-<div class="matrix-grid">
-<a class="matrix-card" data-tags="open,desktop" href="bluetidy.html">
-<div class="mc-top"><span class="mc-num">N°01</span><span class="mc-license">MIT</span></div>
+<div class="mgrid">
+
+<a class="mcard reveal" data-tags="open desktop" href="bluetidy.html">
+<div class="top"><span>N°01</span><span class="lic">MIT</span></div>
 <h3>BlueTidy<span class="en">disk analyzer</span></h3>
-<p class="mc-desc">磁盘空间分析工具。扫描整个磁盘，把文件按类型、大小、时间可视化，找出占空间的"老赖"。</p>
-<div class="mc-tags"><span class="mc-tag">Rust</span><span class="mc-tag">Tauri</span><span class="mc-tag">Disk</span></div>
-<div class="mc-foot"><span>v0.2.0 · Preview</span><span class="arrow">→</span></div>
+<p>磁盘空间分析工具。扫描整个磁盘，把文件按类型、大小、时间可视化，找出占空间的"老赖"。</p>
+<div class="tags"><span>Rust</span><span>Tauri</span><span>Disk</span></div>
+<div class="foot"><span>v0.2.0 · Preview</span><span class="arrow">→</span></div>
 </a>
-<a class="matrix-card" data-tags="open,desktop" href="lannook.html">
-<div class="mc-top"><span class="mc-num">N°02</span><span class="mc-license">GPL-3.0</span></div>
+
+<a class="mcard reveal" data-tags="open desktop" href="lannook.html">
+<div class="top"><span>N°02</span><span class="lic">GPL-3.0</span></div>
 <h3>LanNook<span class="en">lan transfer</span></h3>
-<p class="mc-desc">局域网文件传输，零配置。同一 WiFi 下跨平台传文件，无需服务器，自动发现设备。</p>
-<div class="mc-tags"><span class="mc-tag">Rust</span><span class="mc-tag">LAN</span></div>
-<div class="mc-foot"><span>v26.4.0 · 跨平台</span><span class="arrow">→</span></div>
+<p>局域网文件传输，零配置。同一 WiFi 下跨平台传文件，无需服务器，自动发现设备。</p>
+<div class="tags"><span>Rust</span><span>LAN</span></div>
+<div class="foot"><span>v26.4.0 · 跨平台</span><span class="arrow">→</span></div>
 </a>
-<a class="matrix-card" data-tags="open,web" href="ctf-qiankun.html">
-<div class="mc-top"><span class="mc-num">N°03</span><span class="mc-license">MIT</span></div>
+
+<a class="mcard reveal" data-tags="open web" href="ctf-qiankun.html">
+<div class="top"><span>N°03</span><span class="lic">MIT</span></div>
 <h3>CTF 乾坤袋<span class="en">ctf toolbox</span></h3>
-<p class="mc-desc">CTF 工具箱在线工具，比赛常备。集成编码解码、密码学、隐写分析，一个网页搞定常用操作。</p>
-<div class="mc-tags"><span class="mc-tag">TypeScript</span><span class="mc-tag">Vue</span><span class="mc-tag">CTF</span></div>
-<div class="mc-foot"><span>450+ 工具 · 在线</span><span class="arrow">→</span></div>
+<p>CTF 工具箱在线工具，比赛常备。集成编码解码、密码学、隐写分析，一个网页搞定常用操作。</p>
+<div class="tags"><span>TypeScript</span><span>Vue</span><span>CTF</span></div>
+<div class="foot"><span>450+ 工具 · 在线</span><span class="arrow">→</span></div>
 </a>
-<a class="matrix-card" data-tags="commercial,web" href="autopen.html">
-<div class="mc-top"><span class="mc-num">N°04</span><span class="mc-license commercial">商业</span></div>
+
+<a class="mcard reveal" data-tags="commercial web" href="autopen.html">
+<div class="top"><span>N°04</span><span class="lic com">商业</span></div>
 <h3>AutoPen<span class="en">ai security</span></h3>
-<p class="mc-desc">AI 驱动的安全自动化平台。从资产发现到漏洞验证，用大模型串联渗透测试全流程。</p>
-<div class="mc-tags"><span class="mc-tag">Python</span><span class="mc-tag">AI</span><span class="mc-tag">Security</span></div>
-<div class="mc-foot"><span>v0.3 · 内测</span><span class="arrow">→</span></div>
+<p>AI 驱动的安全自动化平台。从资产发现到漏洞验证，用大模型串联渗透测试全流程。</p>
+<div class="tags"><span>Python</span><span>AI</span><span>Security</span></div>
+<div class="foot"><span>v0.3 · 内测</span><span class="arrow">→</span></div>
 </a>
-<a class="matrix-card" data-tags="commercial,game" href="alertzero.html">
-<div class="mc-top"><span class="mc-num">N°05</span><span class="mc-license commercial">商业</span></div>
+
+<a class="mcard reveal" data-tags="commercial game" href="alertzero.html">
+<div class="top"><span>N°05</span><span class="lic com">商业</span></div>
 <h3>零号告警<span class="en">alert zero</span></h3>
-<p class="mc-desc">Steam 网络安全学习游戏。扮演学校网络安全中心老师，从告警到报告走完整事件分析流程。</p>
-<div class="mc-tags"><span class="mc-tag">Godot 4</span><span class="mc-tag">C#</span><span class="mc-tag">Steam</span></div>
-<div class="mc-foot"><span>V0.5 · 编码中</span><span class="arrow">→</span></div>
+<p>Steam 网络安全学习游戏。扮演学校网络安全中心老师，从告警到报告走完整事件分析流程。</p>
+<div class="tags"><span>Godot 4</span><span>C#</span><span>Steam</span></div>
+<div class="foot"><span>V0.5 · 编码中</span><span class="arrow">→</span></div>
 </a>
-<a class="matrix-card" data-tags="edu,web" href="cryptovis.html">
-<div class="mc-top"><span class="mc-num">N°06</span><span class="mc-license">教学</span></div>
+
+<a class="mcard reveal" data-tags="edu web" href="cryptovis.html">
+<div class="top"><span>N°06</span><span class="lic">教学</span></div>
 <h3>CryptoVis<span class="en">crypto viz</span></h3>
-<p class="mc-desc">密码学可视化教学工具。把对称加密、哈希、签名等抽象概念变成可操作的动画。</p>
-<div class="mc-tags"><span class="mc-tag">Web</span><span class="mc-tag">Edu</span><span class="mc-tag">Crypto</span></div>
-<div class="mc-foot"><span>v0.4 · 活跃</span><span class="arrow">→</span></div>
+<p>密码学可视化教学工具。把对称加密、哈希、签名等抽象概念变成可操作的动画。</p>
+<div class="tags"><span>Web</span><span>Edu</span><span>Crypto</span></div>
+<div class="foot"><span>v0.4 · 活跃</span><span class="arrow">→</span></div>
 </a>
-<a class="matrix-card" data-tags="edu,web" href="structvis.html">
-<div class="mc-top"><span class="mc-num">N°07</span><span class="mc-license">教学</span></div>
+
+<a class="mcard reveal" data-tags="edu web" href="structvis.html">
+<div class="top"><span>N°07</span><span class="lic">教学</span></div>
 <h3>StructVis<span class="en">struct viz</span></h3>
-<p class="mc-desc">看见数据结构与数据库的每一步跳动。保持一致教材章节，跟着教材走，操作即见结构变化。</p>
-<div class="mc-tags"><span class="mc-tag">Web</span><span class="mc-tag">Edu</span><span class="mc-tag">DS</span></div>
-<div class="mc-foot"><span>v1.0.0 · 正式版</span><span class="arrow">→</span></div>
+<p>看见数据结构与数据库的每一步跳动。保持一致教材章节，跟着教材走，操作即见结构变化。</p>
+<div class="tags"><span>Web</span><span>Edu</span><span>DS</span></div>
+<div class="foot"><span>v1.0.0 · 正式版</span><span class="arrow">→</span></div>
 </a>
-<a class="matrix-card" data-tags="commercial,desktop" href="stellar.html">
-<div class="mc-top"><span class="mc-num">N°08</span><span class="mc-license commercial">商业</span></div>
+
+<a class="mcard reveal" data-tags="commercial desktop" href="stellar.html">
+<div class="top"><span>N°08</span><span class="lic com">商业</span></div>
 <h3>Stellar / 摘星<span class="en">curation</span></h3>
-<p class="mc-desc">桌面 AI 内容策展助手。随手贴一个链接或一段文字，5 秒告诉你值不值得看，然后把精华摘下来存好。</p>
-<div class="mc-tags"><span class="mc-tag">Tauri</span><span class="mc-tag">React</span><span class="mc-tag">AI</span></div>
-<div class="mc-foot"><span>v0.1-dev · 开发中</span><span class="arrow">→</span></div>
+<p>桌面 AI 内容策展助手。随手贴一个链接或一段文字，5 秒告诉你值不值得看，然后把精华摘下来存好。</p>
+<div class="tags"><span>Tauri</span><span>React</span><span>AI</span></div>
+<div class="foot"><span>v0.1-dev · 开发中</span><span class="arrow">→</span></div>
 </a>
+
 </div>
 </div>
 </section>
-</main>
-<footer>
-<div class="wrap">
-<div class="footer-inner">
-<span>© 2026 四时工坊 · zep4yrs</span>
-<span>PROJECTS · 项目清单</span>
-<span>BLUE TIDY · LANNOOK · CTF乾坤袋 · AUTOPEN · 零号告警 · CRYPTOVIS · STRUCTVIS · STELLAR</span>
-</div>
-</div>
-</footer>
-<div class="cursor-ring" id="cursorRing"></div>
-<div class="cursor-dot" id="cursorDot"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="assets/js/mimo.js"></script>
+
 <script>
-// 筛选器交互
-(function(){
-  var chips = document.querySelectorAll('.filter-chip');
-  var cards = document.querySelectorAll('.matrix-card');
-  chips.forEach(function(chip){
-    chip.addEventListener('click', function(){
-      chips.forEach(function(c){ c.classList.remove('active'); });
+(function () {
+  var chips = document.querySelectorAll('.chip');
+  var cards = document.querySelectorAll('.mcard');
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      chips.forEach(function (c) { c.classList.remove('active'); });
       chip.classList.add('active');
-      var filter = chip.dataset.filter;
-      cards.forEach(function(card){
-        if(filter === 'all' || card.dataset.tags.indexOf(filter) > -1){
-          card.style.display = '';
-          card.classList.add('stream-in','visible');
-        } else {
-          card.style.display = 'none';
-        }
+      var f = chip.getAttribute('data-filter');
+      cards.forEach(function (card) {
+        var tags = card.getAttribute('data-tags') || '';
+        card.style.display = (f === 'all' || tags.indexOf(f) !== -1) ? '' : 'none';
       });
     });
   });
 })();
 </script>
-<script>
-/* ===== 螺旋星系 · 3D 旋臂星系（Three.js + GSAP） ===== */
-(function(){
-  'use strict';
-  var container = document.getElementById('globe3d');
-  if (!container || typeof THREE === 'undefined' || typeof gsap === 'undefined') return;
 
-  var scene = new THREE.Scene();
-  var aspect = container.clientWidth / container.clientHeight;
-  var camera = new THREE.PerspectiveCamera(40, aspect, 0.1, 100);
-  camera.position.set(4, 2.5, 20);
-  camera.lookAt(0, 0, 0);
-
-  var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setClearColor(0x000000, 0);
-  container.appendChild(renderer.domElement);
-
-  var controls = new THREE.OrbitControls(camera, renderer.domElement);
-  controls.enableDamping = true;
-  controls.dampingFactor = 0.08;
-  controls.autoRotate = false;
-  controls.minDistance = 2;
-  controls.maxDistance = 25;
-  controls.target.set(0, 0, 0);
-
-  function resize() {
-    var w = container.clientWidth;
-    var h = container.clientHeight;
-    if (w === 0 || h === 0) return;
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-    renderer.setSize(w, h);
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  /* 星系核 */
-  var coreGeo = new THREE.SphereGeometry(0.3, 16, 16);
-  var coreMat = new THREE.MeshBasicMaterial({ color: 0xCCCCCC, transparent: true, opacity: 0.9 });
-  var core = new THREE.Mesh(coreGeo, coreMat);
-  scene.add(core);
-
-  /* 内核光晕 */
-  var glowGeo = new THREE.SphereGeometry(0.6, 16, 16);
-  var glowMat = new THREE.MeshBasicMaterial({ color: 0x888888, transparent: true, opacity: 0.15 });
-  var glow = new THREE.Mesh(glowGeo, glowMat);
-  scene.add(glow);
-  gsap.to(glow.scale, { x: 1.6, y: 1.6, z: 1.6, duration: 2, repeat: -1, yoyo: true, ease: 'sine.inOut' });
-
-  /* 螺旋星系粒子 - 真正的旋臂结构 */
-  var starCount = 1500;
-  var starGeo = new THREE.BufferGeometry();
-  var starPos = new Float32Array(starCount * 3);
-  var starColors = new Float32Array(starCount * 3);
-  var starSizes = new Float32Array(starCount);
-
-  for (var i = 0; i < starCount; i++) {
-    /* 旋臂分布 */
-    var armCount = 3;
-    var arm = Math.floor(Math.random() * armCount);
-    var armAngle = (arm / armCount) * Math.PI * 2;
-    var radius = 0.4 + Math.random() * 2.8;
-    var spiralAngle = radius * 2.5 + armAngle;
-    var spread = (0.1 + Math.random() * 0.3) * (0.3 + radius * 0.2);
-    
-    var angle = spiralAngle + (Math.random() - 0.5) * spread;
-    var x = Math.cos(angle) * radius;
-    var z = Math.sin(angle) * radius;
-    /* 3D厚度 - 中心厚边缘薄 */
-    var thickness = 0.3 * (1 - radius / 3.2) + 0.05;
-    var y = (Math.random() - 0.5) * thickness;
-
-    starPos[i*3] = x;
-    starPos[i*3+1] = y;
-    starPos[i*3+2] = z;
-
-    /* 颜色：中心亮，边缘暗 */
-    var brightness = 0.3 + 0.7 * (1 - radius / 3.2);
-    starColors[i*3] = brightness * 0.5;
-    starColors[i*3+1] = brightness * 0.5;
-    starColors[i*3+2] = brightness * 0.5;
-    starSizes[i] = 0.01 + Math.random() * 0.04;
-  }
-
-  starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
-  starGeo.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
-  starGeo.setAttribute('size', new THREE.BufferAttribute(starSizes, 1));
-
-  var starMat = new THREE.PointsMaterial({
-    size: 0.025,
-    vertexColors: true,
-    transparent: true,
-    opacity: 0.8,
-    sizeAttenuation: true
-  });
-  var starPoints = new THREE.Points(starGeo, starMat);
-  scene.add(starPoints);
-
-  /* 稀疏外层晕 */
-  var haloCount = 500;
-  var haloGeo = new THREE.BufferGeometry();
-  var haloPos = new Float32Array(haloCount * 3);
-  for (var i = 0; i < haloCount; i++) {
-    var theta = Math.random() * Math.PI * 2;
-    var phi = Math.acos(2 * Math.random() - 1);
-    var r = 2.5 + Math.random() * 2.0;
-    haloPos[i*3] = Math.sin(phi) * Math.cos(theta) * r;
-    haloPos[i*3+1] = (Math.random() - 0.5) * 1.5;
-    haloPos[i*3+2] = Math.sin(phi) * Math.sin(theta) * r;
-  }
-  haloGeo.setAttribute('position', new THREE.BufferAttribute(haloPos, 3));
-  var haloMat = new THREE.PointsMaterial({ color: 0x555555, size: 0.015, transparent: true, opacity: 0.2, sizeAttenuation: true });
-  var haloPoints = new THREE.Points(haloGeo, haloMat);
-  scene.add(haloPoints);
-
-  /* 大星星（亮星） */
-  var brightCount = 30;
-  for (var i = 0; i < brightCount; i++) {
-    var radius = 0.5 + Math.random() * 2.5;
-    var angle = Math.random() * Math.PI * 2;
-    var y = (Math.random() - 0.5) * 0.2;
-    var geo = new THREE.SphereGeometry(0.04 + Math.random() * 0.03, 6, 6);
-    var mat = new THREE.MeshBasicMaterial({ color: 0x999999 });
-    var mesh = new THREE.Mesh(geo, mat);
-    mesh.position.set(Math.cos(angle) * radius, y, Math.sin(angle) * radius);
-    scene.add(mesh);
-  }
-
-  /* GSAP 旋转 */
-  gsap.to(starPoints.rotation, { y: Math.PI * 2, duration: 60, repeat: -1, ease: 'none' });
-  gsap.to(haloPoints.rotation, { y: -Math.PI * 2, duration: 80, repeat: -1, ease: 'none' });
-  gsap.to(core.rotation, { y: Math.PI * 2, duration: 40, repeat: -1, ease: 'none' });
-
-  /* 标签 - 通用方向名 */
-  var label1 = container.querySelector('.label-proj1');
-  var label2 = container.querySelector('.label-proj2');
-  var label3 = container.querySelector('.label-proj3');
-  var label4 = container.querySelector('.label-proj4');
-  var labelFooter = container.querySelector('.label-footer');
-
-  var labelPositions = [
-    { el: label1, pos: new THREE.Vector3(1.8, 1.5, 0) },
-    { el: label2, pos: new THREE.Vector3(2.5, 0, 0) },
-    { el: label3, pos: new THREE.Vector3(1.8, -1.5, 0) },
-    { el: label4, pos: new THREE.Vector3(0, 2.5, 0) },
-    { el: labelFooter, pos: new THREE.Vector3(0, -3.2, 0) }
-  ];
-
-  function updateLabels() {
-    var rect = container.getBoundingClientRect();
-    for (var i = 0; i < labelPositions.length; i++) {
-      var lp = labelPositions[i];
-      if (!lp.el) continue;
-      var vec = lp.pos.clone();
-      vec.project(camera);
-      var x = (vec.x * 0.5 + 0.5) * rect.width;
-      var y = (-vec.y * 0.5 + 0.5) * rect.height;
-      lp.el.style.left = x + 'px';
-      lp.el.style.top = y + 'px';
-    }
-  }
-
-  function animate() {
-    requestAnimationFrame(animate);
-    controls.update();
-    updateLabels();
-    renderer.render(scene, camera);
-  }
-  animate();
-})();
-</script>
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('sw.js').catch(function(){});
-  });
-}
-</script>
-<script>
-    window.pagefind = new Promise(function(resolve) {
-          var s = document.createElement('script');
-          s.src = 'pagefind/pagefind-ui.js';
-          s.onload = function() { resolve(window.pagefind); };
-          s.onerror = function() { resolve(null); };
-          document.head.appendChild(s);
-        });
-    </script>
+</main>
+<footer>
+<div class="wrap footer-inner">
+<span>© 2026 四时工坊 · 枫桥</span>
+<span>以四季的节奏，做能用的东西</span>
+<span>work.feng-qiao.top</span>
+</div>
+</footer>
+<script src="assets/js/proj-base.js"></script>
 <script src="assets/js/search.js"></script>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})}</script>
 </body>
 </html>

@@ -1,299 +1,214 @@
-﻿<!DOCTYPE html>
-
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CryptoVis · 四时工坊</title>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,500&amp;family=Noto+Sans+SC:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
-<link href="assets/css/fonts.css" rel="stylesheet"/>
-<link href="assets/css/mimo.css" rel="stylesheet"/>
-<link href="assets/css/search.css" rel="stylesheet"/>
-<link href="assets/css/project.css" rel="stylesheet"/>
-<link href="assets/css/siji-subs.css?v=3" rel="stylesheet"/>
-<link href="https://work.feng-qiao.top/cryptovis.html" rel="canonical"/>
-<meta content="software" property="og:type"/>
-<meta content="CryptoVis · 密码学可视化 · 四时工坊" property="og:title"/>
-<meta content="密码学可视化教学工具。把抽象概念变成可操作的动画。" property="og:description"/>
-<meta content="https://work.feng-qiao.top/cryptovis.html" property="og:url"/>
-<meta content="四时工坊" property="og:site_name"/>
-<meta content="zh_CN" property="og:locale"/>
-<meta content="summary" name="twitter:card"/>
-<meta content="CryptoVis · 密码学可视化 · 四时工坊" name="twitter:title"/>
-<meta content="密码学可视化教学工具。把抽象概念变成可操作的动画。" name="twitter:description"/>
-<link href="manifest.json" rel="manifest"/>
-<meta content="#1A1A1A" name="theme-color"/>
-<link href="assets/svg/logo-zep4yrs.svg" rel="icon" type="image/svg+xml"/>
-<link href="feed.xml" rel="alternate" title="四时工坊公告" type="application/rss+xml"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/fonts.css">
+<link rel="stylesheet" href="assets/css/proj-base.css">
+<link rel="canonical" href="https://work.feng-qiao.top/cryptovis.html">
+<meta property="og:type" content="software">
+<meta property="og:title" content="CryptoVis · 密码学可视化 · 四时工坊">
+<meta property="og:description" content="把密码学课本里的框图和数据流做成动画：AES 每一轮加密、MD5 每一个压缩步骤，打开浏览器就能调参数看变化。">
+<meta property="og:url" content="https://work.feng-qiao.top/cryptovis.html">
+<meta property="og:site_name" content="四时工坊">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CryptoVis · 密码学可视化 · 四时工坊">
+<meta name="twitter:description" content="把密码学课本里的框图和数据流做成动画：AES 每一轮加密、MD5 每一个压缩步骤，打开浏览器就能调参数看变化。">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1A1A1A">
+<link rel="icon" type="image/svg+xml" href="assets/svg/logo-zep4yrs.svg">
+<link rel="alternate" type="application/rss+xml" title="四时工坊公告" href="feed.xml">
 <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Organization","name":"四时工坊","alternateName":"Four Seasons Workshop","url":"https://work.feng-qiao.top","logo":"https://work.feng-qiao.top/assets/svg/logo-zep4yrs.svg","founder":"枫桥","foundingDate":"2024","sameAs":["https://github.com/zep4yrs"]}
-  </script>
-<meta content="https://work.feng-qiao.top/assets/og/og-cryptovis.png" property="og:image"/>
-<meta content="1200" property="og:image:width"/>
-<meta content="630" property="og:image:height"/>
-</head>
-<body class="theme-cryptovis">
-<div class="notice">
-  CryptoVis · 教学 · 在线工具
-  <span class="dot"></span>
-<a href="bulletin.html">最新动态 →</a>
-</div>
-<header class="nav">
-<div class="nav-inner">
-<a class="brand" href="index.html">
-<span class="brand-mark">z4</span><span>四时工坊</span>
-</a>
-<nav class="nav-links">
-<a href="index.html">首页</a>
-<a href="about.html">关于</a>
-<a href="projects.html">项目</a>
-<a href="capabilities.html">能力</a>
-<a href="pipeline.html">管线</a>
-<a href="bulletin.html">公告</a>
-<a href="contact.html">联系</a>
-<span class="nav-dropdown">
-<button class="nav-dropdown-btn">在线体验 <span class="arrow-down">▼</span></button>
-<span class="nav-dropdown-menu">
-<a href="https://work.feng-qiao.top/crypto/">CryptoVis<span class="dd-desc">密码学可视化</span></a>
-<a href="https://work.feng-qiao.top/struct/">StructVis<span class="dd-desc">数据结构可视化</span></a>
-<a href="https://work.feng-qiao.top/ctf-qiankun/">CTF 乾坤袋<span class="dd-desc">CTF 工具箱</span></a>
-</span>
-</span>
-<a class="nav-cta" href="https://github.com/zep4yrs" rel="noopener" target="_blank">GitHub ↗</a>
-</nav>
+{"@context":"https://schema.org","@type":"Organization","name":"四时工坊","alternateName":"Four Seasons Workshop","url":"https://work.feng-qiao.top","logo":"https://work.feng-qiao.top/assets/svg/logo-zep4yrs.svg","founder":"枫桥","foundingDate":"2024","sameAs":["https://github.com/zep4yrs"]}
+</script>
+<meta property="og:image" content="https://work.feng-qiao.top/assets/og/og-cryptovis.png">
+<style>
+/* ===== CryptoVis · 密文实验室 ===== */
+:root { --ac: #0D9488; --ac-soft: rgba(13,148,136,0.10); }
 
-  <button class="hamburger" aria-label="菜单"><span></span><span></span><span></span></button>
+.hero { padding: 150px 0 70px; }
+.kicker { display: flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-2); letter-spacing: .22em; }
+.kicker::before { content: ""; width: 30px; height: 2px; background: var(--ink); }
+h1 { font-size: clamp(44px, 6.2vw, 80px); font-weight: 900; letter-spacing: -0.035em; line-height: 1.03; margin: 20px 0 14px; }
+h1 .xor { color: var(--ac); font-family: var(--font-mono); font-weight: 700; }
+.lede { font-size: 16.5px; line-height: 1.85; color: var(--ink-2); max-width: 46ch; margin-bottom: 6px; }
+.lede b { color: var(--ink); }
+.formula {
+  font-family: var(--font-mono); font-size: 13.5px; color: var(--ac);
+  background: var(--ac-soft); border-radius: 10px; padding: 8px 14px;
+  display: inline-block; margin: 14px 0 24px; letter-spacing: .04em;
+}
+.cta { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 26px; border-radius: 999px; border: 1.5px solid var(--ink); font-family: var(--font-mono); font-size: 13.5px; text-decoration: none; color: var(--ink); transition: all .15s; }
+.btn:hover { transform: translateY(-1px); }
+.btn.primary { background: var(--ac); border-color: var(--ac); color: #fff; }
+.btn.primary:hover { background: var(--ink); border-color: var(--ink); }
+
+/* 密文实验台 */
+.lab { background: var(--ink); color: #D6F5EF; border-radius: 26px; padding: clamp(24px,3.5vw,40px); font-family: var(--font-mono); box-shadow: 0 30px 70px rgba(13,148,136,0.25); }
+.lab-head { display: flex; justify-content: space-between; align-items: center; font-size: 11px; letter-spacing: .18em; color: #6BC7BD; margin-bottom: 20px; }
+.lab-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 18px; align-items: stretch; }
+.lab-side .lab-tag { font-size: 10px; letter-spacing: .2em; color: #6BC7BD; margin-bottom: 10px; }
+.plain-box, .cipher-box {
+  border-radius: 14px; padding: 18px; min-height: 132px; font-size: 15px; line-height: 1.7;
+  word-break: break-all; white-space: pre-wrap;
+}
+.plain-box { background: #F0FBF8; color: #0B3B34; border: 1.5px solid var(--ac); }
+.cipher-box { background: #06231F; color: #7FE8DB; border: 1.5px solid #134E48; }
+.xor-mid { align-self: center; font-size: 22px; color: var(--gold); padding: 0 4px; }
+.lab-input { margin-top: 16px; display: flex; gap: 10px; }
+.lab-input input {
+  flex: 1; background: #06231F; border: 1.5px solid #134E48; border-radius: 10px;
+  color: #7FE8DB; font-family: var(--font-mono); font-size: 14px; padding: 11px 14px; outline: none;
+}
+.lab-input input:focus { border-color: var(--ac); }
+.lab-hint { font-size: 10.5px; color: #4E7E77; margin-top: 10px; }
+
+.wrap-section { padding: clamp(64px, 9vw, 110px) 0; border-top: 1px solid var(--hair); }
+.kicker { margin-bottom: 40px; }
+.feat { display: grid; grid-template-columns: 200px 1fr; gap: 28px; padding: 34px 0; border-bottom: 1px dashed var(--line); }
+.feat .fn { font-family: Georgia, serif; font-style: italic; font-size: 40px; color: var(--ac); line-height: 1; }
+.feat h3 { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 10px; }
+.feat h3 .en { font-family: var(--font-mono); font-weight: 400; font-size: 11px; color: var(--ink-3); letter-spacing: .18em; margin-left: 10px; text-transform: uppercase; }
+.feat p { font-size: 14.5px; line-height: 1.9; color: var(--ink-2); max-width: 66ch; margin-bottom: 8px; }
+.feat p b { color: var(--ink); }
+
+.rounds { display: flex; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
+.round-chip {
+  font-family: var(--font-mono); font-size: 11px; color: var(--ink-2);
+  border: 1px solid var(--line); border-radius: 8px; padding: 5px 10px;
+}
+.round-chip.on { background: var(--ac); border-color: var(--ac); color: #fff; }
+
+.sc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.sc { background: var(--card); border-radius: 18px; box-shadow: var(--shadow); padding: 26px; }
+.sc h4 { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
+.sc p { font-size: 13px; line-height: 1.75; color: var(--ink-2); }
+
+.spec { background: var(--card); border-radius: 22px; box-shadow: var(--shadow); padding: 10px 30px; }
+.spec-row { display: grid; grid-template-columns: 130px 1fr; gap: 18px; padding: 14px 0; border-bottom: 1px dashed var(--line); font-size: 14px; }
+.spec-row:last-child { border-bottom: none; }
+.spec-row .k { font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); letter-spacing: .14em; padding-top: 3px; }
+
+@media (max-width: 900px) {
+  .hero { padding: 120px 0 56px; }
+  .lab-grid { grid-template-columns: 1fr; }
+  .xor-mid { transform: rotate(90deg); justify-self: center; padding: 6px 0; }
+  .feat { grid-template-columns: 1fr; gap: 10px; }
+  .sc-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+<a class="brand" href="index.html"><span class="dot"></span>四时工坊</a>
+<nav class="top-links">
+<a href="index.html">首页</a><a href="projects.html">项目</a><a href="pipeline.html">管线</a><a href="bulletin.html">公告</a>
+<a class="gh" href="https://work.feng-qiao.top/crypto/" target="_blank" rel="noopener">在线体验 ↗</a>
+</nav>
+<button class="menu-btn" aria-label="菜单"><span></span><span></span><span></span></button>
 </div>
-</header>
-<div class="mobile-menu">
-  <a href="index.html">首页</a>
-  <a href="index.html#matrix">项目矩阵</a>
-  <a href="index.html#ecosystem">生态</a>
-  <a href="about.html">关于</a>
-  <a href="projects.html">项目</a>
-  <a href="capabilities.html">能力</a>
-  <a href="pipeline.html">管线</a>
-  <a href="bulletin.html">公告</a>
-  <a href="contact.html">联系</a>
-  <div class="mm-dropdown">
-    <button class="mm-dropdown-btn">在线体验 ▼</button>
-    <div class="mm-dropdown-menu">
-      <a href="https://work.feng-qiao.top/crypto/">CryptoVis</a>
-      <a href="https://work.feng-qiao.top/struct/">StructVis</a>
-      <a href="https://work.feng-qiao.top/ctf-qiankun/">CTF 乾坤袋</a>
-    </div>
-  </div>
-  <a href="https://github.com/zep4yrs" class="mm-cta" target="_blank">GitHub ↗</a>
+<div class="menu-overlay">
+<a href="index.html">首页</a><a href="projects.html">项目矩阵</a><a href="pipeline.html">管线</a><a href="bulletin.html">公告</a>
+<a class="gh" href="https://work.feng-qiao.top/crypto/" target="_blank" rel="noopener">在线体验 ↗</a>
 </div>
 
 <main>
-<section class="proj-hero section scroll-reveal">
+<section class="hero">
 <div class="wrap">
-<div class="ph-top">
-<img alt="CryptoVis" class="ph-logo" src="assets/svg/logo-cryptovis.svg"/>
-<div class="ph-num">N°06 · CRYPTOVIS</div>
-</div>
-<h1>CryptoVis<span class="en">crypto vis</span></h1>
-<p class="ph-desc">CryptoVis 把密码学课本里的那堆框图和数据流全部做成了动画，你能亲眼看到 AES 的每一轮加密、MD5 的每一个压缩步骤。不用装任何东西，打开浏览器就能上手调参数看变化。</p>
-<div class="ph-cta">
-<a class="primary" href="https://work.feng-qiao.top/crypto/" rel="noopener" target="_blank">在线体验 →</a>
-<a href="https://github.com/zep4yrs">GitHub 源码 →</a>
-</div>
-</div>
-</section>
-<section class="section scroll-reveal">
-<div class="wrap stream-in">
-<div class="section-head">
-<div class="kicker">SPEC · 规格</div>
-<h2>规格表<span class="en">specification</span></h2>
-</div>
-<div class="spec-table">
-<div class="spec-row"><div class="sk">VERSION</div><div class="sv">v0.5</div></div>
-<div class="spec-row"><div class="sk">STACK</div><div class="sv">React 19 · TypeScript · anime.js · KaTeX</div></div>
-<div class="spec-row"><div class="sk">PLATFORM</div><div class="sv">Web · 浏览器</div></div>
-<div class="spec-row"><div class="sk">LICENSE</div><div class="sv">教学 · 在线工具</div></div>
-<div class="spec-row"><div class="sk">STATUS</div><div class="sv">设计阶段 · 开发中</div></div>
-<div class="spec-row"><div class="sk">FORM</div><div class="sv">在线工具</div></div>
+<div class="reveal">
+<div class="kicker">N°06 · CRYPTOVIS · 密文实验室</div>
+<h1>课本上的框图，<br>活成一场 <span class="xor">XOR</span> 动画。</h1>
+<p class="lede">CryptoVis 把密码学课本里的框图和数据流全部做成动画：<b>AES 的每一轮加密、MD5 的每一个压缩步骤</b>，亲眼看到。不用装任何东西，打开浏览器就能调参数看变化。</p>
+<div class="formula">C = E<sub>k</sub>(P) · 每一轮 · SubBytes → ShiftRows → MixColumns → AddRoundKey</div>
+<div class="cta">
+<a class="btn primary" href="https://work.feng-qiao.top/crypto/" target="_blank" rel="noopener">在线体验 →</a>
+<a class="btn" href="https://github.com/zep4yrs" target="_blank" rel="noopener">GitHub 源码</a>
 </div>
 </div>
-</section>
-<section class="section scroll-reveal">
-<div class="wrap stream-in">
-<div class="section-head">
-<div class="kicker">FEATURES · 特性</div>
-<h2>核心特性<span class="en">key features</span></h2>
+
+<div class="lab reveal" style="margin-top:56px" aria-hidden="true">
+<div class="lab-head"><span>DEMO · XOR 试验台</span><span>数据仅在浏览器本地</span></div>
+<div class="lab-grid">
+<div class="lab-side"><div class="lab-tag">PLAINTEXT · 明文</div><div class="plain-box" id="plainBox">flag{crypto_is_fun}</div></div>
+<div class="xor-mid">⊕</div>
+<div class="lab-side"><div class="lab-tag">CIPHERTEXT · 密文</div><div class="cipher-box" id="cipherBox">·· ·· ··</div></div>
 </div>
-<div class="feat-list">
-<div class="feat-item"><div class="fn">N°01</div><div><h3>对称加密<span class="en">symmetric</span></h3><p>AES 加密过程分 10 轮逐帧展开，每一轮里 SubBytes、ShiftRows、MixColumns、AddRoundKey 四个操作都画在 Canvas 上，数据怎么被替换、怎么移位、怎么混合，每一步都清清楚楚。你可以在面板上自己改密钥或者改明文，右边的加密结果跟着实时刷新，连每一轮中间的状态值都列出来了。</p><p>试几次就能搞明白为什么密钥扩展这么重要，为什么轮数不同安全性不一样。以前在课本上看那些静态图看到脑壳疼，现在动手调几个参数跑一遍，十分钟就通了。</p></div></div>
-<div class="feat-item"><div class="fn">N°02</div><div><h3>哈希算法<span class="en">hash</span></h3><p>MD5 把消息分成 512 位的块，一块一块依次处理，每块经过 64 步压缩函数，最后凑出 128 位的摘要。每一步的中间结果都画在画布上，你能看到数据怎么在状态数组里打转、怎么折叠最终输出摘要。</p><p>试着改一个字符甚至一个比特，看看输出摘要变成啥样。屏幕上跳出来的变化比说一百遍雪崩效应都管用，改一个字母都能让摘要面目全非，印象特别深刻。</p></div></div>
-<div class="feat-item"><div class="fn">N°03</div><div><h3>数字签名<span class="en">signature</span></h3><p>签名流程从哈希消息开始，然后用私钥加密生成签名。验证流程拿公钥解密，再比对新算的哈希，整条链从签名到验证每一步都串起来展示。公钥和私钥在各自场景里怎么用，过程里一目了然。</p><p>看完就明白为什么非对称加密能解决密钥分发的问题，以及签名和加密到底有什么区别。这些概念光看文字容易绕，但跟着动画走一遍就清楚了。</p></div></div>
-<div class="feat-item"><div class="fn">N°04</div><div><h3>教材保持一致<span class="en">textbook</span></h3><p>内容对照了市面上几本主流密码学教材的章节结构。学完置换网络来看 AES，学完欧拉定理来看 RSA，进度跟得上，不会出现前面没讲过的概念突然冒出来。</p><p>看书上那些静态图看到脑壳疼的时候，来这边调参数跑一遍动画，卡住的地方往往几分钟就通了。教材当参考，工具当实操，两个配合着用效果最好。</p></div></div>
+<div class="lab-input">
+<input id="labInput" type="text" maxlength="24" placeholder="输入任意文字，右侧实时变密文…" value="flag{crypto_is_fun}">
 </div>
-</div>
-</section>
-<section class="section scroll-reveal">
-<div class="wrap stream-in">
-<div class="section-head">
-<div class="kicker">SCENARIOS · 适用场景</div>
-<h2>适用场景<span class="en">use cases</span></h2>
-</div>
-<div class="scenario-grid">
-<div class="scenario-card">
-<div class="sc-icon">SC·01</div>
-<h4>密码学课程</h4>
-<p>上课讲 AES 的时候，老师可以直接打开投影调一个密钥跑一遍加密流程，每一轮的状态变化全班都看得到。学生课后自己拿工具回来复现、改参数调密钥，就比背课本上的流程图管用得多，课堂互动也活跃起来了。</p>
-</div>
-<div class="scenario-card">
-<div class="sc-icon">SC·02</div>
-<h4>自学入门</h4>
-<p>密码学的自学门槛主要在那些抽象定义和数学符号上。CryptoVis 把每个操作都变成了画布上的步骤，你不用管公式，先看数据怎么移位、怎么替换、怎么异或，看懂了再回头翻教材，效率高很多，信心也上来了。</p>
-</div>
-<div class="scenario-card">
-<div class="sc-icon">SC·03</div>
-<h4>考前复习</h4>
-<p>考试前把几个重点算法的动画快速过一遍，每一步都能看到数据的变化，比翻书刷笔记快得多。特别是那些容易搞混的步骤，比如 AES 的列混合和行移位，看一遍动画就记住了，考前省不少时间，考试也不容易忘。</p>
-</div>
-<div class="scenario-card">
-<div class="sc-icon">SC·04</div>
-<h4>课堂互动演示</h4>
-<p>老师上课讲 AES 的时候，打开投影调参数跑一遍加密流程，每一轮状态变化全班都看得到。学生课后自己回来复现，比背课本管用。</p>
-</div>
-</div>
-</div>
-</section>
-<section class="section scroll-reveal">
-<div class="wrap stream-in">
-<div class="section-head">
-<div class="kicker">WHY CHOOSE · 为什么选择</div>
-<h2>为什么选择<span class="en">why cryptovis</span></h2>
-</div>
-<div class="why-grid">
-<div class="why-card">
-<div class="wc-num">01</div>
-<h4>交互式动画</h4>
-<p>每个参数都做成可拖拽可输入的控制面板。你改密钥、改明文、改初始向量，动画和中间结果立刻跟着刷新。不是录好的视频，是你自己在操作一台密码学模拟器，想怎么试就怎么试。</p>
-</div>
-<div class="why-card">
-<div class="wc-num">02</div>
-<h4>教材保持一致</h4>
-<p>内容按主流教材的章节梳理过，学到哪看到哪，不会出现前面没讲过的概念突然冒出来。上课学完回来巩固，不用花时间重新理解上下文，直接定位到对应章节就行。</p>
-</div>
-<div class="why-card">
-<div class="wc-num">03</div>
-<h4>完全免费</h4>
-<p>纯前端实现，托管在 GitHub Pages 上，打开浏览器就能用。不用装 Python、不用配环境，手机平板也能打开看。上课用投影仪打开，下课用手机接着看，非常方便。</p>
-</div>
-<div class="why-card">
-<div class="wc-num">04</div>
-<h4>步进调试</h4>
-<p>每个算法可以一步一步走，每走一步都能看到中间状态。卡住的地方拖回上一步重新看，理解透了再继续，不像看视频那样只能被动跟着。</p>
-</div>
-</div>
-</div>
-</section>
-<section class="section scroll-reveal">
-<div class="wrap stream-in">
-<div class="section-head">
-<div class="kicker">CHANGELOG · 更新日志</div>
-<h2>版本历史<span class="en">changelog</span></h2>
-</div>
-<div class="changelog">
-<div class="cl-item"><span class="cl-ver">v0.5</span><span class="cl-date">2026-04</span><span class="cl-desc">上线，对称加密与哈希模块完成</span></div>
-<div class="cl-item"><span class="cl-ver">v0.3</span><span class="cl-date">2026-01</span><span class="cl-desc">核心动画引擎，AES 可视化</span></div>
-<div class="cl-item"><span class="cl-ver">v0.1</span><span class="cl-date">2025-11</span><span class="cl-desc">概念原型，基础加密演示</span></div>
-</div>
-</div>
-</section>
-<section class="section scroll-reveal">
-<div class="wrap stream-in">
-<div class="section-head">
-<div class="kicker">ROADMAP · 路线图</div>
-<h2>下一步<span class="en">what's next</span></h2>
-</div>
-<div class="roadmap-list">
-<div class="rm-item"><span class="rm-num">N°01</span><span class="rm-title">非对称加密模块</span><span class="rm-status">计划</span></div>
-<div class="rm-item"><span class="rm-num">N°02</span><span class="rm-title">PKI 体系</span><span class="rm-status">计划</span></div>
-<div class="rm-item"><span class="rm-num">N°03</span><span class="rm-title">数字签名扩展</span><span class="rm-status">进行中</span></div>
-<div class="rm-item"><span class="rm-num">N°04</span><span class="rm-title">上线发布</span><span class="rm-status done">已完成</span></div>
-</div>
-</div>
-</section>
-<section class="section scroll-reveal">
-<div class="wrap stream-in">
-<div class="section-head">
-<div class="kicker">RELATED · 相关</div>
-<h2>同类项目<span class="en">related</span></h2>
-</div>
-<div class="related-grid">
-<a class="related-card" href="structvis.html"><img alt="StructVis" src="assets/svg/logo-structvis.svg"/><h4>StructVis</h4><p>同属教学可视化</p></a>
-<a class="related-card" href="ctf-qiankun.html"><img alt="CTF乾坤袋" src="assets/svg/logo-ctf-qiankun.svg"/><h4>CTF乾坤袋</h4><p>密码学工具</p></a>
-<a class="related-card" href="alertzero.html"><img alt="零号告警" src="assets/svg/logo-alertzero.svg"/><h4>零号告警</h4><p>安全教学</p></a>
-</div>
-</div>
-</section>
-<section class="section scroll-reveal">
-<div class="wrap stream-in">
-<div class="section-head">
-<div class="kicker">COMMENTS · 评论</div>
-<h2>讨论<span class="en">discussion</span></h2>
-</div>
-<div class="share-bar">
-<span class="share-label">SHARE · 分享</span>
-<a class="share-btn" href="https://connect.qq.com/widget/shareqq/index.html?url=https://work.feng-qiao.top/cryptovis.html&amp;text=CryptoVis%20%C2%B7%20%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8F%AF%E8%A7%86%E5%8C%96" rel="noopener" target="_blank" title="分享到 QQ">
-<svg fill="currentColor" height="14" viewbox="0 0 24 24" width="14"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
-<span class="share-label-text">QQ</span>
-</a>
-<a class="share-btn" href="https://service.weibo.com/share/share.php?url=https://work.feng-qiao.top/cryptovis.html&amp;title=CryptoVis%20%C2%B7%20%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8F%AF%E8%A7%86%E5%8C%96" rel="noopener" target="_blank" title="分享到微博">
-<svg fill="currentColor" height="14" viewbox="0 0 24 24" width="14"><path d="M10.098 20.323c-3.977.391-7.414-1.406-7.672-4.02-.259-2.609 2.759-5.047 6.74-5.441 3.979-.394 7.413 1.404 7.671 4.018.259 2.6-2.759 5.049-6.739 5.443zM3.027 8.64c-1.109.412-1.866.559-1.866.559s.157-.515.683-1.134c.527-.617 1.174-.999 1.174-.999s-.108.48-.108 1.045c0 .304.058.529.117.529zm-.058-.529c-.002-.228-.046-.336-.046-.336s-.06.167-.06.417c0 .153.022.266.048.336.012.034.026.056.038.068.016.016.028.02.028.02s-.008-.113-.008-.284v-.221zm.877-1.596c-1.054.395-1.773.677-1.773.677s.148-.698.848-1.352c.7-.654 1.48-.923 1.48-.923s-.368.707-.368 1.519c0 .137.027.239.055.304.016.036.034.06.055.077.012.01.024.016.033.019l.008.003s-.114-.094-.254-.246c-.14-.153-.228-.328-.228-.328-.069.096-.201.228-.393.35-.192.12-.428.22-.463.221.001.001 0 .001 0 .001zm-2.33 6.312c0-2.442 1.426-4.375 3.568-4.875l.233-.057C5.593 6.099 5.55 4.8 4.919 4.281c-1.134-.917-3.193-.224-3.193-.224s.511-.732 1.46-.997c.949-.266 1.919.005 2.505.508.89.762.968 2.145.289 3.377 1.622-.216 3.154.238 4.144 1.154.861.798 1.257 1.865 1.257 2.944 0 2.582-3.163 4.612-7.067 4.612-3.905 0-7.069-2.031-7.069-4.612z"></path></svg>
-<span class="share-label-text">微博</span>
-</a>
-<a class="share-btn" href="https://www.douban.com/share/service?url=https://work.feng-qiao.top/cryptovis.html" rel="noopener" target="_blank" title="分享到豆瓣">
-<svg fill="currentColor" height="14" viewbox="0 0 24 24" width="14"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg>
-<span class="share-label-text">豆瓣</span>
-</a>
-<button class="share-btn share-copy-link" data-url="https://work.feng-qiao.top/cryptovis.html" title="复制链接">
-<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-<span class="share-label-text">复制链接</span>
-</button>
-</div>
-<div class="giscus">
-<script async="" crossorigin="anonymous" data-category="Announcements" data-category-id="DIC_kwDOSaXw7M4CkKYP" data-emit-metadata="0" data-input-position="top" data-lang="zh-CN" data-mapping="pathname" data-reactions-enabled="1" data-repo="zep4yrs/zep4yrs.github.io" data-repo-id="R_kgDOSaXw7A" data-strict="0" data-theme="preferred_color_scheme" src="https://giscus.app/client.js">
-</script>
+<div class="lab-hint">↑ 真实演示：XOR 0x3F · 完整 AES / MD5 动画请在在线体验里看</div>
 </div>
 </div>
 </section>
 
-</main>
-<footer>
-<div class="wrap">
-<div class="footer-inner">
-<span>© 2026 四时工坊 · zep4yrs</span>
-<span>CryptoVis</span>
-      <span>教学 · 在线工具</span>
+<section class="wrap wrap-section">
+<div class="kicker">FEATURES · 核心特性</div>
+<div class="feat reveal"><div class="fn">01</div><div><h3>对称加密<span class="en">symmetric</span></h3><p>AES 加密分 <b>10 轮逐帧展开</b>：SubBytes、ShiftRows、MixColumns、AddRoundKey 四个操作画在 Canvas 上——数据怎么被替换、移位、混合，每一步清清楚楚。自己改密钥或明文，右边加密结果<b>实时刷新</b>，连每轮中间状态值都列出来。</p></div></div>
+<div class="feat reveal"><div class="fn">02</div><div><h3>哈希算法<span class="en">hash</span></h3><p>MD5 把消息分成 512 位块逐块处理，每块 64 步压缩函数，<b>每一步的中间结果都画在画布上</b>——数据怎么在状态数组里打转、怎么折叠出摘要，看得见。改一个字符甚至一个比特，看雪崩效应把摘要变得面目全非——比说一百遍都管用。</p></div></div>
+<div class="feat reveal"><div class="fn">03</div><div><h3>数字签名<span class="en">signature</span></h3><p>从哈希消息、私钥加密生成签名，到公钥解密、比对哈希的验证——<b>整条链串起来展示</b>。看完就明白非对称加密为什么能解决密钥分发问题，签名和加密到底差在哪。</p></div></div>
+<div class="feat reveal"><div class="fn">04</div><div><h3>教材保持一致<span class="en">textbook</span></h3><p>内容对照主流密码学教材的章节结构：<b>学完置换网络来看 AES，学完欧拉定理来看 RSA</b>，进度跟得上，不会突然冒出没讲过的概念。教材当参考、工具当实操，配合着用效果最好。</p></div></div>
+</section>
+
+<section class="wrap wrap-section">
+<div class="kicker">ROUNDS · AES 十轮一览</div>
+<div class="rounds">
+<span class="round-chip on">R1 SubBytes</span><span class="round-chip on">R2 ShiftRows</span><span class="round-chip on">R3 MixColumns</span><span class="round-chip">R4 AddRoundKey</span><span class="round-chip">R5</span><span class="round-chip">R6</span><span class="round-chip">R7</span><span class="round-chip">R8</span><span class="round-chip">R9</span><span class="round-chip on">R10 最终轮</span>
 </div>
+</section>
+
+<section class="wrap wrap-section">
+<div class="kicker">SCENARIOS · 什么时候用</div>
+<div class="sc-grid">
+<div class="sc reveal"><h4>密码学课程</h4><p>老师投影调一个密钥跑一遍 AES，每轮状态全班都看得到；学生课后自己改参数复现，比背流程图管用。</p></div>
+<div class="sc reveal"><h4>自学入门</h4><p>门槛在抽象定义和数学符号。先看数据怎么移位替换异或，看懂了再回头翻教材，效率和信心都上来。</p></div>
+<div class="sc reveal"><h4>考前复习</h4><p>把重点算法动画快速过一遍，容易搞混的步骤（比如 AES 的行移位和列混淆）多看几遍，比翻笔记快。</p></div>
+</div>
+</section>
+
+<section class="wrap wrap-section">
+<div class="kicker">SPEC · 规格表</div>
+<div class="spec reveal">
+<div class="spec-row"><div class="k">VERSION</div><div>v0.5</div></div>
+<div class="spec-row"><div class="k">STACK</div><div>React 19 · TypeScript · anime.js · KaTeX</div></div>
+<div class="spec-row"><div class="k">PLATFORM</div><div>Web · 浏览器</div></div>
+<div class="spec-row"><div class="k">LICENSE</div><div>教学 · 在线工具</div></div>
+<div class="spec-row"><div class="k">STATUS</div><div>设计阶段 · 开发中</div></div>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="wrap footer-inner">
+<span>© 2026 四时工坊 · 枫桥</span>
+<span>CRYPTOVIS · 密文实验室</span>
+<span>work.feng-qiao.top</span>
 </div>
 </footer>
-<div class="cursor-ring" id="cursorRing"></div>
-<div class="cursor-dot" id="cursorDot"></div>
-<script src="assets/js/mimo.js"></script>
+<script src="assets/js/proj-base.js"></script>
 <script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('sw.js').catch(function(){});
-  });
-}
+(function () {
+  var input = document.getElementById('labInput');
+  var out = document.getElementById('cipherBox');
+  if (!input || !out) return;
+  function render() {
+    var v = input.value || '';
+    var html = '';
+    for (var i = 0; i < v.length; i++) {
+      var hex = (v.charCodeAt(i) ^ 0x3F).toString(16).toUpperCase();
+      if (hex.length < 2) hex = '0' + hex;
+      html += '<span style="opacity:' + (0.55 + (i % 3) * 0.2) + '">' + hex + '</span> ';
+    }
+    out.innerHTML = html || '<span style="opacity:.4">·· ·· ··</span>';
+  }
+  input.addEventListener('input', render);
+  render();
+})();
 </script>
-<script>
-    window.pagefind = new Promise(function(resolve) {
-          var s = document.createElement('script');
-          s.src = 'pagefind/pagefind-ui.js';
-          s.onload = function() { resolve(window.pagefind); };
-          s.onerror = function() { resolve(null); };
-          document.head.appendChild(s);
-        });
-    </script>
-<script src="assets/js/search.js"></script>
 </body>
 </html>

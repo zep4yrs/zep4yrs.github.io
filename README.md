@@ -25,12 +25,15 @@
 ```
 assets/css/
 ├── siji.css        # 首页设计系统「稿纸画布」：暖纸方格底 + 墨色巨字 + 荧光笔导航
-├── siji-subs.css   # 子页重主题层：加载在 mimo.css 之后，把旧壳层重新映射到稿纸画布
-├── mimo.css        # 旧共享壳层（notice/nav/hero 骨架/卡片结构），被 siji-subs 重主题
-├── project.css     # 项目详情页结构（每页 theme-* 变量定义项目主题色 --proj）
+├── siji-subs.css   # 信息页重主题层：加载在 mimo.css 之后，把旧壳层重新映射到稿纸画布
+├── proj-base.css   # 项目详情页共享底座：顶栏/菜单/页脚/滚动显现（无旧架构依赖）
+├── mimo.css        # 信息页旧壳层结构（notice/nav/hero 骨架），被 siji-subs 重主题
+├── project.css     # （已随详情页重构弃用）
 ├── search.css      # pagefind 搜索浮层
 └── fonts.css       # 本地子集字体（Noto Serif SC / Sarasa Mono SC）
 ```
+
+项目详情页（bluetidy / lannook / ctf-qiankun / autopen / alertzero / cryptovis / structvis / stellar）**每页独立设计**：各自的 accent 色、版式与交互演示都在页内 `<style>` / `<script>` 里，互不共享视觉。
 
 - 设计令牌集中在 `siji.css` 与 `siji-subs.css` 的 `:root`：纸色 `#FAF6EC`、墨色 `#1A1A1A`、金色点睛 `#F5C445`
 - 项目主题色在 `project.css` 顶部：每页 `body.theme-*` 定义 `--proj` / `--proj-bg`

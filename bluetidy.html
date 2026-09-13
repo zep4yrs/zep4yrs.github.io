@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -6,328 +6,267 @@
 <title>BlueTidy · 四时工坊</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,500&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/fonts.css">
-<link rel="stylesheet" href="assets/css/project.css">
-  <link rel="stylesheet" href="assets/css/mimo.css">
-  <link rel="stylesheet" href="assets/css/search.css">
-  <link rel="stylesheet" href="assets/css/siji-subs.css?v=3">
-  <link rel="canonical" href="https://work.feng-qiao.top/bluetidy.html">
-  <meta property="og:type" content="software">
-  <meta property="og:title" content="BlueTidy · 磁盘空间分析 · 四时工坊">
-  <meta property="og:description" content="磁盘空间分析、软件资产治理与可回滚迁移工具。Rust + Tauri 2 + React，Windows 10/11 x64。MIT 开源。">
-  <meta property="og:url" content="https://work.feng-qiao.top/bluetidy.html">
-  <meta property="og:site_name" content="四时工坊">
-  <meta property="og:locale" content="zh_CN">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="BlueTidy · 磁盘空间分析 · 四时工坊">
-  <meta name="twitter:description" content="磁盘空间分析、软件资产治理与可回滚迁移工具。Rust + Tauri 2 + React，Windows 10/11 x64。MIT 开源。">
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#1A1A1A">
-  <link rel="icon" type="image/svg+xml" href="assets/svg/logo-zep4yrs.svg">
-  <link rel="alternate" type="application/rss+xml" title="四时工坊公告" href="feed.xml">
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Organization","name":"四时工坊","alternateName":"Four Seasons Workshop","url":"https://work.feng-qiao.top","logo":"https://work.feng-qiao.top/assets/svg/logo-zep4yrs.svg","founder":"枫桥","foundingDate":"2024","sameAs":["https://github.com/zep4yrs"]}
-  </script>
-  <meta property="og:image" content="https://work.feng-qiao.top/assets/og/og-bluetidy.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+<link rel="stylesheet" href="assets/css/proj-base.css">
+<link rel="canonical" href="https://work.feng-qiao.top/bluetidy.html">
+<meta property="og:type" content="software">
+<meta property="og:title" content="BlueTidy · 磁盘空间分析 · 四时工坊">
+<meta property="og:description" content="磁盘空间分析、软件资产治理与可回滚迁移工具。Rust + Tauri 2 + React，Windows 10/11 x64。MIT 开源。">
+<meta property="og:url" content="https://work.feng-qiao.top/bluetidy.html">
+<meta property="og:site_name" content="四时工坊">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BlueTidy · 磁盘空间分析 · 四时工坊">
+<meta name="twitter:description" content="磁盘空间分析、软件资产治理与可回滚迁移工具。Rust + Tauri 2 + React，Windows 10/11 x64。MIT 开源。">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1A1A1A">
+<link rel="icon" type="image/svg+xml" href="assets/svg/logo-zep4yrs.svg">
+<link rel="alternate" type="application/rss+xml" title="四时工坊公告" href="feed.xml">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"四时工坊","alternateName":"Four Seasons Workshop","url":"https://work.feng-qiao.top","logo":"https://work.feng-qiao.top/assets/svg/logo-zep4yrs.svg","founder":"枫桥","foundingDate":"2024","sameAs":["https://github.com/zep4yrs"]}
+</script>
+<meta property="og:image" content="https://work.feng-qiao.top/assets/og/og-bluetidy.png">
+<style>
+/* ===== BlueTidy · 磁盘验收报告单 ===== */
+:root { --ac: #1E6FE8; --ac-soft: rgba(30,111,232,0.10); }
+
+.hero { padding: 150px 0 80px; }
+.hero-grid { display: grid; grid-template-columns: 1.02fr 1fr; gap: clamp(32px,5vw,72px); align-items: center; }
+.kicker { display: flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-2); letter-spacing: .22em; }
+.kicker::before { content: ""; width: 30px; height: 2px; background: var(--ink); }
+h1 { font-size: clamp(46px, 6.6vw, 84px); font-weight: 900; letter-spacing: -0.035em; line-height: 1.02; margin: 20px 0 22px; }
+h1 em { font-style: normal; box-shadow: inset 0 -0.28em 0 rgba(30,111,232,0.25); }
+.lede { font-size: 16.5px; line-height: 1.85; color: var(--ink-2); max-width: 44ch; }
+.cta { display: flex; gap: 12px; flex-wrap: wrap; margin: 30px 0 18px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 26px; border-radius: 999px; border: 1.5px solid var(--ink); font-family: var(--font-mono); font-size: 13.5px; text-decoration: none; color: var(--ink); transition: all .15s; }
+.btn:hover { transform: translateY(-1px); }
+.btn.primary { background: var(--ac); border-color: var(--ac); color: #fff; }
+.btn.primary:hover { background: var(--ink); border-color: var(--ink); }
+.meta-line { font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); letter-spacing: .06em; }
+
+.treemap-card { background: var(--card); border-radius: 26px; box-shadow: var(--shadow-lg); padding: 22px; position: relative; overflow: hidden; }
+.tm-head { display: flex; justify-content: space-between; align-items: baseline; font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-3); padding: 2px 6px 14px; }
+.tm-head b { color: var(--ink); font-size: 13px; }
+.treemap { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: 34px; gap: 6px; }
+.tm { border-radius: 7px; background: var(--ac-soft); position: relative; opacity: 0; animation: tm-in .5s ease forwards; animation-delay: calc(var(--i) * 45ms); }
+.tm:nth-child(3n) { background: rgba(30,111,232,0.22); }
+.tm:nth-child(4n) { background: rgba(26,26,26,0.14); }
+.tm:nth-child(7) { background: var(--ac); }
+.tm:nth-child(12) { background: var(--gold); }
+@keyframes tm-in { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: scale(1); } }
+.tm:hover::after {
+  content: attr(data-p); position: absolute; left: 50%; bottom: calc(100% + 8px);
+  transform: translateX(-50%); white-space: nowrap;
+  background: var(--ink); color: var(--paper); font-family: var(--font-mono);
+  font-size: 11px; padding: 5px 10px; border-radius: 7px; z-index: 3;
+}
+.tm-scan {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, transparent, rgba(30,111,232,0.14), transparent);
+  animation: scan 2.8s ease-in-out infinite;
+}
+@keyframes scan { 0%,100% { transform: translateY(-100%);} 50% { transform: translateY(100%);} }
+.tm-foot { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-3); padding: 14px 6px 2px; }
+.tm-foot b { color: var(--ac); }
+
+.wrap-section { padding: clamp(64px, 9vw, 110px) 0; border-top: 1px solid var(--hair); }
+.kicker { margin-bottom: 40px; }
+.report { display: grid; grid-template-columns: 150px 1fr; gap: 30px; padding: 40px 0; border-bottom: 1px dashed var(--line); }
+.report .no { font-family: var(--font-mono); font-size: 13px; color: var(--ac); letter-spacing: .14em; padding-top: 6px; }
+.report .no small { display: block; color: var(--ink-3); margin-top: 6px; letter-spacing: .2em; font-size: 10px; }
+.report h3 { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 12px; }
+.report h3 .en { font-family: var(--font-mono); font-weight: 400; font-size: 11px; color: var(--ink-3); letter-spacing: .18em; margin-left: 10px; text-transform: uppercase; }
+.report p { font-size: 14.5px; line-height: 1.9; color: var(--ink-2); max-width: 66ch; margin-bottom: 10px; }
+.report p b { color: var(--ink); }
+
+.diff-card { background: var(--card); border-radius: 22px; box-shadow: var(--shadow); padding: 30px 34px; margin-top: 34px; }
+.diff-head { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 12px; color: var(--ink-2); margin-bottom: 20px; }
+.diff-row { display: grid; grid-template-columns: 150px 1fr 90px; align-items: center; gap: 16px; margin-bottom: 12px; font-family: var(--font-mono); font-size: 12px; }
+.diff-track { height: 14px; border-radius: 999px; background: rgba(26,26,26,0.07); overflow: hidden; }
+.diff-fill { height: 100%; border-radius: 999px; background: var(--ac); }
+.diff-fill.up { background: #C2372F; }
+.diff-delta { text-align: right; color: var(--ink-2); }
+.diff-delta.down { color: #1E7F4F; }
+
+.sc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.sc { background: var(--card); border-radius: 20px; box-shadow: var(--shadow); padding: 28px 30px; }
+.sc .sn { font-family: var(--font-mono); font-size: 11px; color: var(--ac); letter-spacing: .16em; }
+.sc h4 { font-size: 17px; font-weight: 800; margin: 10px 0 8px; }
+.sc p { font-size: 13.5px; line-height: 1.8; color: var(--ink-2); }
+
+.spec { background: var(--card); border-radius: 22px; box-shadow: var(--shadow); padding: 10px 30px; }
+.spec-row { display: grid; grid-template-columns: 130px 1fr; gap: 18px; padding: 14px 0; border-bottom: 1px dashed var(--line); font-size: 14px; }
+.spec-row:last-child { border-bottom: none; }
+.spec-row .k { font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); letter-spacing: .14em; padding-top: 3px; }
+
+.cta-band { background: var(--ink); color: var(--paper); border-radius: 26px; padding: clamp(36px,5vw,60px); display: flex; justify-content: space-between; align-items: center; gap: 26px; flex-wrap: wrap; }
+.cta-band h2 { font-size: clamp(24px,3vw,34px); font-weight: 900; letter-spacing: -0.02em; }
+.cta-band p { opacity: .75; margin-top: 8px; font-size: 14.5px; }
+.cta-band .btn { border-color: var(--paper); color: var(--paper); }
+.cta-band .btn.primary { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.cta-band .btn.primary:hover { background: var(--paper); color: var(--ink); }
+
+@media (max-width: 900px) {
+  .hero { padding: 120px 0 56px; }
+  .hero-grid { grid-template-columns: 1fr; }
+  .report { grid-template-columns: 1fr; gap: 8px; }
+  .sc-grid { grid-template-columns: 1fr; }
+  .diff-row { grid-template-columns: 110px 1fr 70px; }
+}
+</style>
 </head>
-<body class="theme-bluetidy">
-
-<div class="notice">
-  BlueTidy · MIT · 开源
-  <span class="dot"></span>
-  <a href="bulletin.html">最新动态 →</a>
+<body>
+<div class="topbar">
+<a class="brand" href="index.html"><span class="dot"></span>四时工坊</a>
+<nav class="top-links">
+<a href="index.html">首页</a><a href="projects.html">项目</a><a href="pipeline.html">管线</a><a href="bulletin.html">公告</a>
+<a class="gh" href="https://github.com/zep4yrs/BlueTidy" target="_blank" rel="noopener">GitHub ↗</a>
+</nav>
+<button class="menu-btn" aria-label="菜单"><span></span><span></span><span></span></button>
 </div>
-
-<header class="nav">
-  <div class="nav-inner">
-    <a href="index.html" class="brand">
-      <span class="brand-mark">z4</span><span>四时工坊</span>
-    </a>
-    <nav class="nav-links">
-      <a href="index.html">首页</a>
-      <a href="about.html">关于</a>
-      <a href="projects.html">项目</a>
-      <a href="capabilities.html">能力</a>
-      <a href="pipeline.html">管线</a>
-      <a href="bulletin.html">公告</a>
-      <a href="contact.html">联系</a>
-      <span class="nav-dropdown">
-        <button class="nav-dropdown-btn">在线体验 <span class="arrow-down">▼</span></button>
-        <span class="nav-dropdown-menu">
-          <a href="https://work.feng-qiao.top/crypto/">CryptoVis<span class="dd-desc">密码学可视化</span></a>
-          <a href="https://work.feng-qiao.top/struct/">StructVis<span class="dd-desc">数据结构可视化</span></a>
-          <a href="https://work.feng-qiao.top/ctf-qiankun/">CTF 乾坤袋<span class="dd-desc">CTF 工具箱</span></a>
-        </span>
-      </span>
-      <a href="https://github.com/zep4yrs" target="_blank" rel="noopener" class="nav-cta">GitHub ↗</a>
-    </nav>
-  
-  <button class="hamburger" aria-label="菜单"><span></span><span></span><span></span></button>
+<div class="menu-overlay">
+<a href="index.html">首页</a><a href="projects.html">项目矩阵</a><a href="pipeline.html">管线</a><a href="bulletin.html">公告</a>
+<a class="gh" href="https://github.com/zep4yrs/BlueTidy" target="_blank" rel="noopener">GitHub 源码 ↗</a>
 </div>
-</header>
-<div class="mobile-menu">
-  <a href="index.html">首页</a>
-  <a href="index.html#matrix">项目矩阵</a>
-  <a href="index.html#ecosystem">生态</a>
-  <a href="about.html">关于</a>
-  <a href="projects.html">项目</a>
-  <a href="capabilities.html">能力</a>
-  <a href="pipeline.html">管线</a>
-  <a href="bulletin.html">公告</a>
-  <a href="contact.html">联系</a>
-  <div class="mm-dropdown">
-    <button class="mm-dropdown-btn">在线体验 ▼</button>
-    <div class="mm-dropdown-menu">
-      <a href="https://work.feng-qiao.top/crypto/">CryptoVis</a>
-      <a href="https://work.feng-qiao.top/struct/">StructVis</a>
-      <a href="https://work.feng-qiao.top/ctf-qiankun/">CTF 乾坤袋</a>
-    </div>
-  </div>
-  <a href="https://github.com/zep4yrs" class="mm-cta" target="_blank">GitHub ↗</a>
-</div>
-
 
 <main>
-<section class="proj-hero">
-  <div class="wrap">
-    <div class="ph-top">
-      <img src="assets/svg/logo-bluetidy.svg" class="ph-logo" alt="BlueTidy">
-      <div class="ph-num">N°01 · BLUETIDY</div>
-    </div>
-    <h1>BlueTidy<span class="en">disk analyzer</span></h1>
-    <p class="ph-desc">面向 Windows 的磁盘空间分析、软件资产治理与可回滚迁移工具。Rust + Tauri 2 + React 构建，仅 Windows 10/11 x64 平台。</p>
-    <div class="ph-cta">
-      <a href="https://github.com/zep4yrs/BlueTidy" class="primary" target="_blank" rel="noopener">GitHub 源码 →</a>
-      <a href="https://github.com/zep4yrs/BlueTidy/releases" target="_blank" rel="noopener">下载 →</a>
-    </div>
-  </div>
+<section class="hero">
+<div class="wrap hero-grid">
+<div class="hero-copy reveal">
+<div class="kicker">N°01 · BLUETIDY · 磁盘扫描报告</div>
+<h1>给你的磁盘<br>做一次<em>体检</em>。</h1>
+<p class="lede">面向 Windows 的磁盘空间分析、软件资产治理与可回滚迁移工具。扫描结果长成一张地图——哪里在吃空间、能不能搬、怎么搬回去，一眼看到。</p>
+<div class="cta">
+<a class="btn primary" href="https://github.com/zep4yrs/BlueTidy" target="_blank" rel="noopener">GitHub 源码 →</a>
+<a class="btn" href="#download">下载 v0.2.0 Preview</a>
+</div>
+<div class="meta-line">MIT 开源 · Rust + Tauri 2 + React · Windows 10/11 x64</div>
+</div>
+<div class="treemap-card reveal" aria-hidden="true">
+<div class="tm-head"><span><b>C:</b> ≈ 512 GB · NTFS</span><span>SCANNING…</span></div>
+<div class="treemap">
+<div class="tm" data-p="Windows · 38.2 GB" style="--i:0;grid-column:1/6;grid-row:1/3"></div>
+<div class="tm" data-p="Users · 96.4 GB" style="--i:1;grid-column:6/10;grid-row:1/4"></div>
+<div class="tm" data-p="Program Files · 41.7 GB" style="--i:2;grid-column:10/13;grid-row:1/3"></div>
+<div class="tm" data-p="AppData · 42.3 GB" style="--i:3;grid-column:1/4;grid-row:3/5"></div>
+<div class="tm" data-p="SteamLibrary · 118.9 GB" style="--i:4;grid-column:4/9;grid-row:4/6"></div>
+<div class="tm" data-p="ProgramData · 12.4 GB" style="--i:5;grid-column:9/11;grid-row:4/5"></div>
+<div class="tm" data-p="Pagefile · 16.0 GB" style="--i:6;grid-column:11/13;grid-row:3/5"></div>
+<div class="tm" data-p="Temp · 8.1 GB" style="--i:7;grid-column:1/4;grid-row:5/6"></div>
+<div class="tm" data-p="Videos · 22.7 GB" style="--i:8;grid-column:4/7;grid-row:6/7"></div>
+<div class="tm" data-p="WeChat Files · 31.5 GB" style="--i:9;grid-column:7/10;grid-row:6/7"></div>
+<div class="tm" data-p="Shaders · 9.4 GB" style="--i:10;grid-column:10/13;grid-row:5/7"></div>
+<div class="tm-scan"></div>
+</div>
+<div class="tm-foot"><span>hover 查看路径</span><span>已用 <b>421.6 GB</b> / 512 GB</span></div>
+</div>
+</div>
 </section>
 
-<section class="section scroll-reveal">
-  <div class="wrap stream-in">
-    <div class="section-head">
-      <div class="kicker">SPEC · 规格</div>
-      <h2>规格表<span class="en">specification</span></h2>
-    </div>
-    <div class="spec-table">
-      <div class="spec-row"><div class="sk">VERSION</div><div class="sv">v0.2.0 · Preview</div></div>
-      <div class="spec-row"><div class="sk">STACK</div><div class="sv">Rust · Tauri 2 · React · TypeScript</div></div>
-      <div class="spec-row"><div class="sk">PLATFORM</div><div class="sv">Windows 10/11 x64</div></div>
-      <div class="spec-row"><div class="sk">LICENSE</div><div class="sv">MIT · 开源</div></div>
-      <div class="spec-row"><div class="sk">STATUS</div><div class="sv">Preview 阶段</div></div>
-      <div class="spec-row"><div class="sk">FORM</div><div class="sv">桌面应用</div></div>
-    </div>
-  </div>
+<section class="wrap wrap-section">
+<div class="kicker">WORKFLOW · 三步验收</div>
+<div class="report reveal">
+<div class="no">STEP 01<small>SCAN · 扫描</small></div>
+<div>
+<h3>先扫一遍，心里有数</h3>
+<p>文件夹模式扫磁盘根目录或任意文件夹，结果同时给出<b>逻辑大小</b>和<b>实际磁盘占用</b>——两个数字经常不一样，实际占用往往更大，因为文件系统有簇对齐。遇到没权限读的目录不会静默当成 0 B，而是记录下来告诉你哪些地方没扫到。</p>
+</div>
+</div>
+<div class="report reveal">
+<div class="no">STEP 02<small>DIFF · 快照对比</small></div>
+<div>
+<h3>两次扫描，变化一目了然</h3>
+<p>每次扫同一路径的结果自动存成快照。两次一对比：新增了哪些、删了哪些、哪些涨了、哪些缩了，配上矩形图和搜索、CSV 导出，空间的变化趋势不用翻文件夹慢慢找。</p>
+</div>
+</div>
+<div class="report reveal">
+<div class="no">STEP 03<small>MOVE · 可回滚迁移</small></div>
+<div>
+<h3>搬得动，也搬得回去</h3>
+<p>对 MSI / EXE 安装目录先做<b>预检</b>：保护路径、目标盘空间、有没有进程在跑。通过后把目录搬到目标盘，原位置创建 Windows 目录联接——软件不用重装就能继续用。全程写入事务日志，想回滚随时恢复原样。</p>
+</div>
+</div>
+
+<div class="diff-card reveal" aria-hidden="true">
+<div class="diff-head"><span>快照对比 · SNAPSHOT DIFF</span><span>2026-06 ← → 2026-07</span></div>
+<div class="diff-row"><span>AppData\Local</span><div class="diff-track"><div class="diff-fill up" style="width:72%"></div></div><span class="diff-delta">+2.1 GB</span></div>
+<div class="diff-row"><span>SteamLibrary</span><div class="diff-track"><div class="diff-fill" style="width:48%"></div></div><span class="diff-delta down">-3.4 GB</span></div>
+<div class="diff-row"><span>WeChat Files</span><div class="diff-track"><div class="diff-fill up" style="width:31%"></div></div><span class="diff-delta">+1.2 GB</span></div>
+<div class="diff-row"><span>Temp</span><div class="diff-track"><div class="diff-fill" style="width:22%"></div></div><span class="diff-delta down">-800 MB</span></div>
+</div>
 </section>
 
-<section class="section scroll-reveal">
-  <div class="wrap stream-in">
-    <div class="section-head">
-      <div class="kicker">FEATURES · 特性</div>
-      <h2>核心特性<span class="en">key features</span></h2>
-    </div>
-    <div class="feat-list">
-      <div class="feat-item"><div class="fn">N°01</div><div><h3>文件夹模式<span class="en">folder mode</span></h3>
-        <p>扫描磁盘根目录或者任意一个文件夹，结果同时显示逻辑大小和实际磁盘占用，这两个数字经常不一样，实际占用往往更大，因为文件系统有簇对齐。遇到没权限读的目录不会静默当成 0 B 处理，而是记录下来告诉你哪些地方没扫到，心里有数。</p>
-        <p>扫描完的结果用矩形图展示，哪块颜色面积大就是哪个东西占地方，鼠标挪上去能看到路径和大小。支持按名称或路径搜索，也能导出 CSV。每次扫同一个路径的结果会自动保存为快照，两次扫完可以对比，新增了哪些、删了哪些、哪些涨了、哪些缩了，一目了然。</p>
-      </div></div>
-      <div class="feat-item"><div class="fn">N°02</div><div><h3>应用模式<span class="en">app mode</span></h3>
-        <p>从卸载注册表、开始菜单、winget、Scoop、Steam、Epic、Xbox、Microsoft Store 这些来源发现你装了什么软件。每个软件都展示安装位置、从哪里发现的、预计占了多少空间、迁移可信度高不高，还有有没有警告或者阻断项，让你判断这个东西能不能动。</p>
-        <p>对传统的 MSI 和 EXE 安装目录，先生成预检计划，检查保护路径、目标盘空间、有没有进程在跑。预检通过了才把目录搬到目标盘，原位置创建一个 Windows 目录联接，软件不用重装就能继续用。整个操作写入事务日志，想回滚的时候可以把目录恢复原样。</p>
-      </div></div>
-      <div class="feat-item"><div class="fn">N°03</div><div><h3>TidyPilot<span class="en">AI assistant</span></h3>
-        <p>默认用本地规则跑，不需要联网，项目里内置了 5 组提示词：快速评估、C 盘迁移判断、瘦身清理、风险复核和回滚解释。打开就能用，不依赖任何外部服务。</p>
-        <p>如果你想用更强的 AI，也可以配一个兼容 OpenAI API 的接口，填上接口地址和 Key 就行。启用后 BlueTidy 把软件名称、版本、路径、来源、容量和本地风险结论发给 AI，不传文件内容。AI 只负责解释分析结果，不能绕过本地预检和保护路径，安全边界还是由程序自己守着。</p>
-      </div></div>
-    </div>
-  </div>
+<section class="wrap wrap-section">
+<div class="kicker">FEATURES · 核心特性</div>
+<div class="report reveal">
+<div class="no">N°01<small>FOLDER · 文件夹模式</small></div>
+<div>
+<h3>一张地图看穿整个磁盘</h3>
+<p>矩形图里<b>哪块颜色面积大，就是哪个东西占地方</b>，鼠标挪上去直接看路径和大小。支持按名称或路径搜索、导出 CSV；快照对比随时回看两次扫描之间的增删涨缩。</p>
+</div>
+</div>
+<div class="report reveal">
+<div class="no">N°02<small>APP · 应用模式</small></div>
+<div>
+<h3>软件资产的盘点清册</h3>
+<p>从卸载注册表、开始菜单、winget、Scoop、Steam、Epic、Xbox、Microsoft Store 这些来源发现你装了什么。每个软件都展示安装位置、发现来源、预计占用、<b>迁移可信度</b>，还有警告与阻断项——让你判断这个东西能不能动。</p>
+</div>
+</div>
+<div class="report reveal">
+<div class="no">N°03<small>TIDYPILOT · AI 助手</small></div>
+<div>
+<h3>默认本地跑，联网可选项</h3>
+<p>内置 5 组提示词：快速评估、C 盘迁移判断、瘦身清理、风险复核、回滚解释，<b>不联网、打开就能用</b>。想用更强的模型，填一个 OpenAI 兼容接口地址和 Key 即可——只发送软件名称、版本、路径、来源、容量和本地风险结论，<b>不传文件内容</b>。AI 只负责解释，安全边界由程序自己守着。</p>
+</div>
+</div>
 </section>
 
-<section class="section scroll-reveal">
-  <div class="wrap stream-in">
-    <div class="section-head">
-      <div class="kicker">SCENARIOS · 适用场景</div>
-      <h2>什么时候用<span class="en">use cases</span></h2>
-    </div>
-    <div class="scenario-grid">
-      <div class="scenario-card">
-        <div class="sc-icon">SC·01</div>
-        <h4>磁盘空间告急</h4>
-        <p>C 盘飘红了，系统弹窗说磁盘空间不够。开文件夹模式扫一遍，矩形图一看就知道哪些东西在吃空间。可能是微信的缓存攒了几十 GB，也可能是 Steam 的着色器缓存，或者某个大型软件的安装目录。扫完看一眼排行，心里就有数了。</p>
-      </div>
-      <div class="scenario-card">
-        <div class="sc-icon">SC·02</div>
-        <h4>定期巡检</h4>
-        <p>每个月扫一次常用目录，扫描结果自动存成快照，跟上次的对比一下，新增了哪些、哪些涨得快，一眼就能看出来。不用每次重新翻一遍文件夹，打开快照对比就知道空间的变化趋势，该不该清理心里有数。</p>
-      </div>
-      <div class="scenario-card">
-        <div class="sc-icon">SC·03</div>
-        <h4>软件迁移</h4>
-        <p>想把大游戏或者吃空间的软件从 C 盘搬到 D 盘，但又不想重装。用应用模式扫出软件资产，看看哪些支持迁移、可信度够不够。预检通过后执行迁移，原位置自动创建目录联接，软件不用重装就能直接启动，万一出问题还能回滚。</p>
-      </div>
-      <div class="scenario-card">
-        <div class="sc-icon">SC·04</div>
-        <h4>换机前整理</h4>
-        <p>换电脑之前把旧硬盘扫一遍，用文件夹模式看看哪些目录占空间最大、哪些很久没动过。再切到应用模式扫一下软件资产，评估哪些软件可以迁移、哪些直接在新机器上重装就行。扫完就知道哪些要搬、哪些可以扔了。</p>
-      </div>
-    </div>
-  </div>
+<section class="wrap wrap-section">
+<div class="kicker">SCENARIOS · 什么时候用</div>
+<div class="sc-grid">
+<div class="sc reveal"><div class="sn">SC · 01</div><h4>磁盘空间告急</h4><p>C 盘飘红，系统弹窗说空间不够。开文件夹模式扫一遍，矩形图一看就知道是谁在吃空间——可能是微信缓存攒了几十 GB，也可能是着色器缓存。</p></div>
+<div class="sc reveal"><div class="sn">SC · 02</div><h4>定期巡检</h4><p>每月扫一次常用目录，快照自动留存。跟上月一对比，哪些新增、哪些涨得快，趋势一目了然，不用重新翻文件夹。</p></div>
+<div class="sc reveal"><div class="sn">SC · 03</div><h4>软件迁移</h4><p>把大游戏从 C 盘搬到 D 盘又不想重装？应用模式扫出软件资产，看迁移可信度，预检通过后执行，原位置自动创建目录联接，出问题还能回滚。</p></div>
+<div class="sc reveal"><div class="sn">SC · 04</div><h4>换机前整理</h4><p>换电脑之前把旧硬盘扫一遍，哪些要带走、哪些是能再下载的缓存、哪些是可以直接清理的旧快照——一次扫描全部列清楚。</p></div>
+</div>
 </section>
 
-<section class="section scroll-reveal">
-  <div class="wrap stream-in">
-    <div class="section-head">
-      <div class="kicker">WHY CHOOSE · 为什么选择</div>
-      <h2>选 BlueTidy 的理由<span class="en">why choose</span></h2>
-    </div>
-    <div class="why-grid">
-      <div class="why-card">
-        <div class="wc-num">01</div>
-        <h4>免费开源</h4>
-        <p>MIT 协议，源码放在 GitHub 上谁都能看。不用担心商业软件那些偷偷收集数据的事情，代码是公开的，有没有小动作一眼就能看出来。想加什么功能也可以自己改，社区里有人提了 PR 也会 review 合并。</p>
-      </div>
-      <div class="why-card">
-        <div class="wc-num">02</div>
-        <h4>安全可回滚</h4>
-        <p>迁移和清理不是点了就执行，每一步都有预检：保护路径不让动、有进程在跑不让搬、目标盘空间不够会提醒。迁移走的东西写入事务日志，任何时候想恢复原样，点一下回滚就行，不用怕搬错了出问题。</p>
-      </div>
-      <div class="why-card">
-        <div class="wc-num">03</div>
-        <h4>双模式设计</h4>
-        <p>文件夹模式管数据目录，应用模式管软件资产，两个场景分开处理，不会混在一起。扫文件夹就好好看空间分布，管软件就看安装证据和迁移风险，每个模式只做自己擅长的事，逻辑清晰，用起来不乱。</p>
-      </div>
-      <div class="why-card">
-        <div class="wc-num">04</div>
-        <h4>本地优先</h4>
-        <p>TidyPilot 默认靠本地规则跑，内置 5 组提示词，不需要联网，不传任何文件出去。想用更强的 AI 可以自己配接口，但 AI 只负责解释分析结果，不能绕过本地安全预检。隐私和安全你自己说了算。</p>
-      </div>
-    </div>
-  </div>
+<section class="wrap wrap-section">
+<div class="kicker">SPEC · 规格表</div>
+<div class="spec reveal">
+<div class="spec-row"><div class="k">VERSION</div><div>v0.2.0 · Preview</div></div>
+<div class="spec-row"><div class="k">STACK</div><div>Rust · Tauri 2 · React · TypeScript</div></div>
+<div class="spec-row"><div class="k">PLATFORM</div><div>Windows 10/11 x64</div></div>
+<div class="spec-row"><div class="k">LICENSE</div><div>MIT · 开源</div></div>
+<div class="spec-row"><div class="k">STATUS</div><div>Preview 阶段</div></div>
+<div class="spec-row"><div class="k">FORM</div><div>桌面应用</div></div>
+</div>
 </section>
 
-<section class="section scroll-reveal">
-  <div class="wrap stream-in">
-    <div class="section-head">
-      <div class="kicker">CHANGELOG · 更新日志</div>
-      <h2>版本历史<span class="en">changelog</span></h2>
-    </div>
-    <div class="changelog">
-      <div class="cl-item"><span class="cl-ver">v0.2.0</span><span class="cl-date">2026-03</span><span class="cl-desc">应用模式 + TidyPilot 预览版</span></div>
-      <div class="cl-item"><span class="cl-ver">v0.1.1</span><span class="cl-date">2026-01</span><span class="cl-desc">文件夹模式增强，快照对比</span></div>
-      <div class="cl-item"><span class="cl-ver">v0.1.0</span><span class="cl-date">2025-11</span><span class="cl-desc">文件夹模式基础版</span></div>
-      <div class="cl-item"><span class="cl-ver">v0.0.1</span><span class="cl-date">2025-09</span><span class="cl-desc">概念原型，基础扫描</span></div>
-    </div>
-  </div>
+<section id="download" style="padding-bottom:90px">
+<div class="wrap">
+<div class="cta-band reveal">
+<div>
+<h2>扫一遍，心里有数。</h2>
+<p>v0.2.0 Preview · Windows 10/11 x64 · 免费 · MIT 开源</p>
+</div>
+<div style="display:flex;gap:12px;flex-wrap:wrap">
+<a class="btn primary" href="https://github.com/zep4yrs/BlueTidy/releases" target="_blank" rel="noopener">下载 v0.2.0 Preview →</a>
+<a class="btn" href="https://github.com/zep4yrs/BlueTidy" target="_blank" rel="noopener">GitHub 源码</a>
+</div>
+</div>
+</div>
 </section>
-
-<section class="section scroll-reveal">
-  <div class="wrap stream-in">
-    <div class="section-head">
-      <div class="kicker">ROADMAP · 路线图</div>
-      <h2>下一步<span class="en">what's next</span></h2>
-    </div>
-    <div class="roadmap-list">
-      <div class="rm-item"><span class="rm-num">N°01</span><span class="rm-title">更多来源支持</span><span class="rm-status ">计划</span></div>
-      <div class="rm-item"><span class="rm-num">N°02</span><span class="rm-title">跨平台探索</span><span class="rm-status ">计划</span></div>
-      <div class="rm-item"><span class="rm-num">N°03</span><span class="rm-title">迁移可靠性提升</span><span class="rm-status ">进行中</span></div>
-      <div class="rm-item"><span class="rm-num">N°04</span><span class="rm-title">文件夹模式发布</span><span class="rm-status done">已完成</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="section scroll-reveal">
-  <div class="wrap stream-in">
-    <div class="section-head">
-      <div class="kicker">RELATED · 相关</div>
-      <h2>同类项目<span class="en">related</span></h2>
-    </div>
-    <div class="related-grid">
-            <a class="related-card" href="lannook.html"><img src="assets/svg/logo-lannook.svg" alt="LanNook"><h4>LanNook</h4><p>也做桌面端工具，侧重文件管理</p></a>
-      <a class="related-card" href="ctf-qiankun.html"><img src="assets/svg/logo-ctf-qiankun.svg" alt="CTF乾坤袋"><h4>CTF乾坤袋</h4><p>专攻安全竞赛，跟 BlueTidy 互补</p></a>
-      <a class="related-card" href="structvis.html"><img src="assets/svg/logo-structvis.svg" alt="StructVis"><h4>StructVis</h4><p>做数据结构的可视化展示</p></a>
-    </div>
-  </div>
-</section>
-
-<section class="section scroll-reveal">
-  <div class="wrap stream-in">
-    <div class="section-head">
-      <div class="kicker">COMMENTS · 评论</div>
-      <h2>讨论<span class="en">discussion</span></h2>
-    </div>
-    <div class="share-bar">
-      <span class="share-label">SHARE · 分享</span>
-      <a class="share-btn" href="https://connect.qq.com/widget/shareqq/index.html?url=https://work.feng-qiao.top/bluetidy.html&title=BlueTidy%20%C2%B7%20%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E5%88%86%E6%9E%90" target="_blank" rel="noopener" title="分享到 QQ">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8l-9 9z"/></svg>
-        <span class="share-label-text">QQ</span>
-      </a>
-      <a class="share-btn" href="https://service.weibo.com/share/share.php?url=https://work.feng-qiao.top/bluetidy.html&title=BlueTidy%20%C2%B7%20%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E5%88%86%E6%9E%90" target="_blank" rel="noopener" title="分享到微博">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M10.098 20.323c-3.977.391-7.414-1.406-7.672-4.02-.259-2.609 2.759-5.047 6.74-5.441 3.979-.394 7.413 1.404 7.671 4.018.259 2.6-2.759 5.049-6.739 5.443zM3.027 8.64c-1.109.412-1.866.559-1.866.559s.157-.515.683-1.134c.527-.617 1.174-.999 1.174-.999s-.108.48-.108 1.045c0 .304.058.529.117.529zm-.058-.529c-.002-.228-.046-.336-.046-.336s-.06.167-.06.417c0 .153.022.266.048.336.012.034.026.056.038.068.016.016.028.02.028.02s-.008-.113-.008-.284v-.221zm.877-1.596c-1.054.395-1.773.677-1.773.677s.148-.698.848-1.352c.7-.654 1.48-.923 1.48-.923s-.368.707-.368 1.519c0 .137.027.239.055.304.016.036.034.06.055.077.012.01.024.016.033.019l.008.003s-.114-.094-.254-.246c-.14-.153-.228-.328-.228-.328-.069.096-.201.228-.393.35-.192.12-.428.22-.463.221.001.001 0 .001 0 .001zm-2.33 6.312c0-2.442 1.426-4.375 3.568-4.875l.233-.057C5.593 6.099 5.55 4.8 4.919 4.281c-1.134-.917-3.193-.224-3.193-.224s.511-.732 1.46-.997c.949-.266 1.919.005 2.505.508.89.762.968 2.145.289 3.377 1.622-.216 3.154.238 4.144 1.154.861.798 1.257 1.865 1.257 2.944 0 2.582-3.163 4.612-7.067 4.612-3.905 0-7.069-2.031-7.069-4.612z"/></svg>
-        <span class="share-label-text">微博</span>
-      </a>
-      <a class="share-btn" href="https://www.douban.com/share/service?url=https://work.feng-qiao.top/bluetidy.html" target="_blank" rel="noopener" title="分享到豆瓣">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8l-9 9z"/></svg>
-        <span class="share-label-text">豆瓣</span>
-      </a>
-      <button class="share-btn share-copy-link" data-url="https://work.feng-qiao.top/bluetidy.html" title="复制链接">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-        <span class="share-label-text">复制链接</span>
-      </button>
-    </div>
-    <div class="giscus">
-      <script src="https://giscus.app/client.js"
-        data-repo="zep4yrs/zep4yrs.github.io"
-        data-repo-id="R_kgDOSaXw7A"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOSaXw7M4CkKYP"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="preferred_color_scheme"
-        data-lang="zh-CN"
-        crossorigin="anonymous"
-        async>
-      </script>
-    </div>
-  </div>
-</section>
-
 </main>
 
 <footer>
-  <div class="wrap">
-    <div class="footer-inner">
-      <span>© 2026 四时工坊 · zep4yrs</span>
-      <span>BlueTidy</span>
-      <span>MIT · 开源</span>
-    </div>
-  </div>
+<div class="wrap footer-inner">
+<span>© 2026 四时工坊 · 枫桥</span>
+<span>BLUETIDY · 磁盘验收报告单</span>
+<span>work.feng-qiao.top</span>
+</div>
 </footer>
-
-<div class="cursor-ring" id="cursorRing"></div>
-<div class="cursor-dot" id="cursorDot"></div>
-<script src="assets/js/mimo.js"></script>
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('sw.js').catch(function(){});
-  });
-}
-</script>
-<script>
-    window.pagefind = new Promise(function(resolve) {
-          var s = document.createElement('script');
-          s.src = 'pagefind/pagefind-ui.js';
-          s.onload = function() { resolve(window.pagefind); };
-          s.onerror = function() { resolve(null); };
-          document.head.appendChild(s);
-        });
-    </script>
-<script src="assets/js/search.js"></script>
+<script src="assets/js/proj-base.js"></script>
 </body>
 </html>
