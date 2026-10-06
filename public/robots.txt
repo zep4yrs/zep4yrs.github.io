@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://work.feng-qiao.top/sitemap.xml

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#F2F5FD" />
+    <meta name="color-scheme" content="light" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Work · 枫桥 zep4yrs — 个人数字作品档案</title>
+    <meta
+      name="description"
+      content="枫桥（zep4yrs）的个人数字作品档案。安全工程、桌面工具、教学可视化与游戏化学习的真实作品与演进记录。保持热爱，奔赴山海。"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Work · 枫桥 zep4yrs" />
+    <meta property="og:title" content="Work · 枫桥 zep4yrs — 个人数字作品档案" />
+    <meta
+      property="og:description"
+      content="枫桥（zep4yrs）的个人数字作品档案。安全工程、桌面工具、教学可视化与游戏化学习的真实作品与演进记录。"
+    />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:image" content="https://work.feng-qiao.top/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://work.feng-qiao.top/og.png" />
+    <script>
+      // 首次访问按浏览器语言跳转，之后以用户选择为准
+      (function () {
+        try {
+          var stored = localStorage.getItem('zep-work-lang')
+          if (stored === 'zh' || stored === 'en') return
+          var nav = (navigator.language || 'zh').toLowerCase()
+          var want = nav.indexOf('zh') === 0 ? 'zh' : 'en'
+          var p = location.pathname
+          if (p === '/' || p === '') {
+            location.replace('/' + want + '/' + location.search + location.hash)
+          }
+        } catch (e) {}
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

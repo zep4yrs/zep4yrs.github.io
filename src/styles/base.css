@@ -1,0 +1,463 @@
+/* ==========================================================================
+   Work · 枫桥 zep4yrs — 基础样式与图版原语
+   浅色蓝紫体系：雾蓝纸面 · 靛蓝墨色 · 蓝紫强调
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  background-color: var(--bg);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: transparent;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--t-body);
+  line-height: 1.68;
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* 氛围层：蓝紫雾化光晕，纯 CSS 绘制，零资源开销 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(56% 44% at 8% 2%, var(--haze-blue), transparent 70%),
+    radial-gradient(48% 40% at 94% 0%, var(--haze-violet), transparent 72%),
+    radial-gradient(60% 48% at 78% 100%, var(--haze-cyan), transparent 74%),
+    radial-gradient(44% 38% at 22% 92%, var(--haze-violet), transparent 76%);
+}
+
+/* 纸张颗粒：纯 CSS 生成，无图片请求 */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--brand);
+  color: #fff;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---------- 排版原语 ---------- */
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.mono-cjk {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.2em;
+  font-weight: 400;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.19em;
+  text-transform: uppercase;
+  color: var(--ink-44);
+}
+
+.lede {
+  font-size: var(--t-lede);
+  line-height: 1.68;
+  color: var(--ink-62);
+  max-width: 56ch;
+}
+
+.prose p {
+  font-size: var(--t-body);
+  line-height: 1.92;
+  color: var(--ink-80);
+  max-width: 62ch;
+}
+
+.prose p + p {
+  margin-top: 1.1em;
+}
+
+/* 目录引导虚线：把一行的两端连起来，让空白成为有意的版面节奏 */
+.leader {
+  flex: 1 1 auto;
+  height: 1px;
+  min-width: 26px;
+  align-self: center;
+  background-image: var(--leader);
+}
+
+/* ---------- 布局 ---------- */
+
+.shell {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+.rule {
+  height: 1px;
+  background: var(--hair);
+  border: 0;
+  width: 100%;
+}
+
+.section {
+  padding-block: var(--rhythm);
+  position: relative;
+}
+
+/* 章节题头：标题与副题之间由引导虚线相连，底边细线两端收虚 */
+.section-head {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: clamp(14px, 1.6vw, 26px);
+  padding-bottom: clamp(20px, 2vw, 30px);
+  margin-bottom: clamp(34px, 3.8vw, 60px);
+  flex-wrap: wrap;
+}
+
+.section-head::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--hair);
+}
+
+.section-head .num {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.18em;
+  color: var(--brand);
+  flex: none;
+}
+
+.section-head h2 {
+  font-family: var(--font-display);
+  font-size: var(--t-h2);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  flex: none;
+}
+
+/* 标题与副标之间不再留空洞，改用一条引导虚线把两端连起来 */
+.section-head .head-lead {
+  flex: 1 1 auto;
+  min-width: 30px;
+  height: 1px;
+  align-self: center;
+  margin-bottom: 0.3em;
+  background-image: var(--leader);
+}
+
+.section-head .sub {
+  margin-left: 0;
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-44);
+}
+
+/* ---------- 图版（Plate）：本站的核心视觉单元 ---------- */
+
+.plate {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-1), var(--hi);
+}
+
+/* 媒体凹槽：图片衬底比纸面更深一档，让截图成为内容而不是背景 */
+.plate-media {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-deep);
+  box-shadow: inset 0 0 0 1px var(--line-soft);
+}
+
+.plate-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 四角刻线 */
+.plate-corners::before,
+.plate-corners::after,
+.plate-corners > .corner::before,
+.plate-corners > .corner::after {
+  content: '';
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border: 1px solid var(--accent-line);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.plate-corners::before {
+  top: -1px;
+  left: -1px;
+  border-right: 0;
+  border-bottom: 0;
+}
+.plate-corners::after {
+  top: -1px;
+  right: -1px;
+  border-left: 0;
+  border-bottom: 0;
+}
+.plate-corners > .corner::before {
+  bottom: -1px;
+  left: -1px;
+  border-right: 0;
+  border-top: 0;
+}
+.plate-corners > .corner::after {
+  bottom: -1px;
+  right: -1px;
+  border-left: 0;
+  border-top: 0;
+}
+
+/* 图版说明条 */
+.plate-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 13px 17px;
+  border-top: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-44);
+}
+
+.plate-caption .cap-id {
+  color: var(--accent);
+}
+
+/* ---------- 状态徽记 ---------- */
+
+.stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 6px 11px 5px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface-2);
+  color: var(--ink-62);
+  white-space: nowrap;
+  justify-self: start;
+}
+
+.stamp::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.stamp[data-status='public'] {
+  color: var(--ok);
+  border-color: rgba(36, 122, 83, 0.32);
+  background: rgba(36, 122, 83, 0.07);
+}
+.stamp[data-status='private'] {
+  color: var(--hold);
+  border-color: rgba(107, 115, 146, 0.34);
+  background: rgba(107, 115, 146, 0.08);
+}
+.stamp[data-status='experimental'] {
+  color: var(--warn);
+  border-color: rgba(150, 102, 26, 0.32);
+  background: rgba(150, 102, 26, 0.07);
+}
+
+/* ---------- 链接与按钮 ---------- */
+
+.linkline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-80);
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--line-strong);
+  transition:
+    color 0.3s var(--ease-out),
+    border-color 0.3s var(--ease-out),
+    gap 0.3s var(--ease-out);
+}
+
+.linkline:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  gap: 14px;
+}
+
+.linkline .arw {
+  transition: transform 0.3s var(--ease-out);
+}
+
+.linkline:hover .arw {
+  transform: translateX(3px);
+}
+
+/* ---------- 无障碍 ---------- */
+
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 10000;
+  transform: translateY(-160%);
+  background: var(--brand);
+  color: #fff;
+  padding: 10px 16px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: transform 0.25s var(--ease-out);
+}
+
+.skip:focus {
+  transform: translateY(0);
+}
+
+/* ---------- 页面转场 ---------- */
+
+.page-enter {
+  animation: pageIn 0.62s var(--ease-out) both;
+}
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- 减弱动态 ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

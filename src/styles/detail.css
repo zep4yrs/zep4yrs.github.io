@@ -1,0 +1,523 @@
+/* ==========================================================================
+   Work · 枫桥 zep4yrs — 作品详情页
+   浅色蓝紫体系：每件作品在统一蓝紫谱系中拥有自己的强调色
+   ========================================================================== */
+
+.detail-hero {
+  padding-top: calc(var(--header-h) + clamp(26px, 4vw, 54px));
+  padding-bottom: clamp(30px, 4vw, 56px);
+  position: relative;
+}
+
+/* 作品色晕染：详情页从作品自己的蓝紫强调色开始 */
+.detail-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 74%;
+  background: radial-gradient(ellipse 74% 100% at 78% 0%, var(--accent-soft), transparent 70%);
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.back {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-44);
+  transition:
+    color 0.3s var(--ease-out),
+    gap 0.3s var(--ease-out);
+}
+
+.back:hover {
+  color: var(--brand-deep);
+  gap: 13px;
+}
+
+.detail-head {
+  position: relative;
+  margin-top: clamp(26px, 3.6vw, 52px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
+  gap: clamp(30px, 4.6vw, 76px);
+  align-items: start;
+}
+
+.detail-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* 作品标识：来自各作品仓库的真实 logo 资源 */
+.detail-mark {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  flex: none;
+}
+
+.detail-no {
+  color: var(--accent);
+}
+
+.detail-year {
+  padding-left: 14px;
+  border-left: 1px solid var(--line-strong);
+}
+
+.detail-title {
+  margin-top: 14px;
+  font-size: clamp(46px, 8.4vw, 128px);
+  line-height: 0.88;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.detail-repo {
+  margin-top: 12px;
+  color: var(--ink-28);
+  letter-spacing: 0.14em;
+}
+
+.detail-sub {
+  margin-top: 20px;
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.1vw, 28px);
+  line-height: 1.3;
+  color: var(--accent);
+}
+
+.detail-desc {
+  margin-top: 16px;
+}
+
+.detail-stamps {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.stamp-plain {
+  color: var(--ink-62);
+}
+
+.stamp-plain::before {
+  background: var(--ink-28);
+}
+
+.detail-links {
+  margin-top: 26px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(18px, 2.6vw, 36px);
+}
+
+/* 封面图版 */
+.dcover {
+  position: relative;
+}
+
+.dcover .plate-media {
+  aspect-ratio: 4 / 3;
+}
+
+.dcover .plate-media[data-fit='contain'] img {
+  max-width: 58%;
+  max-height: 58%;
+}
+
+.dcover-glyph {
+  font-family: var(--font-display);
+  font-size: clamp(70px, 9vw, 130px);
+  color: var(--accent);
+  opacity: 0.34;
+}
+
+/* ---------- 受限展示 ---------- */
+
+.restricted {
+  padding-block: clamp(20px, 3vw, 40px) 0;
+}
+
+.restricted-plate {
+  padding: clamp(26px, 4vw, 52px);
+  display: grid;
+  gap: 18px;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 11px,
+      var(--line-soft) 11px,
+      var(--line-soft) 12px
+    ),
+    var(--surface-2);
+}
+
+.restricted-quote {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3vw, 38px);
+  line-height: 1.35;
+  color: var(--ink);
+  max-width: 34ch;
+}
+
+.restricted-body {
+  max-width: 60ch;
+  font-size: 15.5px;
+  line-height: 1.85;
+  color: var(--ink-44);
+}
+
+/* ---------- 正文 ---------- */
+
+.detail-body {
+  display: grid;
+  grid-template-columns: minmax(168px, 224px) minmax(0, 1fr);
+  gap: clamp(26px, 3.8vw, 74px);
+  padding-top: clamp(32px, 4vw, 58px);
+  align-items: start;
+}
+
+.detail-toc {
+  position: sticky;
+  top: calc(var(--header-h) + 24px);
+  border-top: 1px solid var(--line);
+  padding-top: 15px;
+}
+
+.detail-toc ol {
+  margin-top: 13px;
+  display: grid;
+  gap: 2px;
+}
+
+.detail-toc a {
+  display: block;
+  padding: 8px 0;
+  font-size: 15px;
+  color: var(--ink-44);
+  border-left: 1px solid transparent;
+  padding-left: 12px;
+  margin-left: -12px;
+  transition:
+    color 0.3s var(--ease-out),
+    border-color 0.3s var(--ease-out);
+}
+
+.detail-toc a:hover {
+  color: var(--accent);
+  border-left-color: var(--accent);
+}
+
+.detail-sections {
+  min-width: 0;
+  display: grid;
+}
+
+.dsec {
+  padding-block: clamp(30px, 4vw, 58px);
+  border-top: 1px solid var(--line);
+}
+
+.dsec:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.dsec-head {
+  display: grid;
+  gap: 12px;
+  margin-bottom: clamp(18px, 2.4vw, 30px);
+}
+
+.dsec-label {
+  color: var(--accent);
+}
+
+.dsec-title {
+  font-size: clamp(26px, 3.4vw, 46px);
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  max-width: 24ch;
+}
+
+.dsec-note {
+  margin-top: clamp(16px, 2vw, 24px);
+  padding: 14px 16px;
+  border-left: 2px solid var(--accent);
+  background: var(--surface-2);
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--ink-62);
+  max-width: 72ch;
+}
+
+/* ---------- 要点列表 ---------- */
+
+.bullets {
+  display: grid;
+  gap: 0;
+  margin-top: clamp(14px, 2vw, 22px);
+  border-top: 1px solid var(--line-soft);
+}
+
+.bullets li {
+  position: relative;
+  padding: 16px 0 16px 30px;
+  border-bottom: 1px solid var(--line-soft);
+  font-size: 16.5px;
+  line-height: 1.8;
+  color: var(--ink-80);
+  max-width: 74ch;
+}
+
+.bullets li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 25px;
+  width: 12px;
+  height: 1px;
+  background: var(--accent);
+}
+
+/* ---------- 事实行 ---------- */
+
+.fact-row {
+  margin: clamp(18px, 2.4vw, 28px) 0 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-1);
+}
+
+.fact-row > div {
+  background: var(--surface);
+  padding: 17px 19px;
+  display: grid;
+  gap: 8px;
+}
+
+.fact-row dt {
+  color: var(--ink-28);
+}
+
+.fact-row dd {
+  margin: 0;
+  font-size: 15.5px;
+  color: var(--ink-80);
+}
+
+/* ---------- 上游归属 ---------- */
+
+.upstream {
+  padding: clamp(18px, 2.4vw, 28px);
+  border: 1px solid var(--accent-line);
+  background:
+    radial-gradient(70% 120% at 0% 0%, var(--accent-soft), transparent 70%),
+    var(--surface);
+  box-shadow: var(--shadow-1);
+  display: grid;
+  gap: 11px;
+  margin-bottom: clamp(18px, 2.4vw, 28px);
+}
+
+.upstream-name {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2.6vw, 34px);
+}
+
+.upstream-name a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s var(--ease-out);
+}
+
+.upstream-name a:hover {
+  border-bottom-color: var(--accent);
+}
+
+.upstream-license {
+  color: var(--ink-44);
+}
+
+.upstream-note {
+  font-size: 15.5px;
+  line-height: 1.85;
+  color: var(--ink-62);
+  max-width: 72ch;
+}
+
+/* ---------- 图版画廊 ---------- */
+
+.gallery {
+  margin-top: clamp(20px, 2.6vw, 34px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(14px, 2vw, 26px);
+}
+
+.gallery .plate-media {
+  aspect-ratio: 16 / 10;
+}
+
+.gallery .plate:first-child:nth-last-child(odd) {
+  grid-column: 1 / -1;
+}
+
+.gallery .plate:first-child:nth-last-child(odd) .plate-media {
+  aspect-ratio: 21 / 9;
+}
+
+/* ---------- 上一件 / 下一件 ---------- */
+
+.detail-nav {
+  margin-top: clamp(40px, 6vw, 90px);
+  padding-top: clamp(22px, 3vw, 34px);
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: clamp(14px, 2.4vw, 34px);
+  align-items: center;
+}
+
+.detail-nav-item {
+  display: grid;
+  gap: 7px;
+}
+
+.detail-nav-next {
+  text-align: right;
+  justify-items: end;
+}
+
+.detail-nav-dir {
+  color: var(--ink-28);
+}
+
+.detail-nav-title {
+  font-family: var(--font-display);
+  font-size: clamp(19px, 2vw, 25px);
+  color: var(--ink-80);
+  transition: color 0.3s var(--ease-out);
+}
+
+.detail-nav-item:hover .detail-nav-title {
+  color: var(--accent);
+}
+
+.detail-nav-index {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-44);
+  padding: 8px 15px 7px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  transition:
+    color 0.3s var(--ease-out),
+    border-color 0.3s var(--ease-out),
+    background 0.3s var(--ease-out);
+  white-space: nowrap;
+}
+
+.detail-nav-index:hover {
+  color: var(--brand-deep);
+  border-color: var(--brand-line);
+  background: var(--brand-wash);
+}
+
+/* ---------- 空态 ---------- */
+
+.empty-state {
+  min-height: 68vh;
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 18px;
+  padding-top: calc(var(--header-h) + 40px);
+}
+
+.empty-title {
+  font-size: clamp(34px, 6vw, 76px);
+  line-height: 1;
+  max-width: 22ch;
+}
+
+/* ---------- 响应式 ---------- */
+
+@media (max-width: 1000px) {
+  .detail-head {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .detail-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .detail-toc {
+    position: static;
+    padding-bottom: 6px;
+  }
+
+  .detail-toc ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+  }
+
+  .detail-toc a {
+    padding-left: 0;
+    margin-left: 0;
+    border-left: 0;
+    border-bottom: 1px solid transparent;
+  }
+
+  .detail-toc a:hover {
+    border-left-color: transparent;
+    border-bottom-color: var(--accent);
+  }
+
+  .gallery .plate:first-child:nth-last-child(odd) .plate-media {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (max-width: 700px) {
+  .detail-nav {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+  }
+
+  .detail-nav-next {
+    text-align: left;
+    justify-items: start;
+  }
+
+  .detail-nav-index {
+    justify-self: start;
+  }
+
+  .gallery {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

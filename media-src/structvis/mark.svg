@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56">
+	<rect width="56" height="56" rx="11" fill="#1a1a1a" />
+	<!-- 左：数据结构（树形）— 与 Logo.svelte 同几何 -->
+	<rect x="14" y="8" width="3" height="40" rx="1.5" fill="#e9e6e0" />
+	<rect x="8" y="16" width="8" height="2.5" rx="1.25" fill="#e9e6e0" />
+	<rect x="4" y="32" width="12" height="2.5" rx="1.25" fill="#e9e6e0" />
+	<rect x="15" y="24" width="8" height="2.5" rx="1.25" fill="#e9e6e0" />
+	<circle cx="15.5" cy="6" r="3.4" fill="#f5a623" />
+	<circle cx="6" cy="14" r="3.4" fill="#6fa8ce" />
+	<circle cx="24" cy="22" r="3.4" fill="#6fa8ce" />
+	<circle cx="2.5" cy="30" r="3.4" fill="#5cb088" />
+	<!-- 右：数据库（表/行） -->
+	<g fill="none" stroke="#e9e6e0" stroke-width="1.8">
+		<rect x="30" y="8" width="22" height="8" rx="2" fill="#e9e6e0" fill-opacity="0.22" stroke-width="1.6" />
+		<rect x="30" y="20" width="22" height="8" rx="2" fill="#e9e6e0" fill-opacity="0.22" stroke-width="1.6" />
+		<rect x="30" y="32" width="22" height="8" rx="2" fill="#e9e6e0" fill-opacity="0.22" stroke-width="1.6" />
+		<rect x="30" y="44" width="22" height="8" rx="2" fill="#e9e6e0" fill-opacity="0.22" stroke-width="1.6" />
+	</g>
+	<g stroke="#e9e6e0" stroke-width="1.6" stroke-linecap="round">
+		<line x1="34" y1="12" x2="48" y2="12" />
+		<line x1="34" y1="24" x2="48" y2="24" />
+		<line x1="34" y1="36" x2="48" y2="36" />
+		<line x1="34" y1="48" x2="48" y2="48" />
+	</g>
+</svg>

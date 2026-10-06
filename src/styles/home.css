@@ -1,0 +1,1203 @@
+/* ==========================================================================
+   Work · 枫桥 zep4yrs — 首页：Hero 与图版柜
+   浅色蓝紫体系：雾蓝纸面 · 靛蓝墨色 · 蓝紫强调
+   版面语言：典藏档案 —— 满格图版、克制的尺度、每一行都有内容
+   ========================================================================== */
+
+/* ---------- Hero ---------- */
+
+/* 首屏高度封顶：宽屏上不再被拉伸成一大片空地，留白始终落在可控区间 */
+.hero {
+  position: relative;
+  min-height: min(100svh, 960px);
+  display: flex;
+  align-items: stretch;
+  padding-block: calc(var(--header-h) + clamp(28px, 4.4vw, 62px)) clamp(40px, 4.8vw, 74px);
+  overflow: hidden;
+}
+
+/* 档案格线：CSS 渐变绘制，零资源开销 */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, var(--line-soft) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line-soft) 1px, transparent 1px);
+  background-size: 104px 104px;
+  mask-image: radial-gradient(ellipse 100% 78% at 30% 40%, #000 12%, transparent 76%);
+  -webkit-mask-image: radial-gradient(ellipse 100% 78% at 30% 40%, #000 12%, transparent 76%);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+/* 首屏主光：蓝紫水彩晕染，落在标题上方 */
+.hero::after {
+  content: '';
+  position: absolute;
+  left: -20%;
+  top: 4%;
+  width: 72%;
+  height: 78%;
+  background:
+    radial-gradient(closest-side, rgba(74, 78, 224, 0.16), transparent 72%),
+    radial-gradient(closest-side at 62% 62%, rgba(142, 108, 244, 0.14), transparent 70%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(304px, 376px);
+  gap: clamp(34px, 4.4vw, 78px);
+  align-items: stretch;
+  width: 100%;
+}
+
+/* 档案书脊：标题左侧的一道竖向刻线 */
+.hero-main {
+  min-width: 0;
+  position: relative;
+  padding-left: clamp(22px, 2.6vw, 44px);
+  display: flex;
+  flex-direction: column;
+  /* 三段式：题头在上、脉络横条居中、页脚带贴底，空地由三处分担而不是堆在一处 */
+  justify-content: space-between;
+  gap: clamp(30px, 3.6vw, 54px);
+}
+
+.hero-main::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: linear-gradient(180deg, var(--brand) 0%, var(--brand-line) 38%, transparent 100%);
+}
+
+.hero-lead {
+  min-width: 0;
+}
+
+.hero-kicker {
+  opacity: 0;
+  animation: riseIn 0.6s var(--ease-out) 0.04s both;
+}
+
+.hero-title {
+  margin-top: clamp(18px, 2.4vw, 30px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.03em;
+}
+
+.hero-line {
+  display: block;
+  font-family: var(--font-display);
+  line-height: 0.84;
+  letter-spacing: -0.035em;
+  opacity: 0;
+  animation: riseIn 0.7s var(--ease-out) both;
+}
+
+/* 中文名仅两字，需更大字号才能撑住栏宽；拉丁名较长，用较小字号收住 */
+:lang(zh) .hero-line-1 {
+  font-size: var(--t-h1);
+}
+
+:lang(en) .hero-line-1 {
+  font-size: var(--t-h1-latin);
+}
+
+.hero-line-1 {
+  color: var(--ink);
+  animation-delay: 0.12s;
+}
+
+/* 标识字：蓝 → 蓝紫渐变，作为整站色彩识别的起点 */
+.hero-line-2 {
+  font-size: clamp(36px, 5.2vw, 80px);
+  line-height: 1;
+  letter-spacing: -0.012em;
+  animation-delay: 0.2s;
+  background: linear-gradient(96deg, #2f37b4 0%, #4a4ee0 42%, #7b5cec 74%, #9b7bf0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-tagline {
+  margin-top: clamp(22px, 2.6vw, 34px);
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2.6vw, 36px);
+  line-height: 1.28;
+  color: var(--brand-deep);
+  opacity: 0;
+  animation: riseIn 0.65s var(--ease-out) 0.28s both;
+}
+
+.hero-role {
+  margin-top: 16px;
+  max-width: 40ch;
+  font-size: var(--t-body);
+  line-height: 1.8;
+  color: var(--ink-44);
+  opacity: 0;
+  animation: riseIn 0.65s var(--ease-out) 0.34s both;
+}
+
+/* 脉络横条：五条脉络与各自件数，是档案的目录脊，也是首屏中段的内容 */
+.hero-threads {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding-block: clamp(16px, 1.7vw, 22px);
+  opacity: 0;
+  animation: riseIn 0.65s var(--ease-out) 0.36s both;
+}
+
+.hero-threads-label {
+  display: block;
+  margin-bottom: 14px;
+}
+
+.hero-threads ul {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.hero-threads li {
+  min-width: 0;
+  display: grid;
+  gap: 5px;
+  padding-inline: clamp(11px, 1.4vw, 22px);
+  border-left: 1px solid var(--line-soft);
+}
+
+.hero-threads li:first-child {
+  border-left: 0;
+  padding-left: 0;
+}
+
+.hero-threads .th-count {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 1.9vw, 31px);
+  line-height: 1;
+  color: var(--brand-deep);
+}
+
+.hero-threads .th-name {
+  font-size: var(--t-small);
+  line-height: 1.4;
+  color: var(--ink-44);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 页脚带：贴住首屏底边，用引导线把计数与入口连起来 */
+.hero-foot {
+  padding-top: clamp(20px, 2.2vw, 30px);
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 2.6vw, 36px);
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: riseIn 0.65s var(--ease-out) 0.4s both;
+}
+
+.hero-count {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 13px;
+  color: var(--ink-44);
+  flex: none;
+}
+
+.hero-count strong {
+  font-family: var(--font-display);
+  font-size: 54px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.hero-foot-lead {
+  min-width: 40px;
+}
+
+.hero-scroll {
+  flex: none;
+}
+
+/* 登记册：Hero 右侧的作品索引。十行等分整栏，成为一页真正排满的索引账 */
+.hero-register {
+  opacity: 0;
+  animation: riseIn 0.7s var(--ease-out) 0.34s both;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(92% 42% at 100% 0%, var(--brand-wash), transparent 72%),
+    var(--surface);
+  box-shadow: var(--shadow-1), var(--hi);
+  padding: clamp(16px, 1.5vw, 22px);
+}
+
+.register-head {
+  flex: none;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.register-total {
+  color: var(--brand);
+}
+
+.register-list {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-auto-rows: 1fr;
+  align-content: stretch;
+}
+
+.register-list > li {
+  min-height: 0;
+}
+
+.register-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 13px;
+  height: 100%;
+  width: 100%;
+  text-align: left;
+  border-bottom: 1px solid var(--line-soft);
+  transition:
+    padding-left 0.35s var(--ease-out),
+    background 0.35s var(--ease-out);
+}
+
+.register-list > li:last-child .register-item {
+  border-bottom: 0;
+}
+
+.register-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 1px;
+  background: var(--brand);
+  transition: width 0.35s var(--ease-out);
+}
+
+.register-item:hover,
+.register-item[data-active='true'] {
+  padding-left: 14px;
+  background: var(--brand-wash);
+}
+
+.register-item:hover::before,
+.register-item[data-active='true']::before {
+  width: 9px;
+}
+
+.register-no {
+  color: var(--ink-28);
+  flex: none;
+  transition: color 0.3s var(--ease-out);
+}
+
+.register-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  line-height: 1.25;
+  color: var(--ink-62);
+  transition: color 0.3s var(--ease-out);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.register-item:hover .register-name,
+.register-item[data-active='true'] .register-name {
+  color: var(--brand-deep);
+}
+
+.register-item[data-active='true'] .register-no {
+  color: var(--brand);
+}
+
+.register-dot {
+  margin-left: auto;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex: none;
+  background: var(--hold);
+}
+
+.register-dot[data-status='public'] {
+  background: var(--ok);
+}
+.register-dot[data-status='experimental'] {
+  background: var(--warn);
+}
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- 图版柜舞台 ---------- */
+
+.archive-hint {
+  margin-bottom: clamp(24px, 2.6vw, 38px);
+}
+
+/* 两栏等高：图版柜的自然高度决定行高，当前图版随之拉伸，下方不留空档 */
+.archive-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(316px, 384px);
+  gap: clamp(24px, 2.8vw, 44px);
+  align-items: stretch;
+}
+
+/* ---------- 作品图版柜：五条脉络铺满两排十格 ---------- */
+
+/* 图版柜：随行拉伸到与右侧图版齐高。若只按自身宽高比排布，
+   在 1000–1180px 区间柜体会比图版矮，底部露出一段空隙。 */
+.amap {
+  position: relative;
+  align-self: stretch;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(70% 60% at 18% 0%, var(--brand-wash), transparent 70%),
+    var(--surface);
+  box-shadow: var(--shadow-1), var(--hi);
+  padding: clamp(18px, 1.8vw, 26px) clamp(16px, 1.7vw, 24px) clamp(12px, 1.2vw, 16px);
+}
+
+/* 高度由柜体给足，内容以 meet 居中缩放，图版因此不会被拉伸变形 */
+.amap-svg {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: block;
+  overflow: visible;
+}
+
+.amap-group-label {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 0.14em;
+  fill: var(--ink-62);
+}
+
+.amap-group-count {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  fill: var(--brand);
+}
+
+.amap-group-rule {
+  stroke: var(--line-strong);
+  stroke-width: 1;
+}
+
+.amap-group-tick {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.amap-node {
+  cursor: pointer;
+  outline: none;
+}
+
+.amap-tile {
+  fill: var(--surface);
+  stroke: var(--line);
+  stroke-width: 1;
+  transition:
+    fill 0.35s var(--ease-out),
+    stroke 0.35s var(--ease-out);
+}
+
+.amap-tile-band {
+  fill: var(--bg-deep);
+  transition: fill 0.35s var(--ease-out);
+}
+
+.amap-tile-logo {
+  opacity: 0.94;
+  transition: opacity 0.35s var(--ease-out);
+}
+
+.amap-tile-glyph {
+  font-family: var(--font-display);
+  font-size: 40px;
+  fill: var(--ink-28);
+}
+
+.amap-tile-no {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  fill: var(--ink-28);
+  transition: fill 0.35s var(--ease-out);
+}
+
+.amap-tile-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  fill: var(--ink-80);
+  transition: fill 0.35s var(--ease-out);
+}
+
+.amap-tile-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  fill: var(--ink-44);
+}
+
+.amap-node-dot {
+  fill: var(--hold);
+  transition: fill 0.35s var(--ease-out);
+}
+
+.amap-node[data-status='public'] .amap-node-dot {
+  fill: var(--ok);
+}
+
+.amap-node[data-status='experimental'] .amap-node-dot {
+  fill: var(--warn);
+}
+
+.amap-node:hover .amap-tile,
+.amap-node:focus-visible .amap-tile {
+  stroke: var(--line-strong);
+  fill: var(--surface-2);
+}
+
+.amap-node:hover .amap-tile-band,
+.amap-node:focus-visible .amap-tile-band {
+  fill: var(--surface-3);
+}
+
+.amap-node[data-active='true'] .amap-tile {
+  fill: var(--surface);
+  stroke: var(--accent);
+  stroke-width: 1.6;
+}
+
+.amap-node[data-active='true'] .amap-tile-band {
+  fill: color-mix(in srgb, var(--accent) 11%, var(--bg-deep));
+}
+
+.amap-node[data-active='true'] .amap-tile-title {
+  fill: var(--ink);
+}
+
+.amap-node[data-active='true'] .amap-tile-no {
+  fill: var(--accent);
+}
+
+.amap-node[data-active='true'] .amap-node-dot {
+  fill: var(--accent);
+}
+
+.amap-node:focus-visible .amap-tile {
+  stroke-dasharray: 3 3;
+}
+
+.amap-hint {
+  margin-top: 14px;
+  padding-top: 13px;
+  border-top: 1px solid var(--line-soft);
+  color: var(--ink-28);
+}
+
+/* 窄屏清单 */
+.amap-list {
+  display: grid;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow-1), var(--hi);
+}
+
+.amap-row {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px;
+  padding: 18px;
+  border-bottom: 1px solid var(--line-soft);
+  transition: background 0.3s var(--ease-out);
+}
+
+.amap-list li:last-child .amap-row {
+  border-bottom: 0;
+}
+
+.amap-row:hover {
+  background: var(--surface-2);
+}
+
+.amap-row-thumb {
+  width: 76px;
+  height: 76px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  background: var(--bg-deep);
+  overflow: hidden;
+}
+
+.amap-row-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.amap-row-thumb[data-fit='contain'] img {
+  object-fit: contain;
+  padding: 8px;
+}
+
+/* 标识缩略：白底衬托各作品 logo，避免与浅蓝纸面互相干扰 */
+.amap-row-thumb[data-fit='mark'] {
+  background: var(--surface);
+}
+
+.amap-row-thumb[data-fit='mark'] img {
+  object-fit: contain;
+  padding: 11px;
+}
+
+.amap-row-glyph {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: var(--ink-44);
+}
+
+.amap-row-main {
+  min-width: 0;
+  display: grid;
+  gap: 5px;
+}
+
+.amap-row-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.amap-row-no {
+  color: var(--brand);
+}
+
+.amap-row-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+}
+
+.amap-row-sub {
+  font-size: var(--t-small);
+  color: var(--ink-44);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.amap-row-arw {
+  color: var(--ink-28);
+}
+
+/* ---------- 当前图版 ---------- */
+
+/* 图版随左栏高度拉伸，媒体区吃掉高差，两栏因此始终等高 */
+.panel {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.panel-head {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 15px 18px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-2);
+}
+
+.panel-no {
+  color: var(--accent);
+}
+
+.panel-media {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 178px;
+  display: grid;
+  place-items: center;
+  background: var(--bg-deep);
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+  box-shadow: inset 0 0 0 1px var(--line-soft);
+}
+
+.panel-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: plateIn 0.55s var(--ease-out) both;
+}
+
+.panel-media[data-fit='contain'] img {
+  width: auto;
+  height: auto;
+  max-width: 62%;
+  max-height: 62%;
+  object-fit: contain;
+}
+
+/* 标识图版：作品 logo 陈列在白底图版上，顶部压一层作品强调色氛围 */
+.panel-media[data-fit='mark'] {
+  background:
+    radial-gradient(
+      86% 76% at 50% 2%,
+      color-mix(in srgb, var(--accent) 15%, transparent),
+      transparent 72%
+    ),
+    var(--surface);
+}
+
+.panel-media[data-fit='mark'] img {
+  width: auto;
+  height: auto;
+  max-width: 46%;
+  max-height: 62%;
+  object-fit: contain;
+}
+
+.panel-glyph {
+  font-family: var(--font-display);
+  font-size: 96px;
+  color: var(--accent);
+  opacity: 0.34;
+}
+
+@keyframes plateIn {
+  from {
+    opacity: 0;
+    transform: scale(1.035);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.panel-body {
+  flex: none;
+  padding: clamp(20px, 1.8vw, 26px) clamp(18px, 1.6vw, 22px) clamp(20px, 1.8vw, 26px);
+  display: grid;
+  gap: 14px;
+  animation: riseIn 0.5s var(--ease-out) both;
+}
+
+.panel-title {
+  font-size: var(--t-h3);
+  line-height: 1;
+}
+
+.panel-sub {
+  font-size: var(--t-small);
+  line-height: 1.72;
+  color: var(--ink-44);
+}
+
+/* 著录：两列并置，四条著录占两行，比四行通栏更紧凑 */
+.panel-facts {
+  margin: 4px 0 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line-soft);
+  border-top: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.panel-facts > div {
+  display: grid;
+  gap: 5px;
+  padding: 12px 2px 12px 0;
+  background: var(--surface);
+}
+
+.panel-facts > div:nth-child(even) {
+  padding-left: 14px;
+}
+
+.panel-facts dt {
+  color: var(--ink-28);
+}
+
+.panel-facts dd {
+  margin: 0;
+  font-size: var(--t-small);
+  color: var(--ink-80);
+}
+
+.panel-open {
+  margin-top: 6px;
+  align-self: start;
+}
+
+/* ---------- 脉络 ---------- */
+
+.thread-rows {
+  margin-top: clamp(30px, 3.2vw, 48px);
+  display: grid;
+}
+
+/* 脉络表头通栏：编号 → 名目 → 件数 → 细线收尾，标题不再挤在窄栏里 */
+.thread-row {
+  padding-block: clamp(26px, 2.8vw, 40px);
+  border-top: 1px solid var(--line);
+}
+
+.thread-rows .thread-row:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.thread-head {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(14px, 1.5vw, 22px);
+  padding-bottom: clamp(14px, 1.4vw, 20px);
+  flex-wrap: wrap;
+}
+
+.thread-count {
+  color: var(--brand);
+}
+
+.thread-name {
+  font-size: var(--t-h3);
+  line-height: 1;
+}
+
+.thread-num {
+  color: var(--ink-28);
+}
+
+.thread-head-rule {
+  flex: 1 1 60px;
+  min-width: 40px;
+  height: 1px;
+  align-self: center;
+  margin-bottom: 0.3em;
+  background-image: var(--leader);
+}
+
+/* 作品以全宽索引行排列：无论一件还是三件都排满整行，永远不会空出半格 */
+.thread-works {
+  display: grid;
+}
+
+.thread-works > li {
+  min-width: 0;
+}
+
+/* 索引行：编号 → 名目与副题 → 引导虚线 → 年份 → 状态 → 箭头。
+   中段的空白交给一条引导虚线，空处因此是著录格式的一部分，而不是漏排。 */
+.chip {
+  display: grid;
+  grid-template-columns: auto auto minmax(28px, 1fr) auto auto auto;
+  align-items: center;
+  gap: clamp(14px, 1.6vw, 26px);
+  width: 100%;
+  min-height: var(--row-tall);
+  padding: 12px 4px;
+  border-bottom: 1px solid var(--line-soft);
+  transition:
+    border-color 0.35s var(--ease-out),
+    background 0.35s var(--ease-out),
+    padding-left 0.35s var(--ease-out);
+}
+
+.thread-works > li:last-child .chip {
+  border-bottom-color: transparent;
+}
+
+.chip-no {
+  color: var(--accent);
+}
+
+.chip-text {
+  min-width: 0;
+  max-width: min(48ch, 40vw);
+  display: grid;
+  gap: 4px;
+}
+
+/* 引导虚线：与章节题头、首屏页脚带同一套线型 */
+.chip-lead {
+  height: 1px;
+  align-self: center;
+  background-image: var(--leader);
+  opacity: 0.75;
+}
+
+.chip-title {
+  font-family: var(--font-display);
+  font-size: clamp(21px, 1.6vw, 28px);
+  line-height: 1.15;
+  color: var(--ink);
+  transition: color 0.3s var(--ease-out);
+}
+
+.chip-sub {
+  font-size: var(--t-small);
+  line-height: 1.5;
+  color: var(--ink-44);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chip-year {
+  color: var(--ink-28);
+  white-space: nowrap;
+}
+
+.chip-arw {
+  color: var(--ink-28);
+  transition:
+    color 0.3s var(--ease-out),
+    transform 0.3s var(--ease-out);
+}
+
+.chip:hover {
+  border-bottom-color: var(--accent-line);
+  background: var(--brand-wash);
+  padding-left: 14px;
+}
+
+.chip:hover .chip-title {
+  color: var(--brand-deep);
+}
+
+.chip:hover .chip-arw {
+  color: var(--accent);
+  transform: translateX(3px);
+}
+
+/* ---------- 关联说明 ---------- */
+
+.edges {
+  margin-top: clamp(36px, 4vw, 60px);
+}
+
+.edges-title {
+  margin-bottom: 20px;
+}
+
+.edge-list {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.edge-item {
+  display: grid;
+  grid-template-columns: minmax(260px, 420px) minmax(0, 1fr);
+  gap: clamp(18px, 3vw, 48px);
+  padding-block: 19px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.edge-pair {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: var(--t-body);
+  color: var(--ink-80);
+}
+
+.edge-no {
+  color: var(--brand);
+}
+
+.edge-arrow {
+  color: var(--ink-28);
+}
+
+.edge-reason {
+  font-size: var(--t-small);
+  color: var(--ink-44);
+  line-height: 1.78;
+}
+
+/* ---------- 关于 ---------- */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(300px, 1fr);
+  gap: clamp(34px, 4.6vw, 88px);
+}
+
+.about-dl {
+  margin: 0;
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.about-dl > div {
+  display: grid;
+  gap: 8px;
+  padding: 19px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.about-dl dt {
+  color: var(--ink-28);
+}
+
+.about-dl dd {
+  margin: 0;
+  font-size: var(--t-body);
+  color: var(--ink-80);
+}
+
+.about-tagline {
+  margin-top: 30px;
+  font-size: clamp(28px, 2.8vw, 42px);
+  line-height: 1.2;
+  color: var(--brand-deep);
+}
+
+/* ---------- 联系 ---------- */
+
+/* 三张档案卡并置：把整行铺满，取消被拉长的引导虚线 */
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 1.8vw, 26px);
+}
+
+/* 卡片随行等高：三张卡以最高者为准，底边对齐 */
+.profile-grid > li {
+  display: flex;
+  min-width: 0;
+}
+
+.profile-card {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(28px, 3vw, 46px);
+  min-height: 176px;
+  padding: clamp(18px, 1.6vw, 24px);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow-1), var(--hi);
+  transition:
+    border-color 0.4s var(--ease-out),
+    box-shadow 0.4s var(--ease-out),
+    transform 0.4s var(--ease-out);
+}
+
+.profile-card:hover {
+  border-color: var(--brand-line);
+  box-shadow: var(--shadow-2), var(--hi);
+  transform: translateY(-3px);
+}
+
+.profile-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.profile-label {
+  font-family: var(--font-display);
+  font-size: var(--t-h3);
+  line-height: 1;
+}
+
+.profile-arw {
+  color: var(--brand);
+  font-size: 21px;
+  transition: transform 0.35s var(--ease-out);
+}
+
+.profile-card:hover .profile-arw {
+  transform: translate(3px, -3px);
+}
+
+.profile-url {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  color: var(--ink-44);
+  letter-spacing: 0.06em;
+  word-break: break-all;
+}
+
+/* ---------- 响应式 ---------- */
+
+@media (max-width: 1180px) {
+  .archive-stage {
+    grid-template-columns: minmax(0, 1fr) minmax(290px, 336px);
+  }
+}
+
+@media (max-width: 1000px) {
+  .hero {
+    min-height: 0;
+  }
+
+  .hero-inner {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    gap: clamp(34px, 5vw, 54px);
+  }
+
+  .hero-main {
+    gap: clamp(30px, 5vw, 50px);
+  }
+
+  .hero-register {
+    align-self: start;
+    max-width: 580px;
+  }
+
+  .register-list {
+    grid-auto-rows: auto;
+  }
+
+  .register-item {
+    height: auto;
+    padding-block: 14px;
+  }
+
+  .archive-stage {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .panel {
+    align-self: start;
+  }
+
+  .panel-media {
+    flex: none;
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+  }
+
+  .panel-media[data-fit='contain'] img {
+    max-width: 26%;
+    max-height: 74%;
+  }
+
+  .panel-media[data-fit='mark'] img {
+    max-width: 22%;
+    max-height: 62%;
+  }
+
+  .about-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 860px) {
+  .profile-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .profile-card {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero-threads ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 0;
+  }
+
+  .hero-threads li:nth-child(odd) {
+    border-left: 0;
+    padding-left: 0;
+  }
+
+  /* 窄屏收起年份与引导线，名目占满中段，状态与箭头靠右 */
+  .chip {
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    row-gap: 8px;
+  }
+
+  .chip-year,
+  .chip-lead {
+    display: none;
+  }
+
+  .chip-text {
+    max-width: none;
+  }
+
+  /* 窄屏上表头折行后，引导线会落成一条孤线，索性隐去 */
+  .thread-head-rule {
+    display: none;
+  }
+
+  .edge-item {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-kicker,
+  .hero-line,
+  .hero-tagline,
+  .hero-role,
+  .hero-threads,
+  .hero-foot,
+  .hero-register,
+  .panel-media img,
+  .panel-body {
+    opacity: 1;
+    animation: none;
+  }
+}
