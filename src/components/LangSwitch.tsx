@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import { useLang } from '../i18n/LangContext'
 import type { Lang } from '../i18n/dict'
 
@@ -8,18 +9,24 @@ export default function LangSwitch() {
 
   return (
     <div className="langswitch" role="group" aria-label={t('switchLabel')}>
-      {(['zh', 'en'] as Lang[]).map((code) => (
-        <button
-          key={code}
-          type="button"
-          className="langswitch-btn"
-          data-on={lang === code}
-          aria-pressed={lang === code}
-          lang={code === 'zh' ? 'zh-CN' : 'en'}
-          onClick={() => setLang(code)}
-        >
-          {LABEL[code]}
-        </button>
+      {(['zh', 'en'] as Lang[]).map((code, i) => (
+        <Fragment key={code}>
+          {i > 0 ? (
+            <span className="langswitch-sep" aria-hidden="true">
+              /
+            </span>
+          ) : null}
+          <button
+            type="button"
+            className="rowlink"
+            data-on={lang === code}
+            aria-pressed={lang === code}
+            lang={code === 'zh' ? 'zh-CN' : 'en'}
+            onClick={() => setLang(code)}
+          >
+            {LABEL[code]}
+          </button>
+        </Fragment>
       ))}
     </div>
   )

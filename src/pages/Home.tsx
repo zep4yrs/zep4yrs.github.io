@@ -1,25 +1,24 @@
-import { useCallback, useState, type CSSProperties } from 'react'
+import { useCallback, useRef, useState, type CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
-import ArchiveMap from '../components/ArchiveMap'
-import PlatePanel from '../components/PlatePanel'
+import PixelField from '../components/PixelField'
+import ContactList from '../components/ContactList'
 import Reveal from '../components/Reveal'
+import WorkArchive, { scrollToWork } from '../components/WorkArchive'
 import SectionHead from '../components/SectionHead'
-import { getWork, threadEdges, threads, works } from '../data/works'
+import { demos, installs, type AccessRoute } from '../data/access'
+import { getWork, threads, works } from '../data/works'
 import { useLang } from '../i18n/LangContext'
 import { usePrefersReducedMotion, useReveal } from '../lib/hooks'
-import { statusKey } from '../lib/labels'
 import { useSeo } from '../lib/useSeo'
 
-const PROFILES = [
-  { label: 'GitHub', url: 'https://github.com/zep4yrs' },
-  { label: 'Gitee', url: 'https://gitee.com/Map1eBr1dge' },
-  { label: 'CNB', url: 'https://cnb.cool/feng-qiao' },
-]
-
 export default function Home() {
-  const { t, L, lang } = useLang()
+  const { t, lang } = useLang()
   const [active, setActive] = useState(works[0].slug)
   const reduced = usePrefersReducedMotion()
+
+  /* 取用一节里没出现的那几件，就是还没成形、暂时没有入口的 */
+  const taken = new Set([...demos, ...installs].map((r) => r.slug))
+  const pending = works.filter((w) => !taken.has(w.slug))
 
   useSeo({
     title: t('siteTitle') + ' — ' + t('siteSub'),
@@ -29,11 +28,11 @@ export default function Home() {
     image: '/og.png',
   })
 
+  /* 首屏索引脊点了哪一件，就把舞台翻到那一档；当前件由滚动位置决定 */
   const pick = useCallback(
     (slug: string) => {
       setActive(slug)
-      const el = document.getElementById('archive')
-      if (el) el.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' })
+      scrollToWork(slug, !reduced)
     },
     [reduced],
   )
@@ -45,90 +44,47 @@ export default function Home() {
       <section id="archive" className="section archive">
         <div className="shell">
           <SectionHead num={t('archiveNum')} title={t('archiveTitle')} sub={t('archiveSub')} />
-          <Reveal>
-            <p className="lede archive-hint">{t('archiveHint')}</p>
-          </Reveal>
           <Reveal className="archive-stage" delay={80}>
-            <ArchiveMap active={active} onActive={setActive} />
-            <PlatePanel slug={active} />
+            <WorkArchive onActive={setActive} />
           </Reveal>
         </div>
       </section>
 
-      <section id="threads" className="section threads">
+      <section id="access" className="section access">
         <div className="shell">
-          <SectionHead num={t('linesNum')} title={t('linesTitle')} sub={t('linesSub')} />
-          <Reveal>
-            <p className="lede">{t('linesNote')}</p>
-          </Reveal>
+          <SectionHead num={t('accessNum')} title={t('accessTitle')} sub={t('accessSub')} />
 
-          <div className="thread-rows">
-            {threads.map((th, i) => (
-              <Reveal key={th.id} className="thread-row" delay={i * 60}>
-                <div className="thread-head">
-                  <span className="mono thread-count">{String(i + 1).padStart(2, '0')}</span>
-                  <h3 className="thread-name display">{L(th.label)}</h3>
-                  <span className="mono thread-num">
-                    {String(th.works.length).padStart(2, '0')} {t('heroUnit')}
-                  </span>
-                  <span className="thread-head-rule" aria-hidden="true" />
-                </div>
-                <ul className="thread-works">
-                  {th.works.map((slug) => {
-                    const w = getWork(slug)
-                    if (!w) return null
-                    return (
-                      <li key={slug}>
-                        <Link
-                          to={`/${lang}/works/${slug}`}
-                          className="chip"
-                          style={{ '--accent': w.accent } as CSSProperties}
-                        >
-                          <span className="mono chip-no">{w.no}</span>
-                          <span className="chip-text">
-                            <span className="chip-title display">{L(w.title)}</span>
-                            <span className="chip-sub">{L(w.subtitle)}</span>
-                          </span>
-                          <span className="chip-lead" aria-hidden="true" />
-                          <span className="mono chip-year">{w.year}</span>
-                          <span className="stamp" data-status={w.status}>
-                            {t(statusKey(w.status))}
-                          </span>
-                          <span className="chip-arw" aria-hidden="true">
-                            →
-                          </span>
-                        </Link>
-                      </li>
-                    )
-                  })}
-                </ul>
-              </Reveal>
-            ))}
+          <div className="access-groups">
+            <AccessGroup
+              no="01"
+              name={t('accessDemo')}
+              note={t('accessDemoNote')}
+              cta={t('accessOpen')}
+              routes={demos}
+            />
+            <AccessGroup
+              no="02"
+              name={t('accessInstall')}
+              note={t('accessInstallNote')}
+              cta={t('accessDownload')}
+              routes={installs}
+            />
           </div>
 
-          <Reveal className="edges">
-            <p className="eyebrow edges-title">{t('linesSub')}</p>
-            <ul className="edge-list">
-              {threadEdges.map((e) => {
-                const a = getWork(e.from)
-                const b = getWork(e.to)
-                if (!a || !b) return null
-                return (
-                  <li key={`${e.from}-${e.to}`} className="edge-item">
-                    <span className="edge-pair">
-                      <span className="mono edge-no">{a.no}</span>
-                      {L(a.title)}
-                      <span className="edge-arrow" aria-hidden="true">
-                        ↔
-                      </span>
-                      <span className="mono edge-no">{b.no}</span>
-                      {L(b.title)}
-                    </span>
-                    <span className="edge-reason">{L(e.reason)}</span>
-                  </li>
-                )
-              })}
-            </ul>
+          <Reveal className="access-pending-row">
+            <p className="access-pending">
+              <span className="mono access-pending-no">
+                {String(pending.length).padStart(2, '0')}
+              </span>
+              <span className="access-pending-text">{t('accessPending')}</span>
+              <span className="access-lead" aria-hidden="true" />
+              <Link className="lk" to={`/${lang}/#archive`}>
+                {t('accessPendingCta')}
+                <span className="arw" data-dir="e" aria-hidden="true">
+                  →
+                </span>
+              </Link>
+            </p>
           </Reveal>
         </div>
       </section>
@@ -141,59 +97,98 @@ export default function Home() {
               <p>{t('aboutP1')}</p>
               <p>{t('aboutP2')}</p>
               <p>{t('aboutP3')}</p>
+              <p>{t('aboutP4')}</p>
+              <p>{t('aboutP5')}</p>
+              <p>{t('aboutP6')}</p>
             </Reveal>
-            <Reveal className="about-facts" delay={100}>
-              <dl className="about-dl">
-                <div>
-                  <dt className="mono">{t('aboutNameLabel')}</dt>
-                  <dd>
-                    {t('brand')} · {t('brandMark')}
-                  </dd>
-                </div>
-                <div>
-                  <dt className="mono">{t('aboutFieldLabel')}</dt>
-                  <dd>{t('brandRole')}</dd>
-                </div>
-                <div>
-                  <dt className="mono">{t('aboutCountLabel')}</dt>
-                  <dd>
-                    {works.length} {t('heroUnit')}
-                  </dd>
-                </div>
-              </dl>
+
+            <Reveal className="about-side" delay={100}>
+              <figure className="about-portrait">
+                <img
+                  src="/media/profile.webp"
+                  alt={t('aboutPortraitAlt')}
+                  width={880}
+                  height={1100}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+
+              <div className="about-who">
+                <p className="about-name display">{t('brand')}</p>
+                <p className="about-id mono">{t('brandMark')}</p>
+              </div>
+
+              <div className="about-contacts">
+                <p className="eyebrow about-contacts-label">{t('aboutContactLabel')}</p>
+                <ContactList />
+              </div>
+
               <p className="about-tagline display">{t('tagline')}</p>
             </Reveal>
           </div>
         </div>
       </section>
+    </div>
+  )
+}
 
-      <section id="contact" className="section contact">
-        <div className="shell">
-          <SectionHead num={t('contactNum')} title={t('contactTitle')} sub={t('contactSub')} />
-          <Reveal>
-            <ul className="profile-grid">
-              {PROFILES.map((p) => (
-                <li key={p.label}>
-                  <a
-                    className="profile-card"
-                    href={p.url}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                  >
-                    <span className="profile-top">
-                      <span className="profile-label display">{p.label}</span>
-                      <span className="profile-arw" aria-hidden="true">
-                        ↗
-                      </span>
+function AccessGroup({
+  no,
+  name,
+  note,
+  cta,
+  routes,
+}: {
+  no: string
+  name: string
+  note: string
+  cta: string
+  routes: AccessRoute[]
+}) {
+  const { L } = useLang()
+
+  return (
+    <div className="access-group">
+      <header className="access-head">
+        <span className="mono access-head-no">{no}</span>
+        <h3 className="access-head-name display">{name}</h3>
+        <span className="mono access-head-note">{note}</span>
+        <span className="access-head-rule" aria-hidden="true" />
+      </header>
+
+      <ul className="access-grid" data-count={routes.length}>
+        {routes.map((r) => {
+          const w = getWork(r.slug)
+          if (!w) return null
+          return (
+            <li key={r.slug}>
+              <a
+                className="access-card"
+                href={r.url}
+                target="_blank"
+                rel="noreferrer noopener"
+                style={{ '--accent': w.accent } as CSSProperties}
+              >
+                <span className="access-card-main">
+                  <span className="mono access-card-no">{w.no}</span>
+                  <span className="access-card-title display">{L(w.title)}</span>
+                  <span className="access-card-form">{L(r.form)}</span>
+                </span>
+                <span className="access-card-side">
+                  <span className="mono access-card-host">{r.host}</span>
+                  <span className="lk" data-tone="accent">
+                    {cta}
+                    <span className="arw" data-dir="ne" aria-hidden="true">
+                      ↗
                     </span>
-                    <span className="profile-url mono">{p.url.replace(/^https?:\/\//, '')}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-        </div>
-      </section>
+                  </span>
+                </span>
+              </a>
+            </li>
+          )
+        })}
+      </ul>
     </div>
   )
 }
@@ -201,72 +196,75 @@ export default function Home() {
 function Hero({ active, onPick }: { active: string; onPick: (slug: string) => void }) {
   const { t, L, lang } = useLang()
   const { ref, shown } = useReveal<HTMLElement>()
+  const glyphRef = useRef<HTMLButtonElement>(null)
+  const [markRun, setMarkRun] = useState(0)
+  const reduced = usePrefersReducedMotion()
 
   return (
     <section className="hero" ref={ref} data-shown={shown}>
-      <div className="hero-grid" aria-hidden="true" />
+      <PixelField text={t('brand')} runId={markRun} anchorRef={glyphRef} reduced={reduced} />
+
       <div className="shell hero-inner">
-        <div className="hero-main">
-          <div className="hero-lead">
-            <p className="eyebrow hero-kicker">{t('heroKicker')}</p>
-            <h1 className="hero-title">
-              <span className="hero-line hero-line-1">{t('brand')}</span>
-              <span className="hero-line hero-line-2 display">{t('brandMark')}</span>
-            </h1>
-            <p className="hero-tagline">{t('tagline')}</p>
-            <p className="hero-role">{t('brandRole')}</p>
-          </div>
+        <div className="hero-top">
+          <p className="eyebrow hero-kicker">{t('heroKicker')}</p>
+          <span className="leader" aria-hidden="true" />
+        </div>
 
-          <div className="hero-threads">
-            <span className="eyebrow hero-threads-label">{t('navLines')}</span>
-            <ul>
-              {threads.map((th) => (
-                <li key={th.id}>
-                  <span className="th-count">{String(th.works.length).padStart(2, '0')}</span>
-                  <span className="th-name">{L(th.label)}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div className="hero-anchor">
+          <h1 className="sr">
+            {t('brand')} · {t('brandMark')}
+          </h1>
+          <button
+            ref={glyphRef}
+            type="button"
+            className="hero-glyph"
+            aria-label={t('heroRedraw')}
+            onClick={() => setMarkRun((n) => n + 1)}
+          />
+          <p className="hero-tagline">{t('tagline')}</p>
+        </div>
 
-          <div className="hero-foot">
+        <div className="hero-ledger">
+          <ul className="ledger-index">
+            {works.map((w) => (
+              <li key={w.slug}>
+                <button
+                  type="button"
+                  className="ledger-item"
+                  data-on={w.slug === active}
+                  onClick={() => onPick(w.slug)}
+                >
+                  <span className="mono ledger-no">{w.no}</span>
+                  <span className="ledger-name">{L(w.title)}</span>
+                  <span className="ledger-dot" data-status={w.status} aria-hidden="true" />
+                </button>
+              </li>
+            ))}
+          </ul>
+
+          <div className="ledger-foot">
             <p className="hero-count">
               <span className="mono">{t('heroIndex')}</span>
               <strong>{String(works.length).padStart(2, '0')}</strong>
               <span className="mono">{t('heroUnit')}</span>
             </p>
-            <span className="leader hero-foot-lead" aria-hidden="true" />
-            <Link className="linkline hero-scroll" to={`/${lang}/#archive`}>
+            <span className="leader" aria-hidden="true" />
+            <ul className="ledger-threads">
+              {threads.map((th) => (
+                <li key={th.id}>
+                  <span className="mono th-count">{String(th.works.length).padStart(2, '0')}</span>
+                  <span className="th-name">{L(th.label)}</span>
+                </li>
+              ))}
+            </ul>
+            <Link className="lk hero-scroll" to={`/${lang}/#archive`}>
               {t('heroScroll')}
-              <span className="arw" aria-hidden="true">
+              <span className="arw" data-dir="s" aria-hidden="true">
                 ↓
               </span>
             </Link>
           </div>
         </div>
-
-        <aside className="hero-register">
-          <div className="register-head">
-            <span className="eyebrow">{t('archiveIndexLabel')}</span>
-            <span className="mono register-total">{String(works.length).padStart(2, '0')}</span>
-          </div>
-          <ul className="register-list">
-            {works.map((w, i) => (
-              <li key={w.slug} style={{ '--i': i } as CSSProperties}>
-                <button
-                  type="button"
-                  className="register-item"
-                  data-active={w.slug === active}
-                  onClick={() => onPick(w.slug)}
-                >
-                  <span className="mono register-no">{w.no}</span>
-                  <span className="register-name">{L(w.title)}</span>
-                  <span className="register-dot" data-status={w.status} aria-hidden="true" />
-                </button>
-              </li>
-            ))}
-          </ul>
-        </aside>
       </div>
     </section>
   )

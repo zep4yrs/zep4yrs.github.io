@@ -1,8 +1,8 @@
 /**
  * 把素材压缩为站点可直接使用的 WebP（public/media/）。两个来源严格分开：
  *
- * 1. media-src/ —— 各作品仓库中的真实素材（来自云端仓库调查）。
- *    只做尺寸收敛与编码转换，不生成、不合成、不伪造。
+ * 1. media-src/ —— 各作品仓库中的真实素材（来自云端仓库调查），以及本站自用的
+ *    少量站点家具（页头印记里的头像）。只做尺寸收敛与编码转换，不生成、不合成、不伪造。
  * 2. marks-src/ —— 仓库本身没有 logo 的作品所使用的标识图（AI 生成，
  *    非仓库素材）。仅用于补足图版柜的标识位，不参与作品事实性描述。
  */
@@ -24,8 +24,16 @@ const PLAN = {
   'sitelens/banner-3.0-exploit.png': { out: 'sitelens/banner-3.0-exploit.webp', width: 2000, quality: 80 },
   'sitelens/roadmap.png': { out: 'sitelens/roadmap.webp', width: 2200, quality: 78 },
   'sitelens/release-3.0.0.png': { out: 'sitelens/release-3.0.0.webp', width: 2200, quality: 78 },
+  'sitelens/workbench.png': { out: 'sitelens/workbench.webp', width: 1800, quality: 82 },
 
   'lannook/app-icon.png': { out: 'lannook/app-icon.webp', width: 512, quality: 88 },
+  'lannook/transfer.png': { out: 'lannook/transfer.webp', width: 1800, quality: 82 },
+
+  'ctfhub/toolbox.png': { out: 'ctfhub/toolbox.webp', width: 1800, quality: 82 },
+
+  'alertzero/campus.png': { out: 'alertzero/campus.webp', width: 1600, quality: 74 },
+
+  'cryptovis/wip.png': { out: 'cryptovis/wip.webp', width: 1600, quality: 82 },
 
   'bluetidy/application-mode.png': { out: 'bluetidy/application-mode.webp', width: 2200, quality: 78 },
   'bluetidy/logo.png': { out: 'bluetidy/logo.webp', width: 512, quality: 88 },
@@ -36,10 +44,14 @@ const PLAN = {
   'disksift/empty.png': { out: 'disksift/empty.webp', width: 2000, quality: 80 },
   'disksift/logo.png': { out: 'disksift/logo.webp', width: 512, quality: 88 },
 
+  /* 站点家具：页头那枚印记里的头像。不属于任何作品，只是本站自己的一块图。 */
+  'avatar/avatar.jpg': { out: 'avatar.webp', width: 160, quality: 88 },
+
   'structvis/quick-sort.png': { out: 'structvis/quick-sort.webp', width: 1800, quality: 82 },
   'structvis/graph-traversal.png': { out: 'structvis/graph-traversal.webp', width: 1800, quality: 82 },
   'structvis/binary-tree.png': { out: 'structvis/binary-tree.webp', width: 1800, quality: 82 },
   'structvis/splash.png': { out: 'structvis/splash.webp', width: 2000, quality: 80 },
+  'structvis/home.png': { out: 'structvis/home.webp', width: 1800, quality: 82 },
 }
 
 /** SVG 原样拷贝：本身已是矢量，压缩反而有害。 */

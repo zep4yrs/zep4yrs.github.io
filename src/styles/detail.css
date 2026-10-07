@@ -1,7 +1,68 @@
 /* ==========================================================================
    Work · 枫桥 zep4yrs — 作品详情页
    浅色蓝紫体系：每件作品在统一蓝紫谱系中拥有自己的强调色
+   制图纸语汇：全站方格纸之上加标尺带、剖切标记、套准刻线、分区线与标题栏
    ========================================================================== */
+
+.detail {
+  position: relative;
+}
+
+/* 详情页的纸面：去掉粒子点阵，只留方格线。
+   点阵本是首屏粒子场落在纸上的余绪，内页没有那块场，散点就只剩噪；
+   方格线留着，制图纸的底还在。 */
+main:has(> .detail)::before {
+  background-image:
+    linear-gradient(to right, var(--grid-major) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-major) 1px, transparent 1px),
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size:
+    calc(var(--tile) * 24) calc(var(--tile) * 24),
+    calc(var(--tile) * 24) calc(var(--tile) * 24),
+    calc(var(--tile) * 6) calc(var(--tile) * 6),
+    calc(var(--tile) * 6) calc(var(--tile) * 6);
+  background-position: center top;
+}
+
+/* 标尺带：版面左右两侧的纵向刻度，只在大屏出现，落在页边距里不压内容。
+   细刻每 2 格、长刻每 10 格，与方格纸同源，两种网格才对得上。
+   取 z-index: -1 与 main::before 同层，DOM 上排在它之后，于是压在方格纸之上、正文之下。 */
+.detail::before,
+.detail::after {
+  content: '';
+  position: absolute;
+  top: calc(var(--header-h) + 44px);
+  bottom: 44px;
+  width: 13px;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      var(--line-strong) 0 1px,
+      transparent 1px calc(var(--tile) * 10)
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      var(--line-soft) 0 1px,
+      transparent 1px calc(var(--tile) * 2)
+    );
+  background-size:
+    13px 100%,
+    6px 100%;
+  background-repeat: repeat-y, repeat-y;
+}
+
+.detail::before {
+  left: 0;
+  background-position: left top, left top;
+}
+
+.detail::after {
+  right: 0;
+  background-position: right top, right top;
+}
 
 .detail-hero {
   padding-top: calc(var(--header-h) + clamp(26px, 4vw, 54px));
@@ -20,29 +81,30 @@
   pointer-events: none;
 }
 
-.back {
+/* 顶带：返回 + 引导虚线 + 档案序号，与首页顶带同一套排法 */
+.detail-top {
   position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 9px;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-44);
-  transition:
-    color 0.3s var(--ease-out),
-    gap 0.3s var(--ease-out);
+  gap: clamp(14px, 1.8vw, 26px);
 }
 
-.back:hover {
-  color: var(--brand-deep);
-  gap: 13px;
+.detail-top .leader {
+  min-width: 30px;
+}
+
+.detail-pos {
+  flex: none;
+  color: var(--ink-44);
+}
+
+.detail-pos span {
+  color: var(--ink-16);
 }
 
 .detail-head {
   position: relative;
-  margin-top: clamp(26px, 3.6vw, 52px);
+  margin-top: clamp(20px, 2.8vw, 40px);
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
   gap: clamp(30px, 4.6vw, 76px);
@@ -53,6 +115,11 @@
   display: flex;
   align-items: center;
   gap: 14px;
+}
+
+/* 题名与副题那栏：min-width 归零，长标题才不会把封面那一栏挤出去 */
+.detail-head-main {
+  min-width: 0;
 }
 
 /* 作品标识：来自各作品仓库的真实 logo 资源 */
@@ -98,19 +165,48 @@
   margin-top: 16px;
 }
 
-.detail-stamps {
-  margin-top: 22px;
+/* 著录条：一件作品的固定字段横铺一行，与首页索引行同一套行律。
+   用 flex 而不是 grid：字段数是随作品变的（3–6 个），grid 分列除不尽时
+   末尾会空出一格、露出当作分隔线的底色，读起来像块破洞；flex 每行都会被
+   撑满，只有分隔线是底色。 */
+.detail-record {
+  margin-top: clamp(28px, 3.6vw, 52px);
   display: flex;
   flex-wrap: wrap;
-  gap: 9px;
+  gap: 1px;
+  background: var(--line);
+  border-block: 1px solid var(--line);
 }
 
-.stamp-plain {
-  color: var(--ink-62);
+.detail-record > div {
+  flex: 1 1 148px;
+  background: var(--surface);
+  padding: 14px 18px 15px;
+  display: grid;
+  gap: 7px;
 }
 
-.stamp-plain::before {
-  background: var(--ink-28);
+.detail-record dt {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-28);
+}
+
+.detail-record dd {
+  margin: 0;
+  color: var(--ink-80);
+}
+
+.rec-status[data-status='public'] {
+  color: var(--ok);
+}
+.rec-status[data-status='private'] {
+  color: var(--hold);
+}
+.rec-status[data-status='experimental'] {
+  color: var(--warn);
 }
 
 .detail-links {
@@ -139,6 +235,39 @@
   font-size: clamp(70px, 9vw, 130px);
   color: var(--accent);
   opacity: 0.34;
+}
+
+/* 没有封面图的作品改用仓库里的真实标识：一枚居中的印记，
+   比一个字孤零零浮在大凹槽里像样 */
+.dcover .plate-media img.dcover-mark {
+  width: auto;
+  height: auto;
+  max-width: 30%;
+  max-height: 30%;
+  object-fit: contain;
+}
+
+/* 受限作品的封面：斜纹封缄，读起来是「有意不公开」而不是「没做出来」 */
+.dcover[data-restricted='true'] .plate-media {
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 11px,
+      var(--line-soft) 11px,
+      var(--line-soft) 12px
+    ),
+    var(--surface-2);
+}
+
+/* 图版说明里的分隔点与年份 */
+.plate-caption .cap-sep {
+  margin: 0 7px;
+  color: var(--ink-16);
+}
+
+.plate-caption .cap-year {
+  color: var(--ink-28);
 }
 
 /* ---------- 受限展示 ---------- */
@@ -201,7 +330,9 @@
 }
 
 .detail-toc a {
-  display: block;
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
   padding: 8px 0;
   font-size: 15px;
   color: var(--ink-44);
@@ -218,29 +349,112 @@
   border-left-color: var(--accent);
 }
 
+.toc-no {
+  color: var(--ink-28);
+  transition: color 0.3s var(--ease-out);
+}
+
+.detail-toc a:hover .toc-no {
+  color: var(--accent);
+}
+
+/* 当前读到的章节：与页头的当前区同一种「常驻下划线 + 提重」的处理 */
+.detail-toc a[data-active='true'] {
+  color: var(--accent);
+  border-left-color: var(--accent);
+}
+
+.detail-toc a[data-active='true'] .toc-no {
+  color: var(--accent);
+}
+
 .detail-sections {
   min-width: 0;
   display: grid;
 }
 
 .dsec {
+  position: relative;
   padding-block: clamp(30px, 4vw, 58px);
-  border-top: 1px solid var(--line);
+}
+
+/* 分区线：制图纸上分隔区域的那道线。主线两端收实、中段转虚，两端各挂一道竖档，
+   与正文里那些通铺的发丝线区分开。 */
+.dsec::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 7px;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--line-strong), var(--line-strong)) left top / 1px 7px no-repeat,
+    linear-gradient(var(--line-strong), var(--line-strong)) right top / 1px 7px no-repeat;
+}
+
+.dsec::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    var(--line-strong),
+    var(--line-soft) 18%,
+    var(--line-soft) 82%,
+    var(--line-strong)
+  );
 }
 
 .dsec:first-child {
-  border-top: 0;
   padding-top: 0;
 }
 
-.dsec-head {
-  display: grid;
-  gap: 12px;
-  margin-bottom: clamp(18px, 2.4vw, 30px);
+.dsec:first-child::before,
+.dsec:first-child::after {
+  display: none;
 }
 
+/* 章节题头的色块：一个标题一块底，取首页 01/02/03 的分区底色——
+   01 雾蓝、02 淡紫、03 雾蓝，隔一节重复一次，相邻两块不重色。 */
+.dsec-head {
+  position: relative;
+  display: grid;
+  gap: 14px;
+  padding: clamp(18px, 2.2vw, 28px) clamp(18px, 2.4vw, 32px) clamp(20px, 2.4vw, 30px);
+  margin-bottom: clamp(18px, 2.4vw, 30px);
+  background: linear-gradient(180deg, #e6eefd 0%, #d7e3fa 100%);
+}
+
+/* 隔一节重复：偶数节取淡紫，与奇数节的雾蓝交替 */
+.dsec:nth-of-type(even) .dsec-head {
+  background: linear-gradient(180deg, #ebe8fb 0%, #ded7f6 100%);
+}
+
+/* 章节标签行：序号 + 名目 + 引导虚线，与首页章节题头同源 */
 .dsec-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.dsec-no {
   color: var(--accent);
+}
+
+/* 剖切标记：制图纸上每一道剖切都挂一对象字母，与章节序号并存 */
+.dsec-cut {
+  flex: none;
+  color: var(--ink-16);
+  letter-spacing: 0.08em;
+}
+
+.dsec-label .leader {
+  min-width: 24px;
 }
 
 .dsec-title {
@@ -424,6 +638,20 @@
   color: var(--accent);
 }
 
+.detail-nav-mid {
+  display: grid;
+  justify-items: center;
+  gap: 9px;
+}
+
+.detail-nav-pos {
+  color: var(--ink-28);
+}
+
+.detail-nav-pos span {
+  color: var(--ink-16);
+}
+
 .detail-nav-index {
   font-family: var(--font-mono);
   font-size: 11.5px;
@@ -446,21 +674,118 @@
   background: var(--brand-wash);
 }
 
-/* ---------- 空态 ---------- */
+/* ---------- 查无此页：404 与失效的作品详情共用 ---------- */
 
-.empty-state {
-  min-height: 68vh;
+.missing {
+  min-height: 76vh;
   display: grid;
   align-content: center;
-  justify-items: start;
-  gap: 18px;
-  padding-top: calc(var(--header-h) + 40px);
+  gap: clamp(30px, 3.6vw, 56px);
+  padding-top: calc(var(--header-h) + clamp(30px, 5vw, 72px));
+  padding-bottom: clamp(44px, 6vw, 96px);
 }
 
-.empty-title {
-  font-size: clamp(34px, 6vw, 76px);
-  line-height: 1;
-  max-width: 22ch;
+/* 顶带：编号 → 引导虚线 → 档案名，与首页、详情页同一套题头排法 */
+.missing-top {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 1.8vw, 28px);
+  padding-bottom: clamp(12px, 1.3vw, 18px);
+  border-bottom: 1px solid var(--line-soft);
+  flex-wrap: wrap;
+}
+
+.missing-code {
+  flex: none;
+  color: var(--brand);
+}
+
+.missing-kicker {
+  flex: none;
+  color: var(--ink-44);
+  text-align: right;
+}
+
+.missing-top .leader {
+  min-width: 30px;
+}
+
+.missing-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(264px, 380px);
+  gap: clamp(30px, 4.6vw, 84px);
+  align-items: center;
+}
+
+.missing-copy {
+  display: grid;
+  gap: clamp(16px, 1.8vw, 24px);
+  justify-items: start;
+}
+
+.missing-title {
+  font-size: clamp(38px, 5.6vw, 86px);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  max-width: 20ch;
+}
+
+.missing-body {
+  max-width: 46ch;
+}
+
+.missing-cta {
+  margin-top: 6px;
+}
+
+.missing-plate {
+  position: relative;
+}
+
+/* 查无此件的图版：凹槽里压一枚淡墨编号，说明条照常著录 */
+.missing-media {
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(70% 100% at 50% 0%, var(--brand-wash), transparent 72%),
+    var(--bg-deep);
+}
+
+.missing-glyph {
+  font-size: clamp(70px, 9vw, 126px);
+  letter-spacing: -0.04em;
+  color: var(--brand);
+  opacity: 0.3;
+}
+
+@media (max-width: 900px) {
+  .missing-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(26px, 5vw, 42px);
+  }
+
+  .missing-plate {
+    order: -1;
+    width: min(320px, 100%);
+  }
+}
+
+@media (max-width: 760px) {
+  /* 窄屏顶带折行后引导线会落成孤线，索性收掉 */
+  .missing-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 9px;
+  }
+
+  .missing-top .leader {
+    display: none;
+  }
+
+  .missing-kicker {
+    text-align: left;
+  }
 }
 
 /* ---------- 响应式 ---------- */
@@ -468,6 +793,17 @@
 @media (max-width: 1000px) {
   .detail-head {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* 折成单列后封面会顶成一整幅满宽图版，压到一栏宽就够 */
+  .dcover {
+    max-width: 460px;
+  }
+
+  /* 单列时页头的下内边距和正文的上内边距叠在一起，收掉一段，
+     别在著录条和目录之间留出一条空谷 */
+  .detail-hero {
+    padding-bottom: clamp(16px, 2.6vw, 26px);
   }
 
   .detail-body {
@@ -497,6 +833,11 @@
     border-bottom-color: var(--accent);
   }
 
+  .detail-toc a[data-active='true'] {
+    border-left-color: transparent;
+    border-bottom-color: var(--accent);
+  }
+
   .gallery .plate:first-child:nth-last-child(odd) .plate-media {
     aspect-ratio: 16 / 9;
   }
@@ -513,11 +854,220 @@
     justify-items: start;
   }
 
+  .detail-nav-mid {
+    justify-items: start;
+  }
+
   .detail-nav-index {
     justify-self: start;
   }
 
   .gallery {
     grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ==========================================================================
+   取舍 · 边界 · 指路 · 标题栏
+   ========================================================================== */
+
+/* 取舍块：一张白面清单，每条一格，格与格之间只留一道线。
+   choice 是条目名，why / cost 并排两栏，各挂一道左侧竖线——why 取强调色、
+   cost 取中性线，一眼能分出「理由」与「代价」不是同一类东西。 */
+.decisions {
+  margin-top: clamp(14px, 2vw, 22px);
+  display: grid;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-1);
+}
+
+.decision {
+  background: var(--surface);
+  padding: clamp(18px, 2.2vw, 26px) clamp(18px, 2.4vw, 30px) clamp(20px, 2.4vw, 28px);
+  display: grid;
+  gap: clamp(14px, 1.8vw, 20px);
+}
+
+.decision-choice {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.decision-idx {
+  flex: none;
+  color: var(--accent);
+}
+
+.decision-name {
+  font-family: var(--font-display);
+  font-size: clamp(19px, 1.9vw, 24px);
+  line-height: 1.3;
+  color: var(--ink);
+  max-width: 32ch;
+}
+
+.decision-pair {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: clamp(14px, 1.8vw, 28px);
+}
+
+.decision-pair > div {
+  display: grid;
+  gap: 7px;
+  padding-left: 14px;
+  border-left: 1px solid var(--line);
+}
+
+.decision-pair > div[data-kind='why'] {
+  border-left-color: var(--accent-line);
+}
+
+.decision-pair > div[data-kind='cost'] {
+  border-left-color: var(--line-strong);
+}
+
+.decision-pair dt {
+  color: var(--ink-28);
+}
+
+.decision-pair dd {
+  margin: 0;
+  font-size: var(--t-small);
+  line-height: 1.82;
+  color: var(--ink-62);
+}
+
+/* 边界清单：与「要点」区分开——那边是实心强调短横，这边是空心方框，
+   墨色也更淡，读起来是约束而不是优点。 */
+.limits {
+  margin-top: clamp(14px, 2vw, 22px);
+  display: grid;
+  border-top: 1px solid var(--line-soft);
+}
+
+.limits li {
+  position: relative;
+  padding: 15px 0 15px 30px;
+  border-bottom: 1px solid var(--line-soft);
+  font-size: var(--t-small);
+  line-height: 1.82;
+  color: var(--ink-62);
+  max-width: 74ch;
+}
+
+.limits li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 22px;
+  width: 9px;
+  height: 9px;
+  border: 1px solid var(--ink-28);
+}
+
+/* 指路卡：虚线框，说明这一页到此为止，科普与用法在博客那边 */
+.reading {
+  margin-top: clamp(20px, 2.6vw, 30px);
+  padding: clamp(16px, 2vw, 22px) clamp(18px, 2.2vw, 26px);
+  border: 1px dashed var(--line-strong);
+  background: var(--surface-2);
+  display: grid;
+  gap: 11px;
+  justify-items: start;
+}
+
+.reading .eyebrow {
+  color: var(--ink-28);
+}
+
+.reading-lead {
+  margin: 0;
+}
+
+.reading-note {
+  font-size: var(--t-small);
+  line-height: 1.82;
+  color: var(--ink-62);
+  max-width: 66ch;
+}
+
+/* 套准刻线：详情页的图版把四角刻线拉长，读起来是制图套准而不是普通刻线 */
+.detail .plate-corners::before,
+.detail .plate-corners::after,
+.detail .plate-corners > .corner::before,
+.detail .plate-corners > .corner::after {
+  width: 14px;
+  height: 14px;
+}
+
+/* 标题栏：制图纸右下角那一格，图号在左、固定字段在右，纯装饰 */
+.dwg-block {
+  margin-top: clamp(30px, 4vw, 52px);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  box-shadow: var(--shadow-1);
+}
+
+.dwg-fig {
+  display: grid;
+  place-items: center;
+  padding: 14px 20px;
+  border-right: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.dwg-rows {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
+  gap: 1px;
+  background: var(--line-soft);
+}
+
+.dwg-rows > div {
+  background: var(--surface);
+  padding: 12px 14px;
+  display: grid;
+  gap: 6px;
+}
+
+.dwg-rows dt {
+  color: var(--ink-28);
+}
+
+.dwg-rows dd {
+  margin: 0;
+  color: var(--ink-62);
+}
+
+/* 窄屏：标尺带会挤进页边距、剖切标记会把题头行挤断，一起收掉 */
+@media (max-width: 1180px) {
+  .detail::before,
+  .detail::after {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .dsec-cut {
+    display: none;
+  }
+
+  .dwg-block {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dwg-fig {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
   }
 }

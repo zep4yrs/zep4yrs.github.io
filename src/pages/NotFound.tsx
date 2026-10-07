@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import MissingRecord from '../components/MissingRecord'
 import { useLang } from '../i18n/LangContext'
 import { useSeo } from '../lib/useSeo'
 
@@ -13,16 +13,11 @@ export default function NotFound() {
   })
 
   return (
-    <section className="section shell empty-state page-enter">
-      <p className="eyebrow">404</p>
-      <h1 className="display empty-title">{t('notFoundTitle')}</h1>
-      <p className="lede">{t('notFoundBody')}</p>
-      <Link className="linkline" to={`/${lang}/`}>
-        {t('notFoundCta')}
-        <span className="arw" aria-hidden="true">
-          →
-        </span>
-      </Link>
-    </section>
+    <MissingRecord
+      title={t('notFoundTitle')}
+      body={t('notFoundBody')}
+      cta={t('notFoundCta')}
+      to={`/${lang}/`}
+    />
   )
 }

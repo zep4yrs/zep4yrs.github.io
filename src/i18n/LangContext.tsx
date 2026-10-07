@@ -73,9 +73,11 @@ export function LangProvider({ children }: { children: ReactNode }) {
     (next: Lang) => {
       if (next === lang) return
       const target = swapLangInPath(location.pathname, next)
-      navigate(target + location.search + location.hash, { replace: true })
+      /* 锚点读 window.location 而不是 react-router 的 location：
+         滚动跟随是用 history.replaceState 写的，router 那份会过期 */
+      navigate(target + location.search + window.location.hash, { replace: true })
     },
-    [lang, location.pathname, location.search, location.hash, navigate],
+    [lang, location.pathname, location.search, navigate],
   )
 
   const value = useMemo<LangValue>(

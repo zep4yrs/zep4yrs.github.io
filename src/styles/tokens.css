@@ -49,10 +49,52 @@
   --brand-wash: rgba(74, 78, 224, 0.055);
   --brand-line: rgba(74, 78, 224, 0.3);
 
+  /* ---------- 链接与控件：全站只有一套 ----------
+     一处可去之处怎么写、一只控件长什么样，值都定在这里，别处不再各写各的。
+     此前下划线散在六种线色、五种间距、四种箭头位移之间，一行行看过去就是
+     「拼起来的」——现在这些数只出现这一次。
+     悬停色不在这里写死：它取本件的强调色（--accent），而强调色是逐件就地注入的，
+     在这儿引用会被冻成品牌靛蓝，所以那条规则留在 base.css 的 .lk 里。 */
+  --link-ink: var(--ink-62); /* 著录链接的常态墨色 */
+  --link-ul: var(--line-strong); /* 常态下划线：一道发丝，不抢字 */
+  --link-gap: 9px; /* 字与箭头之间 */
+  --link-gap-hover: 13px; /* 悬停撑开的那一档 */
+  --link-pad: 4px; /* 字与下划线之间 */
+  --arw: 3px; /* 箭头离位多远；朝哪边走由字形（→ ↗ ↓ ←）自己交代 */
+
+  /* 方印控件：页头的印记与封面键、菜单键都取这一套框线与底色 */
+  --ctl-line: var(--line-strong);
+  --ctl-line-hover: var(--brand-line);
+  --ctl-fill: var(--brand-wash);
+
   /* ---------- 氛围：雾蓝 / 淡紫 / 天青 光晕 ---------- */
   --haze-blue: rgba(92, 128, 240, 0.2);
   --haze-violet: rgba(142, 108, 244, 0.16);
   --haze-cyan: rgba(104, 186, 238, 0.15);
+
+  /* ---------- 方格纸：首屏之外的所有版面都铺这一层 ----------
+     首屏那块方格由 canvas 自绘并整块盖住；这里铺的是同一张纸的另一半。
+     格边长必须与 canvas 那套同源，否则两页纸纹的密度对不上，一眼就看得出是
+     两张纸。canvas 取字标槽高除以 24 行再夹到 [10, 30]，槽高本身是
+     clamp(150px, 34svh, 380px)，折算下来正是下面这个式子——照抄即可。
+     两道格线取它的整数倍（6 格与 24 格），格线才正好落在方格上，不出现半格。 */
+  --tile: clamp(10px, 1.4167svh, 15.8333px);
+  --grid-line: rgba(38, 47, 110, 0.058);
+  --grid-major: rgba(38, 47, 110, 0.092);
+
+  /* ---------- 粒子场：字标与背景共用的一张方格纸 ----------
+     首屏不是"深色底 + 亮粒子"，而是浅纸上的靛蓝墨点：格子越密墨越重，
+     字标取最重的峰档。六档由浅到深，背景只用中间三档。
+     档位按浅底重配：Omarchy 那套是深底发光，最亮的档最显眼；浅底反过来，
+     最深的档最显眼。所以最淡档必须压到能看见——它承担着大部分静息格子
+     和字标底部 5 行的墨色，太淡场就空了、字标的底也没了。
+     括号里是对 #e9eefb 场底的对比度，从 1.3 一路拉到 4.5。 */
+  --field-bg: #e9eefb; /* 场的底：比页面纸面深一档，首屏因此是一块图版 */
+  --field-dim: #9faae6; /* 最淡档（1.3）：静息粒子与字标底行 */
+  --field-mid: #7b85dd; /* 中档（1.6）：浅层响应 */
+  --field-lit: #565dd4; /* 重档（2.1）：指针经过的外圈 */
+  --field-hover: #383cc0; /* 更重档（2.9）：指针正下方、戳印边缘 */
+  --field-crest: #1e2278; /* 峰档（4.5）：字标顶行、戳印中心、点按冲击波 */
 
   /* ---------- 状态 ---------- */
   --ok: #247a53;
@@ -70,34 +112,38 @@
   --accent-soft: var(--brand-soft);
   --accent-line: var(--brand-line);
 
-  /* ---------- 字体：衬线显示 + 等宽编号 + 无衬线正文，全部系统字体 ---------- */
-  --font-display: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, 'Songti SC',
-    'Source Han Serif SC', 'Noto Serif SC', 'SimSun', serif;
-  --font-mono: ui-monospace, 'SFMono-Regular', 'Cascadia Mono', 'JetBrains Mono', Consolas,
-    'Courier New', monospace;
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
-    'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  /* ---------- 字体：霞鹜文楷（显示 / 正文 / 等宽）----------
+     三个栈一律把文楷排在首位，汉字全部由它来排。文楷的 Web 字体包按 unicode-range
+     分片，只覆盖汉字与少量标点，不含拉丁字母和数字——所以拉丁与数字会自然落到
+     栈里的下一个字体：显示栈落到衬线、正文栈落到系统无衬线、等宽栈落到系统等宽。
+     这是字体包本身的分片方式，不是缺字，不必在栈里做额外手脚。
+     等宽用文楷 Mono，编号与著录仍是等宽的，只是换了文楷的笔形。 */
+  --font-display: 'LXGW WenKai', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia,
+    'Songti SC', 'Source Han Serif SC', 'Noto Serif SC', 'SimSun', serif;
+  --font-mono: 'LXGW WenKai Mono', ui-monospace, 'SFMono-Regular', 'Cascadia Mono',
+    'JetBrains Mono', Consolas, 'Courier New', monospace;
+  --font-sans: 'LXGW WenKai', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
 
   /* ---------- 字号：全站只从这一套流体尺度取值，避免各处各写一个 clamp ---------- */
   --t-mono: clamp(12.5px, 0.88vw, 13.5px); /* 编号、标签、著录键 */
   --t-small: clamp(14px, 0.98vw, 15.5px); /* 副标、说明 */
   --t-body: clamp(16.5px, 1.12vw, 18px); /* 正文 */
-  --t-lede: clamp(18px, 1.36vw, 22px); /* 导语 */
-  --t-h3: clamp(27px, 2.3vw, 40px); /* 段内标题、名目 */
-  --t-h2: clamp(38px, 4.3vw, 68px); /* 章节标题 */
-  --t-h1: clamp(96px, 17vw, 248px); /* 首屏主名 */
-  --t-h1-latin: clamp(60px, 11vw, 156px);
+  --t-lede: clamp(17px, 1.2vw, 19px); /* 导语 */
+  --t-h3: clamp(17.5px, 1.35vw, 21px); /* 段内标题、名目 */
+  /* 章节题头：改用首屏顶带那套等宽语汇，收成一行著录标签，不再是左对齐衬线大字。
+     仍要明显高于导语与正文，否则题头会被下面的说明文字压住。 */
+  --t-h2: clamp(19px, 1.45vw, 23px);
 
   /* ---------- 尺度 ---------- */
   --gutter: clamp(24px, 4.2vw, 76px);
   --maxw: 1440px;
-  --rhythm: clamp(72px, 7.6vw, 126px);
+  --rhythm: clamp(58px, 5.8vw, 96px);
   --rhythm-tight: clamp(46px, 5vw, 80px);
   --track: clamp(22px, 2.4vw, 40px);
 
   /* 行律：索引行与账页行共用同一套高度，全站行距因此对齐 */
   --row: clamp(56px, 4.4vw, 68px);
-  --row-tall: clamp(72px, 5.4vw, 92px);
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
@@ -106,9 +152,10 @@
 }
 
 /* 强调色的派生色必须与内联注入的 --accent 声明在同一元素上求值，
-   因此在这三处（Home 芯片 / 首页当前图版 / 详情页根节点）就地派生。 */
-.chip,
+   因此在这几处（首页取用卡 / 首页图版 / 档案行 / 详情页根节点）就地派生。 */
+.access-card,
 .panel,
+.wa-entry,
 .detail {
   --accent-soft: var(--brand-soft);
   --accent-soft: color-mix(in srgb, var(--accent) 13%, transparent);

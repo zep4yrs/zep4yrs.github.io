@@ -3,8 +3,46 @@
    ========================================================================== */
 
 :root {
-  --header-bg: rgba(255, 255, 255, 0.78);
+  /* 落成实底时用近实色而不是毛玻璃：fixed 页头每帧重算一次背景模糊，
+     在整页滚动里是最大的一笔开销，而浅纸上这层模糊本来也看不出多少。
+     0.94 的白与原来的 blur(18px) 在观感上几乎一致。 */
+  --header-bg: rgba(250, 251, 255, 0.94);
   --header-h: 86px;
+}
+
+/* ---------- 纸面：全站铺一张方格纸 ---------- */
+
+/* 首屏那块方格是 canvas 自绘的、整块盖住；首屏之外的一切版面铺这一层，
+   于是内页不再是浮在白底上的散件，而是同一张纸的下一段。纸层挂在 main
+   上随内容一起滚（不 fixed），才读得出是"纸"而不是贴在屏幕上的网。
+   isolation 把 -1 的子层圈在 main 里，它只退到内容之后，不会掉到页面底色下面。 */
+main {
+  position: relative;
+  isolation: isolate;
+}
+
+main::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    /* 一格方格：16 份里取 6 份的实心小方，与首屏 canvas 落的那几格同族蓝紫。
+       只给 viewBox 不给宽高，瓦片才会跟着 background-size 缩放，格边长一变
+       小方跟着变，不会退化成固定像素的点阵。 */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='6' height='6' fill='%23686fd8' fill-opacity='0.1'/%3E%3C/svg%3E"),
+    linear-gradient(to right, var(--grid-major) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-major) 1px, transparent 1px),
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size:
+    var(--tile) var(--tile),
+    calc(var(--tile) * 24) calc(var(--tile) * 24),
+    calc(var(--tile) * 24) calc(var(--tile) * 24),
+    calc(var(--tile) * 6) calc(var(--tile) * 6),
+    calc(var(--tile) * 6) calc(var(--tile) * 6);
+  background-position: center top;
 }
 
 /* ---------- 图版媒体：cover / contain 两种装配方式 ---------- */
@@ -22,6 +60,39 @@
   object-fit: contain;
 }
 
+/* ---------- 「敬请期待」字版 ----------
+   还没成形的作品没有可摆的素材，图版位置改立一块字版。做成字而不是图片：
+   图片里的字切不了语言，而全站是中英双语的。
+   底上一层淡斜纹，读起来是「有意封存」，不是「图没加载出来」。 */
+.plate-media[data-soon='true'],
+.wa-plate-media[data-soon='true'] {
+  background:
+    repeating-linear-gradient(-45deg, transparent 0 11px, var(--line-soft) 11px 12px),
+    var(--surface-2);
+}
+
+.soon-plate {
+  display: grid;
+  justify-items: center;
+  gap: clamp(9px, 0.95vw, 15px);
+  text-align: center;
+}
+
+.soon-plate-kicker {
+  font-size: var(--t-mono);
+  letter-spacing: 0.3em;
+  /* 字间距会把整行往右推半个字，缩回来才是真居中 */
+  text-indent: 0.3em;
+  color: var(--ink-44);
+}
+
+.soon-plate-word {
+  font-size: clamp(23px, 2.35vw, 35px);
+  letter-spacing: 0.16em;
+  text-indent: 0.16em;
+  color: var(--brand);
+}
+
 /* ---------- 页头 ---------- */
 
 .site-header {
@@ -31,23 +102,41 @@
   border-bottom: 1px solid transparent;
   transition:
     background 0.45s var(--ease-out),
-    border-color 0.45s var(--ease-out),
-    backdrop-filter 0.45s var(--ease-out);
+    border-color 0.45s var(--ease-out);
 }
 
 .site-header[data-solid='true'] {
   background: var(--header-bg);
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
   border-bottom-color: var(--line);
   box-shadow: 0 12px 30px -26px rgba(28, 36, 90, 0.4);
 }
 
 .header-inner {
+  position: relative;
   display: flex;
   align-items: center;
   gap: clamp(14px, 2vw, 28px);
   min-height: var(--header-h);
+}
+
+/* 阅读进度：页头底边一条随滚动生长的线。位置感来自这条线，
+   所以它只在页头落成实底后显形，浮在首屏上时不该多出一条横杠。 */
+.header-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  transform: scaleX(var(--progress, 0));
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--brand) 0%, var(--brand-bright) 100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s var(--ease-out);
+}
+
+.site-header[data-solid='true'] .header-progress {
+  opacity: 1;
 }
 
 .brand {
@@ -57,21 +146,21 @@
   flex: none;
 }
 
-/* 印记：以标识首字母作单字篆印，比塞进整串字母更可读 */
+/* 印记：一枚方印，内里嵌作者头像。外框取自 .ctl 那一套，里面再压一条发丝线，
+   与全站着录行的框线同族。头像方裁满框——缩到 46px 时读的是色块与轮廓，
+   不是五官，所以不必为它放大尺寸。 */
 .brand-seal {
   position: relative;
   width: 46px;
   height: 46px;
-  flex: none;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--brand);
-  background: var(--brand-wash);
-  color: var(--brand-deep);
-  font-family: var(--font-display);
-  font-size: 25px;
-  line-height: 1;
-  padding-bottom: 2px;
+  overflow: hidden;
+}
+
+.brand-seal img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .brand-seal::after {
@@ -109,38 +198,6 @@
   margin-left: auto;
 }
 
-.header-link {
-  position: relative;
-  padding: 5px 0;
-  font-family: var(--font-mono);
-  font-size: var(--t-mono);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--ink-62);
-  transition: color 0.3s var(--ease-out);
-}
-
-.header-link::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -1px;
-  height: 1px;
-  background: var(--brand);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s var(--ease-out);
-}
-
-.header-link:hover {
-  color: var(--ink);
-}
-
-.header-link:hover::after {
-  transform: scaleX(1);
-}
-
 .header-actions {
   display: flex;
   align-items: center;
@@ -150,47 +207,26 @@
 
 /* ---------- 语言切换 ---------- */
 
+/* 两个词之间一道斜线分开，两项本身走全站通用的行内键（.rowlink）——
+   与页头导航同一副样子，不再自成分段胶囊。 */
 .langswitch {
   display: inline-flex;
-  border: 1px solid var(--line-strong);
-  background: var(--surface);
+  align-items: baseline;
+  gap: 8px;
 }
 
-.langswitch-btn {
-  padding: 8px 15px 7px;
+.langswitch-sep {
   font-family: var(--font-mono);
   font-size: var(--t-mono);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-44);
-  transition:
-    color 0.25s var(--ease-out),
-    background 0.25s var(--ease-out);
-}
-
-.langswitch-btn + .langswitch-btn {
-  border-left: 1px solid var(--line-strong);
-}
-
-.langswitch-btn:hover {
-  color: var(--brand-deep);
-  background: var(--brand-wash);
-}
-
-.langswitch-btn[data-on='true'] {
-  background: var(--brand);
-  color: #fff;
+  color: var(--ink-16);
 }
 
 /* ---------- 移动端菜单按钮 ---------- */
 
 .menu-btn {
   display: none;
-  width: 38px;
+  width: 34px;
   height: 34px;
-  place-items: center;
-  border: 1px solid var(--line-strong);
-  background: var(--surface);
 }
 
 .menu-bars {
@@ -214,12 +250,12 @@
   transform: translateY(-2.5px) rotate(-45deg);
 }
 
+/* 展开的移动端菜单也用近实底，不挂毛玻璃：这层每帧要重算一次背景模糊，
+   滚动里是一笔白花的合成开销，浅纸上却几乎看不出差别。 */
 .mobile-nav {
   display: none;
   border-top: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  background: var(--header-bg);
 }
 
 .mobile-nav[hidden] {
@@ -233,86 +269,244 @@
 
 .mobile-link {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
   padding: 19px 0;
   border-bottom: 1px solid var(--line-soft);
   font-family: var(--font-display);
   font-size: 27px;
+  color: var(--ink-62);
+  transition: color 0.3s var(--ease-out);
 }
 
-.mobile-link-arw {
+.mobile-link-no {
+  flex: none;
+  color: var(--ink-28);
+  transition: color 0.3s var(--ease-out);
+}
+
+.mobile-link-label {
+  flex: 1 1 auto;
+}
+
+.mobile-link[data-on='true'] {
+  color: var(--ink);
+}
+
+.mobile-link[data-on='true'] .mobile-link-no {
+  color: var(--brand);
+}
+
+/* 箭头的颜色随行一起走，位移交给 .arw 那一条通则 */
+.mobile-link .arw {
+  color: var(--ink-28);
+  transition:
+    color 0.3s var(--ease-out),
+    transform 0.3s var(--ease-out);
+}
+
+.mobile-link:hover .arw,
+.mobile-link[data-on='true'] .arw {
   color: var(--brand);
 }
 
 /* ---------- 页脚 ---------- */
 
+/* 页脚的底就是首屏那块方格纸：粒子场铺满整块页脚，zep4yrs 居中刻在里面当
+   水印，四栏文字与上下两条带压在它上面。场是 canvas 自绘的，这里只给它一块
+   舞台与层级。 */
 .site-footer {
   position: relative;
+  isolation: isolate;
+  overflow: hidden;
   border-top: 1px solid var(--line);
-  background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
-  margin-top: clamp(40px, 6vw, 90px);
+  background: var(--field-bg);
 }
 
 .site-footer::before {
   content: '';
   position: absolute;
   inset: 0;
+  z-index: 1;
   pointer-events: none;
   background: radial-gradient(52% 100% at 12% 0%, var(--haze-blue), transparent 72%);
-  opacity: 0.7;
+  opacity: 0.5;
+}
+
+/* 页脚顶带：一条运行头，与首屏题头同一套排法 */
+.footer-strip {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 1.8vw, 28px);
+  padding-block: clamp(18px, 1.8vw, 26px);
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+
+.footer-strip-title {
+  flex: none;
+  color: var(--ink-62);
+  /* 这一行里有字标 zep4yrs：等宽语汇的大写会把它变成 ZEP4YRS，按原样落字 */
+  text-transform: none;
+}
+
+.footer-strip-note {
+  flex: none;
+  color: var(--ink-28);
+}
+
+.footer-strip .leader {
+  min-width: 30px;
 }
 
 .footer-inner {
   position: relative;
+  z-index: 2;
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.8fr) minmax(0, 1.25fr);
-  gap: clamp(32px, 4vw, 72px);
-  padding-block: clamp(54px, 5.6vw, 92px);
+  grid-template-columns:
+    minmax(0, 1fr) minmax(0, 0.62fr) minmax(0, 1.16fr)
+    minmax(0, 1.1fr);
+  gap: clamp(28px, 3.2vw, 62px);
+  padding-block: clamp(44px, 4.6vw, 74px);
 }
 
-.footer-mark {
-  font-size: clamp(48px, 5.2vw, 84px);
-  color: var(--ink-16);
-  line-height: 0.9;
+/* 列头：给页脚各栏一个名目，四栏因此读起来是著录而不是散落的链接 */
+.footer-col-label {
+  margin-bottom: 3px;
+}
+
+/* 粒子场：铺满整块页脚，退到内容之后当底 */
+.footer-field {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.footer-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+}
+
+/* 字标占位：只交代 zep4yrs 刻在哪。它整块压在四栏文字底下，自己不显形、
+   不吃指针——它是页脚的背景，不是页脚里的一件陈设。
+   一行七字是横长的，宽度就是它的尺寸上限：铺到版心那么宽，这一页的底才立得住。 */
+.footer-glyph {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(94%, 1600px);
+  height: clamp(150px, 26vw, 420px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* 左栏：名号与题记，其余交给底下的粒子场 */
+.footer-brand {
+  display: grid;
+  align-content: start;
+  gap: 12px;
 }
 
 .footer-name {
-  margin-top: 15px;
   font-size: var(--t-small);
   color: var(--ink-62);
 }
 
 .footer-tagline {
-  margin-top: 12px;
   font-family: var(--font-display);
   font-size: clamp(22px, 1.8vw, 27px);
   color: var(--brand-deep);
 }
 
+/* 目录四行就是四枚行内键，与页头导航同一副样子；行距里已经含了它自带的上下留白，
+   所以这里只补一道缝 */
 .footer-nav {
   display: grid;
   align-content: start;
-  gap: 15px;
-}
-
-.footer-nav a {
-  font-family: var(--font-mono);
-  font-size: var(--t-mono);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--ink-44);
-  transition: color 0.3s var(--ease-out);
-}
-
-.footer-nav a:hover {
-  color: var(--brand-deep);
+  gap: 9px;
 }
 
 .footer-meta {
   display: grid;
   align-content: start;
   gap: 13px;
+}
+
+/* 联系方式一栏：六行著录，每行一枚方印记号 + 名目与账号，末了是去路（↗）
+   或「点按复制」。行与行之间只用发丝线分栏，不做成六个按钮——
+   它读起来是档案的联络页，不是一排图标。 */
+.footer-contacts {
+  display: grid;
+  align-content: start;
+  gap: 13px;
+}
+
+.contact-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* 一枚方印一格：图标就是全部，名目与账号只在悬停 / 聚焦时浮一条名条，
+   不再常驻成一行「名目 + 账号 + 去路」。 */
+.contact-mark-btn {
+  position: relative;
+  width: 34px;
+  height: 34px;
+}
+
+.contact-mark-btn .contact-mark {
+  width: 17px;
+  height: 17px;
+}
+
+.contact-mark-btn::after {
+  content: attr(data-tip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 7px);
+  transform: translateX(-50%) translateY(2px);
+  padding: 3px 7px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.4;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line-soft);
+  box-shadow: var(--shadow-1);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.22s var(--ease-out),
+    transform 0.22s var(--ease-out);
+  z-index: 3;
+}
+
+.contact-mark-btn:hover::after,
+.contact-mark-btn:focus-visible::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* 复制完原地转色，名条也改口——不必再摆一行常驻的「点按复制」 */
+.contact-mark-btn[data-copied='true'] {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
+.contact-mark-btn[data-copied='true']:hover:not(:disabled),
+.contact-mark-btn[data-copied='true']:focus-visible {
+  border-color: var(--brand);
+  color: var(--brand);
 }
 
 .footer-note {
@@ -322,9 +516,366 @@
   max-width: 42ch;
 }
 
+/* 页脚底带：版权 → 引导线 → 技术栈，与顶带对称，页脚因此有头有尾 */
+.footer-base {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 1.8vw, 28px);
+  padding-block: clamp(18px, 1.8vw, 26px);
+  border-top: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+
+.footer-base .leader {
+  min-width: 30px;
+}
+
 .footer-built,
 .footer-rights {
+  flex: none;
   color: var(--ink-28);
+  text-transform: none;
+}
+
+/* ---------- 站内播放器：落在页头正中，跨路由续播 ---------- */
+
+/* 页头正中那一条：绝对定位，不参与两端伸缩，字标与导航因此照旧各贴一边。
+   两轴都用显式的 50% 落位——绝对定位的子项不吃 flex 的居中，
+   交给 align-items 会因浏览器而异。 */
+.header-player {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+}
+
+/* 收起时是页头上的一行字，展开才垂下面板，不常驻占版面 */
+.player {
+  position: relative;
+  z-index: 150;
+  display: grid;
+  justify-items: center;
+}
+
+/* 页头正中这一条不再是一只药丸：没有底色、没有外框，就是一行著录——
+   封面一枚方印，右边曲名与艺人，末了电平、切曲与展开两枚方印。悬停的回执落在
+   各个部件上（封面的暗罩、曲名转浓），不靠整条变色来提示可点。 */
+.player-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  padding: 0;
+  background: transparent;
+}
+
+/* 封面即播放键：点这一格起停，不另立第二个键。方寸取自 .ctl（框线与底色同印记、
+   同菜单键），平时它就是一张封面，指针压上去才压一层暗罩、浮出三角或双条——
+   三角/双条是「这一刻按下去会发生什么」，不是常驻的装饰。 */
+.player-art {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  overflow: hidden;
+}
+
+.player-art img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 没有封面那一首的印面：题名首字落在正中。必须绝对定位——这一格是 grid，
+   再放进一个常规流里的子项会把它挤成两行，播放三角就不居中了。 */
+.player-art-mark {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1;
+}
+
+.player-art-veil {
+  position: absolute;
+  inset: 0;
+  background: rgba(22, 26, 58, 0.46);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease-out);
+}
+
+.player-art:hover:not(:disabled) .player-art-veil,
+.player-art:focus-visible .player-art-veil {
+  opacity: 1;
+}
+
+.player-art-icon {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  opacity: 0;
+  transform: scale(0.8);
+  transition:
+    opacity 0.3s var(--ease-out),
+    transform 0.3s var(--ease-out);
+}
+
+.player-art:hover:not(:disabled) .player-art-icon,
+.player-art:focus-visible .player-art-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* 三角形 = 播放；两块竖条 = 暂停。折线描三角，渐变切双条 */
+.player-art-icon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  clip-path: polygon(12% 0, 100% 50%, 12% 100%);
+}
+
+.player[data-playing='true'] .player-art-icon::before {
+  clip-path: none;
+  background: linear-gradient(to right, #fff 0 32%, transparent 32% 68%, #fff 68% 100%);
+}
+
+.player-meta {
+  display: grid;
+  gap: 1px;
+  text-align: left;
+  max-width: 280px;
+}
+
+.player-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  line-height: 1.25;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.3s var(--ease-out);
+}
+
+.player-meta:hover .player-title {
+  color: var(--brand-deep);
+}
+
+.player-artist {
+  color: var(--ink-28);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 电平表读的是分析器里的真值，不是一段循环动画：
+   每帧由脚本写 --lvl，有声音才起，静下来就落回一条平线。
+   收放走 transform: scaleY 而不是 height——height 是布局属性，每帧都要
+   重新排版一次药丸，滚动里正好压在合成上；scaleY 只动合成层，不碰布局。 */
+.player-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+  flex: none;
+}
+
+.player-bars i {
+  width: 2px;
+  height: 14px;
+  /* --lvl 是脚本逐帧写进来的原始值（0..1），不掺任何假动作；
+     0.08 的底只是让平线仍读得出是一条线，不是把柱子举起来 */
+  transform: scaleY(calc(0.08 + var(--lvl, 0) * 0.92));
+  transform-origin: bottom center;
+  background: var(--ink-16);
+  transition: background 0.3s var(--ease-out);
+}
+
+.player[data-playing='true'] .player-bars i {
+  background: var(--brand);
+}
+
+/* 展开键也是方印，尺寸与封面键齐：页头正中因此是一行著录、两头各一枚方印 */
+.player-more {
+  width: 34px;
+  height: 34px;
+}
+
+/* 切曲键：与展开键同尺寸的另一枚方印，立在电平与展开键之间 */
+.player-next {
+  width: 34px;
+  height: 34px;
+}
+
+/* 「下一首」的记号：一个右指三角贴着一根竖条。用折线画，不用字形——
+   字体的 ⏭ 各家画法不一，混在方印里会忽大忽小。 */
+.player-next-icon {
+  position: relative;
+  width: 12px;
+  height: 12px;
+}
+
+.player-next-icon::before {
+  content: '';
+  position: absolute;
+  inset: 0 3px 0 0;
+  background: currentColor;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.player-next-icon::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 2px;
+  background: currentColor;
+}
+
+/* 面板垂在下方，所以收起时朝下指、展开时翻上来 */
+.player-chevron {
+  width: 7px;
+  height: 7px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: rotate(45deg) translate(-1px, -1px);
+  transition: transform 0.35s var(--ease-out);
+}
+
+.player[data-open='true'] .player-chevron {
+  transform: rotate(-135deg) translate(-1px, -1px);
+}
+
+/* 面板从页头底下垂出来：页头贴在顶上，面板只能朝下长。
+   锚在正中，展开时上面那一条原地不动。 */
+.player-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(320px, calc(100vw - 32px));
+  display: grid;
+  padding: 15px 16px 16px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  box-shadow: var(--shadow-2), var(--hi);
+}
+
+.player-panel[hidden] {
+  display: none;
+}
+
+.player-scrub {
+  display: grid;
+  gap: 7px;
+}
+
+/* 时间读作一行著录：已播在左、总长在右，中间一段引导虚线把两端连起来 */
+.player-time {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--ink-44);
+}
+
+.player-time-now {
+  color: var(--ink-80);
+}
+
+.player-time-lead {
+  flex: 1 1 auto;
+  min-width: 18px;
+  height: 1px;
+  background-image: var(--leader);
+}
+
+/* 音量这一行与进度之间拉一道发丝线：面板因此是两行著录，不是两块浮件 */
+.player-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  margin-top: 13px;
+  padding-top: 13px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.player-row-label {
+  color: var(--ink-44);
+}
+
+/* 音源未就绪只是「还没上」，不是故障，所以用中性的墨色，不摆成告警 */
+.player-note {
+  font-size: var(--t-small);
+  line-height: 1.55;
+  color: var(--ink-44);
+}
+
+/* 滑杆：一条发丝轨道，已播那截染浓，方块滑块。与站内的直角、方印同族。
+   --p 由组件按当前进度写进来——拖拽与键盘仍交给浏览器原生滑杆，
+   不自己造一套指针逻辑，所以 Tab 聚焦、方向键微调这些照旧可用。 */
+.player-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 16px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.player-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.player-range::-webkit-slider-runnable-track {
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    var(--brand) 0 var(--p, 0%),
+    var(--line-strong) var(--p, 0%) 100%
+  );
+}
+
+.player-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 9px;
+  height: 9px;
+  margin-top: -3.5px;
+  border: 0;
+  border-radius: 0;
+  background: var(--brand);
+}
+
+.player-range::-moz-range-track {
+  height: 2px;
+  background: var(--line-strong);
+}
+
+/* Firefox 有原生的「已播」段，不必再叠一层渐变 */
+.player-range::-moz-range-progress {
+  height: 2px;
+  background: var(--brand);
+}
+
+.player-range::-moz-range-thumb {
+  width: 9px;
+  height: 9px;
+  border: 0;
+  border-radius: 0;
+  background: var(--brand);
+}
+
+.player-range:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
 }
 
 /* ---------- 揭示动画 ---------- */
@@ -346,22 +897,25 @@
 /* ---------- 加载态 ---------- */
 
 .page-loading {
-  min-height: 62vh;
+  min-height: 68vh;
   display: grid;
   place-content: center;
   justify-items: center;
-  gap: 16px;
+  gap: 18px;
+  padding-top: var(--header-h);
 }
 
 .page-loading-text {
   color: var(--ink-44);
+  letter-spacing: 0.2em;
 }
 
+/* 取阅中的一道扫线：两端收虚，比一根通铺的进度条更贴档案的纸面 */
 .page-loading-bar {
   position: relative;
-  width: 170px;
-  height: 1px;
-  background: var(--line-strong);
+  width: min(190px, 44vw);
+  height: 2px;
+  background: var(--line);
   overflow: hidden;
 }
 
@@ -369,9 +923,9 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--brand);
+  background: linear-gradient(90deg, transparent, var(--brand) 35%, var(--brand-bright) 65%, transparent);
   transform: translateX(-100%);
-  animation: loadbar 1.15s var(--ease-inout) infinite;
+  animation: loadbar 1.25s var(--ease-inout) infinite;
 }
 
 @keyframes loadbar {
@@ -388,6 +942,36 @@
 }
 
 /* ---------- 响应式 ---------- */
+
+/* 页头正中这一条要与两端的字标、导航共处一条线，宽度不够时逐级收窄：
+   先舍副题，再舍曲名与电平条，最后只剩播放键与展开键——它始终在正中 */
+@media (max-width: 1180px) {
+  .player-artist {
+    display: none;
+  }
+}
+
+/* 页脚四栏在平板宽度折成两排：字标图版占满首排，其余三栏依次落到下面 */
+@media (max-width: 1080px) {
+  .footer-inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 1020px) {
+  .player-meta,
+  .player-bars {
+    display: none;
+  }
+
+  .player-bar {
+    gap: 4px;
+  }
+}
 
 @media (max-width: 900px) {
   .header-nav {
